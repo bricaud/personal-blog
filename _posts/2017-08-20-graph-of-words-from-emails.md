@@ -21,7 +21,7 @@ The code for the data processing and graph design is available on [my github acc
 
 ## The Visualization and analysis
 
-![Graph of words]({{ site.baseurl }}/images/clintonmails.png "Graph of words appearing in Clinton's emails")
+![Graph of words](/images/clintonmails.png "Graph of words appearing in Clinton's emails")
 
 This is an example of a visualization of a network of words. A look at the graph provides interesting insights into this dataset of emails. Topics discussed in the emails can be guessed from the figure and the labels.
 
