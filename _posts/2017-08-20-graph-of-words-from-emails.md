@@ -21,7 +21,7 @@ The code for the data processing and graph design is available on [my github acc
 
 ## The Visualization and analysis
 
-![Graph of words]({{ site.url }}/images/clintonmails.png "Graph of words appearing in Clinton's emails")
+![Graph of words]({{ site.baseurl }}/images/clintonmails.png "Graph of words appearing in Clinton's emails")
 
 This is an example of a visualization of a network of words. A look at the graph provides interesting insights into this dataset of emails. Topics discussed in the emails can be guessed from the figure and the labels.
 
@@ -38,6 +38,6 @@ The nodes of the graph represent proper nouns found in the emails. They are conn
 As expected, H. Clinton messages are mainly focused on Foreign affairs. At that time, the main concerns were about middle east and muslim countries. 
 
 Some themes are clear and well-separated, some other not. For example if you drag the node "Japan" (in light orange), it has been classified in the same cluster as south american countries and has a link with Brazil (that would be interesting to know why!). Notice that it is the case for Korea as well. It is also connected to the word "Asia" in the dark green cluster, and also to China in the light green cluster. These connections are of course not surprising and shows a glimpse of the complexity of international relationships. 
-![Graph of words Middle East]({{ site.url }}/images/zoommiddleeast.png "Zoom on the Middle East")
+![Graph of words Middle East]({{ site.baseurl }}/images/zoommiddleeast.png "Zoom on the Middle East")
 
 Concerning the relevance of the data displayed, we can point out a few uninformative nodes. The visualization could be improved further with an additional cleaning of the dataset. For example, "Clinton" should be removed (unless it refers to Bill) as everything is obviously related to Hillary. This node is a hub, with many connections, that add some confusion to the graph and the connected topics. Word containing numbers or nodes with month names should also be removed.
