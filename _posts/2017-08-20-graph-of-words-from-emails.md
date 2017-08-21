@@ -67,22 +67,25 @@ You can also spot in the middle of the graph a group of nodes related to Taliban
 
 At that time, there was a major concern about Middle East and muslim countries. This is still true today.
 
-Concerning the US politics, there is a large cluster with various keywords at the bottom of the graph. The precise topic is unsure and could involve several themes. Further analysis of the mails should be done to understand how they relate.
+Concerning the US politics, there is a large cluster with various keywords at the bottom of the graph. The precise topic is unsure and could involve several themes. Further analysis of the mails should be done to understand how they relate. The word "Democratic" seems to be quite central.
 
 ![US politics cluster]({{ site.baseurl }}/images/HCmails/HCmailszoomUS.png "Zoom on the US politics cluster")
 
-During her mandate, it seems that one of the US elections has raised H. Clinton interest in particular. If you google some of the keywords, you will find [this page](https://en.wikipedia.org/wiki/United_States_Senate_election_in_Ohio,_2010) relating the event.
+During her mandate, it seems that one of the US elections has raised H. Clinton interest in particular. If you google some of the keywords in the image below, you will find [this page](https://en.wikipedia.org/wiki/United_States_Senate_election_in_Ohio,_2010) relating the event. The democrat Brunner lost the Senate election in Ohio and the republican Portman was elected.
 ![Election cluster]({{ site.baseurl }}/images/HCmails/HCmailszoomelections.png "Zoom on the Election cluster")
 
 
-Eventually, it is interesting to note that H. C. has close collaborators to whom she exchange a lot. They are visible as light blue nodes
+Eventually, it is interesting to note that H. C. has close collaborators with whom she exchange often. They are visible as light blue nodes on the following image. The orange nodes next to them seems to be related to the places, travels and meetings Hillary refers in her emails. 
 
 ![Assistants cluster]({{ site.baseurl }}/images/HCmails/HCmailzoomassist.png "Zoom on the assistants cluster")
 
 
-Some themes are clear and well-separated, some other not. For example if you drag the node "Japan" (in light orange), it has been classified in the same cluster as south american countries and has a link with Brazil (that would be interesting to know why!). Notice that it is the case for Korea as well. It is also connected to the word "Asia" in the dark green cluster, and also to China in the light green cluster. These connections are of course not surprising and shows a glimpse of the complexity of international relationships. 
-![Graph of words Middle East]({{ site.baseurl }}/images/zoommiddleeast.png "Zoom on the Middle East")
+Some themes are clear and well-separated, some other not. For example if you drag a node with a country name (mostly in light orange), You can see connections with other countries. You may notice a subgroup of south american countries, one with asian countries and one related to europe but connection between the groups are also present. These connections are of course not surprising and shows a glimpse of the complexity of international relationships. 
 
-Concerning the relevance of the data displayed, we can point out a few uninformative nodes. The visualization could be improved further with an additional cleaning of the dataset. For example, "Clinton" should be removed (unless it refers to Bill) as everything is obviously related to Hillary. This node is a hub, with many connections, that add some confusion to the graph and the connected topics. Word containing numbers or nodes with month names should also be removed.
+## Conclusion
 
-Further development could be done by taking the time into account. Clearly, some of the topics have a limited time span and the keywords they contain could be 
+This Graph of words gives a snapshot of the topics discussed in Clinton's emails. It is a quick way to get information without having to read the 7945 emails. It delivers much more information than just a list of keywords appearing often in emails.
+
+Concerning the improvement of the visualization, we can point out a few uninformative nodes. The visualization could be improved further with an additional cleaning of the dataset. For example, first and last names should be put together because the node "Robert" connects here all the persons with firstname Robert even if they are completely unrelated. Word containing numbers or nodes with month names should also be removed.
+
+Further development could be done by taking the time into account. Clearly, some of the topics have a limited time span and related keywords that do not appear in this time span could be easily disconnected. 
