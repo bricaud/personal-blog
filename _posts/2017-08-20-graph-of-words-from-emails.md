@@ -9,19 +9,29 @@ The nice post of my colleague and friend [Volodymir](http://blog.miz.space/) on 
 
 ## The data
 
-The goal of this post is to demonstrate with an example that one can build a graph from some unstructured dataset to extract valuable information. Our dataset will be a set of texts. I have chosen Hillary Clinton's emails as they are publicly available, most of the world has been aware of this controversy or can easily get some information about it on [wikipedia](https://en.wikipedia.org/wiki/Hillary_Clinton_email_controversy). We can find the dataset on Kaggle [here](https://www.kaggle.com/kaggle/hillary-clinton-emails). This dataset contains the emails sent and received by Hillary Clinton between 2009 and 2011 in her private mailbox. As I said, the data has been made freely accessible to the public, except for some parts which have been censored. There are XX emails.
+The goal of this post is to demonstrate with an example that one can build a graph from some unstructured dataset to extract valuable information. Our dataset will be a set of texts. I have chosen Hillary Clinton's emails as they are publicly available, most of the world has been aware of this controversy or can easily get some information about it on [wikipedia](https://en.wikipedia.org/wiki/Hillary_Clinton_email_controversy). We can find the dataset on Kaggle [here](https://www.kaggle.com/kaggle/hillary-clinton-emails). This dataset contains the emails sent and received by Hillary Clinton between 2009 and 2011 in her private mailbox. As I said, the data has been made freely accessible to the public, except for some parts which have been censored by the US government. There are 7945 emails.
 
 ## The graph
 
 The code for the data processing and graph design is available on [my github account](https://github.com/bricaud/HCmails).
 
+The idea is to extract some keywords form the emails and see how they relate together. From this, we could infer some interesting stories about politics and the work of H. C. 
+
+### Nodes
+
+We want to find some important words in the texts, and get rid of the useless articles for example. We could use a Natural Language Processing toolbox, there are several in Python. However, I want to keep this example simple. So we will select the proper nouns in the texts which can be found easily because they begin with a capital letter. Unfortunately, not all words beginning with a Capital letter are proper nouns. The first word of each sentence has a capital as well. To avoid to problem, we can get rid of the words that appear frequently both with or without a capital letter. It is sign that they are not proper nouns. This selection process is not perfect but it is a compromise between complexity and efficiency.
+
+The keywords that have just been extracted from the corpus will form the nodes of our graph.
 
 
+### Edges
+
+Let us connect the nodes together if the keywords associated can be found in the same email. Moreover, we will associate a weight to the link, proportional to the number of text where we have found them together. We expect to find clusters of well connected words, forming topics.
 
 
 ## The Visualization and analysis
 
-![Graph of words](/images/clintonmails.png "Graph of words appearing in Clinton's emails")
+![Graph of words]({{ site.baseurl }}/images/clintonmails.png "Graph of words appearing in Clinton's emails")
 
 This is an example of a visualization of a network of words. A look at the graph provides interesting insights into this dataset of emails. Topics discussed in the emails can be guessed from the figure and the labels.
 
