@@ -26,28 +26,63 @@ The keywords that have just been extracted from the corpus will form the nodes o
 
 ### Edges
 
-Let us connect the nodes together if the keywords associated can be found in the same email. Moreover, we will associate a weight to the link, proportional to the number of text where we have found them together. We expect to find clusters of well connected words, forming topics.
+Let us connect the nodes together if the keywords associated can be found in the same email. Moreover, we will associate a weight to the link, proportional to the number of text where we have found them together. We expect to find clusters of well connected words, forming topics. 
+
+But it is not enough to make an nice insightful graph to visualize. If you are someone experienced with data analysis you may think that this seems too good to be true. You are right. There are too many edges in the graph and it requires a bit more processing. So some  (in fact, many) edges have been removed based on their weight and the degree of the nodes they connect. We remove the weakest links but weakness is relative to the node degree: We require that more links are removed if they connect node with numerous connections.
 
 
 ## The Visualization and analysis
 
-![Graph of words]({{ site.baseurl }}/images/clintonmails.png "Graph of words appearing in Clinton's emails")
-
 This is an example of a visualization of a network of words. A look at the graph provides interesting insights into this dataset of emails. Topics discussed in the emails can be guessed from the figure and the labels.
 
+In order to separate nodes into groups or clusters, a community detection algorithm has been applied to the graph. On the figure, each color represents a different community.
+In addition, the radius of each node is related it the number of occurences of the word in the texts. The layout of the graph is a force directed layout, meaning that nodes repulse each others and links are some elastic binding between them.
 
-The nodes of the graph represent proper nouns found in the emails. They are connected if the nouns have been found together in several mails. In order to separate nodes into groups or clusters, a community detection algorithm has been applied to the graph. On the figure, each color represents a different community. A closer look shows that the communities are related to particular topics:
+The interactive graph can be found by clicking on the following link:
+[Interactive visualization](https://bricaud.github.io/HCmails/).
 
-* Middle East (dark purple)
-* Iran Pakistan (dark green)
-* North Africa (blue)
-* National politics (light green, red and pink)
-* Europe (light purple)
-* South America (light orange)
+Since it is hard to explain on an interactive visualization, I have made some screen shots of the graph. The following figure show a global view of the graph.
+![Graph of words]({{ site.baseurl }}/images/HCmails/HCmails1.png "Graph of words appearing in Clinton's emails")
 
-As expected, H. Clinton messages are mainly focused on Foreign affairs. At that time, the main concerns were about middle east and muslim countries. 
+On the borders of the graph we can see several groups of nodes, many of them having a large radius (appearing in many emails). Notice that the visual clusters are not the same as the clusters found by the community detection. This is not a problem and both clustering can bring slightly different information.
+
+
+A closer look at the node colors shows that the communities are related to particular topics:
+
+* Foreign affairs (light orange)
+* US politics (Green)
+* United Kingdom (dark blue)
+* Clinton's collaborators (light blue)
+* Travel/meetings (dark orange)
+
+As expected, H. Clinton messages are mainly focused on US politics and foreign affairs. First interesting fact is that she seems to treat UK politics differently from the rest of the world. 
+![UK cluster]({{ site.baseurl }}/images/HCmails/HCmailzoomGB.png "Zoom on the UK cluster")
+
+Staying in the foreign affairs, a large cluster can be seen containing word related to Middle East, Israel and Palestine; A major concern of US politics for years.
+
+![Middle East cluster]({{ site.baseurl }}/images/HCmails/HCmailszoommiddleeast.png "Zoom on the Middle East cluster")
+
+You can also spot in the middle of the graph a group of nodes related to Talibans.
+![Taliban cluster]({{ site.baseurl }}/images/HCmails/HCmailszoomAfghan.png "Zoom on the Taliban cluster")
+
+At that time, there was a major concern about Middle East and muslim countries. This is still true today!
+
+Concerning the US politics, there is a large cluster with various keywords at the bottom of the graph. The precise topic is unsure and could involve several themes. Further analysis of the mails should be done to understand how they relate.
+
+![US politics cluster]({{ site.baseurl }}/images/HCmails/HCmailszoomUS.png "Zoom on the US politics cluster")
+
+During her mandate, it seems that one of the US elections has raised H. C. interest in particular. 
+![Election cluster]({{ site.baseurl }}/images/HCmails/HCmailszoomelections.png "Zoom on the Election cluster")
+
+
+Eventually, it is interesting to note that H. C. has close collaborators to whom she exchange a lot. They are visible as light blue nodes
+
+![Assistants cluster]({{ site.baseurl }}/images/HCmails/HCmailszoomassit.png "Zoom on the assistants cluster")
+
 
 Some themes are clear and well-separated, some other not. For example if you drag the node "Japan" (in light orange), it has been classified in the same cluster as south american countries and has a link with Brazil (that would be interesting to know why!). Notice that it is the case for Korea as well. It is also connected to the word "Asia" in the dark green cluster, and also to China in the light green cluster. These connections are of course not surprising and shows a glimpse of the complexity of international relationships. 
 ![Graph of words Middle East]({{ site.baseurl }}/images/zoommiddleeast.png "Zoom on the Middle East")
 
 Concerning the relevance of the data displayed, we can point out a few uninformative nodes. The visualization could be improved further with an additional cleaning of the dataset. For example, "Clinton" should be removed (unless it refers to Bill) as everything is obviously related to Hillary. This node is a hub, with many connections, that add some confusion to the graph and the connected topics. Word containing numbers or nodes with month names should also be removed.
+
+Further development could be done by taking the time into account. Clearly, some of the topics have a limited time span and the keywords they contain could be 
