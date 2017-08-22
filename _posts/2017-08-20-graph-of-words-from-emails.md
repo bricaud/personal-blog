@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: How graphs can help you find information in data
 categories: [graph, data science]
 thumbnail: /images/HCmails/HCmailsthumb.jpg
