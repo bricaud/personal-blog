@@ -2,7 +2,7 @@
 layout: post
 title: How graphs can help you find information in data
 categories: [graph, data science]
-image: /images/HCmails/HCmails1.png
+thumbnail: /images/HCmails/HCmails1thumb.png
 ---
 
 If you think graphs and networks techniques are only useful for graph datasets or data structured as network of entities, you are wrong. You can leverage powerful graph methods by designing a graph from unstructured data. In this example I show how to extract information from a set of texts (emails). At the end of this post you will discover what H. Clinton was talking about in her emails, on which topics she was exchanging information and who/what was involved in each topic.
