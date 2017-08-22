@@ -9,6 +9,7 @@ If you think graphs and networks techniques are only useful for graph datasets o
 
 As a teaser, I can't resist to show you an image of Clinton's emails universe:
 ![Graph of words]({{ site.baseurl }}/images/HCmails/HCmails1.png "Graph of words appearing in Clinton's emails")
+This is an example of a visualization of a network of words. A look at the graph provides interesting insights into this dataset of emails. Topics discussed in the emails can be guessed from the figure and the labels, as you will see below.
 
 The nice post of my colleague and friend [Volodymir](http://blog.miz.space/) on [Wikipedia graph mining](http://blog.miz.space/research/2017/08/14/wikipedia-collective-memory-dynamic-graph-analysis-graphx-spark-scala-time-series-network/), made me think that I should blog as well on my exploration of graphs and data analysis. Blogging is an interesting way to spread some science to a broader audience and scientists should do that more often. Also, this could help me share the fascinating world of graphs and networks and how it can be useful in practice. So here is my first contribution. 
 
@@ -24,7 +25,7 @@ The idea is to extract some keywords form the emails and see how they relate tog
 
 ### Nodes
 
-We want to find some important words in the texts, and get rid of the useless articles for example. We could use a Natural Language Processing toolbox, there are several in Python. However, I want to keep this example simple. So we will select the proper nouns in the texts which can be found easily because they begin with a capital letter. Unfortunately, not all words beginning with a Capital letter are proper nouns. The first word of each sentence has a capital as well. To avoid to problem, we can get rid of the words that appear frequently both with or without a capital letter. It is sign that they are not proper nouns. This selection process is not perfect but it is a compromise between complexity and efficiency.
+We want to find some important words in the texts, and get rid of the useless articles for example. We could use a Natural Language Processing toolbox, there are several in Python. However, I want to keep this example simple. So we will select the proper nouns in the texts which can be found easily because they begin with a capital letter. Unfortunately, not all words beginning with a capital letter are proper nouns. The first word of each sentence has a capital as well. To avoid useless keywords, we can get rid of the words that appear frequently both with or without a capital letter. It is sign that they are not proper nouns. This selection process is not perfect but it is a compromise between accuracy and complexity.
 
 The keywords that have just been extracted from the corpus will form the nodes of our graph.
 
@@ -38,15 +39,13 @@ But this is not enough to make an nice insightful graph to visualize. If you are
 
 ## The Visualization and analysis
 
-This is an example of a visualization of a network of words. A look at the graph provides interesting insights into this dataset of emails. Topics discussed in the emails can be guessed from the figure and the labels.
-
 In order to separate nodes into groups or clusters, a community detection algorithm has been applied to the graph. On the figure, each color represents a different community.
 In addition, the radius of each node is related to the number of occurences of the word in the texts. The layout of the graph is a force directed layout, meaning that nodes repulse each others and links are some elastic binding between them.
 
 The interactive graph can be found by clicking on the following link:
 [Interactive visualization](https://bricaud.github.io/HCmails/).
 
-Since it is hard to explain on an interactive visualization, I have made some screen shots of the graph. The following figure show a global view of the graph.
+Since it is hard to explain on an interactive visualization, I have made some screen shots of the graph. The following figure shows a global view of the graph.
 ![Graph of words]({{ site.baseurl }}/images/HCmails/HCmails1.png "Graph of words appearing in Clinton's emails")
 
 On the borders of the graph we can see several groups of nodes, many of them having a large radius (appearing in many emails). Notice that the visual clusters are not the same as the clusters found by the community detection. This is not a problem and both clustering can bring slightly different information.
@@ -63,11 +62,11 @@ A closer look at the node colors shows that the communities are related to parti
 As expected, H. Clinton messages are mainly focused on US politics and foreign affairs. First interesting fact is that she seems to treat UK politics differently from the rest of the world. Indeed, UK politics has its own cluster quite well separated from the rest. You can see Brown and Cameron in good position inside this group.
 ![UK cluster]({{ site.baseurl }}/images/HCmails/HCmailzoomGB.png "Zoom on the UK cluster")
 
-Staying in the foreign affairs, a large cluster can be seen containing word related to Middle East, Israel and Palestine; A major concern of US politics for years. The side of the nodes show how busy H. Clinton was writing emails about these topics. If you over the mouse on the nodes in the interactive visualization, you can get the number of occurences of the words. Palestinian (244 times), Israeli (143) and Jewish (156) are the most used words in this cluster.
+Staying in the foreign affairs, a large cluster can be seen containing words related to Middle East, Israel and Palestine; A major concern of US politics for years. The side of the nodes show how busy H. Clinton was writing emails about these topics. If you over the mouse on the nodes in the interactive visualization, you can get the number of occurences of the words. Palestinian (244 times), Israeli (143) and Jewish (156) are the most used words in this cluster.
 
 ![Middle East cluster]({{ site.baseurl }}/images/HCmails/HCmailszoommiddleeast.png "Zoom on the Middle East cluster")
 
-You can also spot in the middle of the graph a group of nodes related to Talibans, Afghanistan and Pakistan. This group is not as clearly isolated as the Middle East one. This might be due solely to the visualization layout or maybe because the emails concerning this topics are less focused and involve different other nouns/ countries.
+You can also spot in the middle of the graph a group of nodes related to Talibans, Afghanistan and Pakistan. This group is not as clearly isolated as the Middle East one. This might be due solely to the visualization layout or maybe because the emails concerning this topics are less focused and involve different other nouns / countries.
 ![Taliban cluster]({{ site.baseurl }}/images/HCmails/HCmailszoomAfghan.png "Zoom on the Taliban cluster")
 
 Back in 2010-2011, there was a major concern about Middle East and muslim countries. This is still true today.
@@ -85,7 +84,7 @@ Eventually, it is interesting to note that H. C. has close collaborators with wh
 ![Assistants cluster]({{ site.baseurl }}/images/HCmails/HCmailzoomassist.png "Zoom on the assistants cluster")
 
 
-Some themes are clear and well-separated, some other not. For example if you drag a node with a country name (mostly in light orange), You can see connections with other countries. You may notice a subgroup of south american countries, one with asian countries and one related to europe but connections between the groups are also present. These connections are of course not surprising and shows a glimpse of the complexity of international relationships. 
+Some themes are clear and well-separated, some other not. For example if you drag a node with a country name (mostly in light orange), You can see connections with other countries. You may notice a subgroup of South American countries, one with Asian countries and one related to Europe but connections between the groups are also present. These connections are of course not surprising and shows a glimpse of the complexity of international relationships. 
 
 ## Conclusion
 

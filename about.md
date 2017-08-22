@@ -4,9 +4,10 @@ title: About
 permalink: /about/
 ---
 
-Benjamin Ricaud
+I am interested in data science, graphs, networks and practical applications of scientific methods to real world data.
 
-### Data Scientist
+I see programming as a creative process and data sience as a set of challenges stimuling creativity, combining mathematical rigor and artistic skills.
 
-A place to include any other types of information that you'd like to include about yourself.
+I am curious and I need to learn new things every day.
 
+I have a background in Physics and Mathematics. I have spend many years in various research labs analysing data or designing new methods for data analysis. The last years, I focused on graphs and their fascinating properties.
