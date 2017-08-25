@@ -19,6 +19,8 @@ Plato, with his cave, knew that metaphor are good for explaning deep ideas. Let 
 
 > Entropy is a measure of disorder
 
+![Messy room](/images/entropy/messy_room.jpg "My Kids messy room")
+
 To get an idea of entropy in our case, let us start with this sentence:
 
 > Entropy is an indicator on how messy your data is.
@@ -33,7 +35,6 @@ The requirement of this function is that it provides a minimal value if there is
 In decision trees, the goal is to tidy the data. You try to separate your data and group the samples together in the classes they belong to. You know their label since you construct the trees from the training set. You maximize the purity of the groups as much as possible each time you create a new node of the tree (meaning you cut your dataset in too). Of course at the end of the tree you want to have a clear answer. To which group does this sample belongs to? So decision trees are here to tidy the dataset by looking at the values of the feature vector associated to the data. Based on the values of each feature, they are making decision on where to put them at each step. 
 
 
-How do you know the 
 
 ## Mathematical definition of entropy
 
