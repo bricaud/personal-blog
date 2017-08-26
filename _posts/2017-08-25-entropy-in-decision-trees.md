@@ -19,32 +19,41 @@ Plato, with his cave, knew that metaphors are good for explaning deep ideas. Let
 
 > Entropy is a measure of disorder
 
-So let us take this point of view and compare our dataset as a messy room:
+So let us take this point of view and think that our dataset is like a messy room:
 
 > Entropy is an indicator on how messy your data is.
 
 ![Messy room](/images/entropy/messy_room.jpg "My Kids messy room")
 
-Imagine you are about to tidy your room. Usually you use a subjective measure to estimate how messy is it. (Probably your mother has a different one or a more sensitive one :), but this is not the topic here). You know that objects must be on the shelves and probably grouped together, by type: books with books, toys with other toys ...
+Imagine you are about to tidy your room. Usually you use a subjective measure to estimate how messy is it. (not everyone has the same measure :), but this is not the topic here). You know that objects must be on the shelves and probably grouped together, by type: books with books, toys with other toys ...
 Fortunately, the visual inspection can be replaced by a more mathematical approach for the data. A mathematical function exists for estimating the mess among mathematical objects and we can apply it to our data.
-The requirement of this function is that it provides a minimal value if there is the same kind of objects in the set and a maximal value if there is a uniform mixing of objects with different labels (or categories) in the set. This is a mathematical sense of being ordered!
+The requirement of this function is that it provides a minimal value if there is the same kind of objects in the set and a maximal value if there is a uniform mixing of objects with different labels (or categories) in the set. 
+
+
 
 
 ## Why entropy and decision trees?
 
-In decision trees, the goal is to tidy the data. You try to separate your data and group the samples together in the classes they belong to. You know their label since you construct the trees from the training set. You maximize the purity of the groups as much as possible each time you create a new node of the tree (meaning you cut your set in two). Of course at the end of the tree you want to have a clear answer. To which group does this sample belongs to? Based on this arrangment of features, without doubt it belongs to Group 1! So decision trees are here to tidy the dataset by looking at the values of the feature vector associated to each data point. Based on the values of each feature, decisions are made that eventually leads to a leaf and an answer. 
+In decision trees, the goal is to tidy the data. You try to separate your data and group the samples together in the classes they belong to. You know their label since you construct the trees from the training set. You maximize the purity of the groups as much as possible each time you create a new node of the tree (meaning you cut your set in two). Of course at the end of the tree you want to have a clear answer. 
+- "To which group does this sample belongs to? Based on this arrangment of features, without doubt it belongs to Group 1!"
+So decision trees are here to tidy the dataset by looking at the values of the feature vector associated to each data point. Based on the values of each feature, decisions are made that eventually leads to a leaf and an answer. 
 
 At each step, each branching, you want to decrease the entropy, so this quantity is computed before the cut and after the cut. If it decreases, we can proceed to the next step otherwise we must stop. 
 
-What is nice with the entropy is that you can sum it up if you probe 2 (or more) different sets which are independent.
+Before and after the decision, the sets have different sizes. However entropy can be compared between these sets using a weighted sum, as we will see in the next section.
 
-## Mathematical definition of entropy
+## Mathematical definition of entropy
 
-The entropy is given by the following equation:
+The entropy (for data with 2 different labels) is given by the following equation:
 
-![Entropy formula](http://chart.apis.google.com/chart?cht=tx&chl=%24E%20%3D%20-%5Csum_i%20p_i%20%5Cln%20p_i%24%0A)
+![Entropy formula](http://chart.apis.google.com/chart?cht=tx&chl=%24E%20%3D%20-p%20%5C%20%5Clog_2%20(p)%20-q%20%5C%20%5Clog_2%20(q)%24%0A)
 
-![Entropy function](/images/entropy/entropyfunction.png "Entropy function")
+where p is the ratio of items with label 1 in the set and q=1-p the ratio of items with label 2.
+
+Now have a look at the Entropy function. When there is no item with label 1 in the set or if the set is full of item with label 1, the entropy is zero. If you have half with label 1 half with label2, the entropy is maximal (equal to one since it is the log base 2).
+![Entropy function](/images/entropy/entropyfunction2.png "Entropy function")
+
+Now let us understand how you compare entropy before and after the split. Imagine you have a messy set with entropy one (half/half). It could be split into 2 messy sets where half of the items are labelled 1 and the other half have label2. So we just compute the weighted sum of entropies (weighted by the size of the sets).
 
 ## Limits of decision trees
 
