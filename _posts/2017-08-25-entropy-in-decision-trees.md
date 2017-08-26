@@ -35,7 +35,9 @@ The requirement of this function is that it provides a minimal value if there is
 ## Why entropy and decision trees?
 
 In decision trees, the goal is to tidy the data. You try to separate your data and group the samples together in the classes they belong to. You know their label since you construct the trees from the training set. You maximize the purity of the groups as much as possible each time you create a new node of the tree (meaning you cut your set in two). Of course at the end of the tree you want to have a clear answer. 
-- "To which group does this sample belongs to? Based on this arrangment of features, without doubt it belongs to Group 1!"
+
+"To which group does this sample belongs to? Based on this arrangment of features, without doubt it belongs to Group 1!"
+
 So decision trees are here to tidy the dataset by looking at the values of the feature vector associated to each data point. Based on the values of each feature, decisions are made that eventually leads to a leaf and an answer. 
 
 At each step, each branching, you want to decrease the entropy, so this quantity is computed before the cut and after the cut. If it decreases, we can proceed to the next step otherwise we must stop. 
@@ -50,7 +52,7 @@ The entropy (for data with 2 different labels) is given by the following equatio
 
 where p is the ratio of items with label 1 in the set and q=1-p the ratio of items with label 2.
 
-Now have a look at the Entropy function. When there is no item with label 1 in the set or if the set is full of item with label 1, the entropy is zero. If you have half with label 1 half with label2, the entropy is maximal (equal to one since it is the log base 2).
+Now have a look at the Entropy function. When there is no item with label 1 in the set (p=0) or if the set is full of item with label 1 (p=1), the entropy is zero. If you have half with label 1 half with label2 (p=1/2), the entropy is maximal (equal to one since it is the log base 2).
 ![Entropy function](/images/entropy/entropyfunction2.png "Entropy function")
 
 Now let us understand how you compare entropy before and after the split. Imagine you have a messy set with entropy one (half/half). It could be split into 2 messy sets where half of the items are labelled 1 and the other half have label2. So we just compute the weighted sum of entropies (weighted by the size of the sets).
