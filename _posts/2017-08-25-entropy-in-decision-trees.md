@@ -46,17 +46,22 @@ Before and after the decision, the sets have different sizes. However entropy ca
 
 ## Mathematical definition of entropy
 
-Let us imagine we have a set of N items. These items fall in two categories, n have a label 1 and m=N-n have a label 2. To get our data a bit more ordered, we want to group them by label. We introduce the ratio p = n/N and ![q=m/N=1-p](http://chart.apis.google.com/chart?cht=tx&chl=q%3Dm%2FN%3D%201-p%0A).
+Let us imagine we have a set of ![N](http://chart.apis.google.com/chart?cht=tx&chl=N%0A) items. These items fall in two categories, ![n](http://chart.apis.google.com/chart?cht=tx&chl=n%0A) have a label 1 and ![m=N-n](http://chart.apis.google.com/chart?cht=tx&chl=m%3DN-n) have a label 2. To get our data a bit more ordered, we want to group them by label. We introduce the ratio ![p = n/N](http://chart.apis.google.com/chart?cht=tx&chl=p%3Dn%2FN) and ![q=m/N=1-p](http://chart.apis.google.com/chart?cht=tx&chl=q%3Dm%2FN%3D%201-p%0A).
 
 The entropy of our set is given by the following equation:
 
 ![Entropy formula](http://chart.apis.google.com/chart?cht=tx&chl=%24E%20%3D%20-p%20%5C%20%5Clog_2%20(p)%20-q%20%5C%20%5Clog_2%20(q)%24%0A)
 
 
-Now have a look at the Entropy function. When there is no item with label 1 in the set (p=0) or if the set is full of item with label 1 (p=1), the entropy is zero. If you have half with label 1 half with label2 (p=1/2), the entropy is maximal (equal to one since it is the log base 2).
+Now have a look at the Entropy function. When there is no item with label 1 in the set (p=0) or if the set is full of item with label 1 (p=1), the entropy is zero. If you have half with label 1 half with label2 (p=1/2), the entropy is maximal (equals to one since it is the log base 2).
 ![Entropy function](/images/entropy/entropyfunction2.png "Entropy function")
 
-Now let us understand how you compare entropy before and after the split. Imagine you have a messy set with entropy one (half/half). It could be split into 2 messy sets where half of the items are labelled 1 and the other half have label2. So we just compute the weighted sum of entropies (weighted by the size of the sets).
+
+## Evolution of entropy
+
+The entropy is an absolute measure which provide a number between 0 and 1, independently of the size of the set. It is not important if your room is small or large when it is messy. Also, if you separate your room in two by building a wall in the middle, it does not look less messy! The entropy will remain the same on each part.
+
+In decision trees, the set to tidy is split in 2. Let us understand how you compare entropy before and after the split. Imagine you start with a messy set with entropy one (half/half, p=q). In the worst case, it could be split into 2 messy sets where half of the items are labelled 1 and the other half have label2 in each set. Hence the entropy of each of the 2 resulting sets is 1. In this scenario, the messiness has not changed and we would like to have the same entropy before and after the split. We can not just sum the entropies of the two sets. A solution, often used in mathematics, is to compute the mean entropy of the two sets. In this case the mean is one. However, in decision trees a weighted sum of entropies is computed instead (weighted by the size of the two subsets). It gives more importance to the set wich is larger (if any). The idea is that it is a bit better if the large set gets tidier.
 
 ## Limits of decision trees
 
