@@ -41,7 +41,12 @@ The requirement of this function is that it provides a minimal value if there is
 
 In decision trees, the goal is to tidy the data. You try to separate your data and group the samples together in the classes they belong to. You know their label since you construct the trees from the training set. You maximize the purity of the groups as much as possible each time you create a new node of the tree (meaning you cut your set in two). Of course at the end of the tree you want to have a clear answer. 
 
-"To which group does this sample belongs to? Based on this arrangment of features, without doubt it belongs to Group 1!"
+> "To which group does this sample belongs to? Based on this arrangment of features, without doubt it belongs to Group 1!"
+
+On the figure below is depicted the spliting process. Red rings and blue crosses symbolize elements with 2 different labels. Based on the value of some feature of the elements, they are put in Set 1 or Set 2. In this example, after the spliting, the state seems more tidy, most of red rings have been put in Set 1 while a majority of blue crosses are in Set 2.
+
+![Decision digram](/images/entropy/splitdiagram.png "Decision diagram")
+
 
 So decision trees are here to tidy the dataset by looking at the values of the feature vector associated to each data point. Based on the values of each feature, decisions are made that eventually leads to a leaf and an answer. 
 
