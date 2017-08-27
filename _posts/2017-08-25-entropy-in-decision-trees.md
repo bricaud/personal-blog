@@ -7,7 +7,7 @@ thumbnail: /images/Entropy.entropythumb.png
 published: false
 ---
 
-When browsing Machine Learning tutorials, every now and then I find the explanations obscure and not adapted to beginners. Sometimes, there is a strong focus on maths, which is not bad in itself, but makes it difficult to grasp for people not used to high level maths (and there are many of them who wish to learn the basic concepts of Machine Learning!). Sometimes, the emphasis is on the main part of the algorithm and some details are left missing. Then you tend to think it is missing because it is so simple that everyone will understand. But in many case it is not! And it leaves the false impression that because you are not able to understand this step, you are not clever enough to grasp the concept. Pretty discouraging!
+I recently wanted to refresh my memory about Machine Learning methods. I have spent some time reading tutorials, blogs and wikipedia. No doubts, Internet is really useful, this is great. I got back on tracks quickly with the general idea of the mainsteam algorithms. However, I find some points and explanations obscure and not adapted to beginners. Sometimes, there is a strong focus on maths, which is not bad in itself, but makes it difficult to grasp for people not used to high level maths (and there are many of them who wish to learn the basic concepts of Machine Learning!). Sometimes, the emphasis is on the main part of the algorithm and some details are left missing. Then you tend to think it is missing because it is so simple that everyone will understand. But in many case it is not! And it leaves the false impression that because you are not able to understand this step, you are not clever enough to grasp the concept. Pretty discouraging!
 
 In this series of blog posts, I want to clarify or at least provide a different explanation of some of the concepts in machine learning, in the hope of helping people increasing their understanding about these methods.
 Since I have spent quite some time studying the concept of entropy in academia, I will start my Machine Learning tutorial with it.
@@ -46,22 +46,32 @@ Before and after the decision, the sets have different sizes. However entropy ca
 
 ## Mathematical definition of entropy
 
-Let us imagine we have a set of ![N](http://chart.apis.google.com/chart?cht=tx&chl=N%0A) items. These items fall in two categories, ![n](http://chart.apis.google.com/chart?cht=tx&chl=n%0A) have a label 1 and ![m=N-n](http://chart.apis.google.com/chart?cht=tx&chl=m%3DN-n) have a label 2. To get our data a bit more ordered, we want to group them by label. We introduce the ratio ![p = n/N](http://chart.apis.google.com/chart?cht=tx&chl=p%3Dn%2FN) and ![q=m/N=1-p](http://chart.apis.google.com/chart?cht=tx&chl=q%3Dm%2FN%3D%201-p%0A).
+Let us imagine we have a set of ![N](http://chart.apis.google.com/chart?cht=tx&chl=N%0A) items. These items fall in two categories, ![n](http://chart.apis.google.com/chart?cht=tx&chl=n%0A) have a label 1 and ![m=N-n](http://chart.apis.google.com/chart?cht=tx&chl=m%3DN-n) have a label 2. To get our data a bit more ordered, we want to group them by label. We introduce the ratio ![p = n/N](http://chart.apis.google.com/chart?cht=tx&chl=p%3Dn%2FN) or ![p=n/N](http://chart.apis.google.com/chart?cht=tx&chl=p%3D%5Cfrac%7Bn%7D%7BN%7D) and ![q=m/N=1-p](http://chart.apis.google.com/chart?cht=tx&chl=q%3Dm%2FN%3D%201-p%0A).
 
 The entropy of our set is given by the following equation:
 
-![Entropy formula](http://chart.apis.google.com/chart?cht=tx&chl=%24E%20%3D%20-p%20%5C%20%5Clog_2%20(p)%20-q%20%5C%20%5Clog_2%20(q)%24%0A)
+![Entropy formula](http://chart.apis.google.com/chart?cht=tx&chl=%24E%20%3D%20-p%20%5C%20%5Clog_2%20(p)%20-q%20%5C%20%5Clog_2%20(q)%24%0A.)
 
-
+A set is tidy if it contains only items with the same label, and messy if it is a mix of items with different labels.
 Now have a look at the Entropy function. When there is no item with label 1 in the set (p=0) or if the set is full of item with label 1 (p=1), the entropy is zero. If you have half with label 1 half with label2 (p=1/2), the entropy is maximal (equals to one since it is the log base 2).
 ![Entropy function](/images/entropy/entropyfunction2.png "Entropy function")
-
+This function reflects the messiness of the data.
 
 ## Evolution of entropy
 
-The entropy is an absolute measure which provide a number between 0 and 1, independently of the size of the set. It is not important if your room is small or large when it is messy. Also, if you separate your room in two by building a wall in the middle, it does not look less messy! The entropy will remain the same on each part.
+The entropy is an absolute measure which provide a number between 0 and 1, independently of the size of the set. It is not important if your room is small or large when it is messy. Also, if you separate your room in two, by building a wall in the middle, it does not look less messy! The entropy will remain the same on each part.
 
-In decision trees, the set to tidy is split in 2. Let us understand how you compare entropy before and after the split. Imagine you start with a messy set with entropy one (half/half, p=q). In the worst case, it could be split into 2 messy sets where half of the items are labelled 1 and the other half have label2 in each set. Hence the entropy of each of the 2 resulting sets is 1. In this scenario, the messiness has not changed and we would like to have the same entropy before and after the split. We can not just sum the entropies of the two sets. A solution, often used in mathematics, is to compute the mean entropy of the two sets. In this case the mean is one. However, in decision trees a weighted sum of entropies is computed instead (weighted by the size of the two subsets). It gives more importance to the set wich is larger (if any). The idea is that it is a bit better if the large set gets tidier.
+In decision trees, at each branching, the input set to tidy is split in 2. Let us understand how you compare entropy before and after the split. Imagine you start with a messy set with entropy one (half/half, p=q). In the worst case, it could be split into 2 messy sets where half of the items are labelled 1 and the other half have label2 in each set. Hence the entropy of each of the 2 resulting sets is 1. In this scenario, the messiness has not changed and we would like to have the same entropy before and after the split. We can not just sum the entropies of the two sets. A solution, often used in mathematics, is to compute the mean entropy of the two sets. In this case, the mean is one. However, in decision trees, a weighted sum of entropies is computed instead (weighted by the size of the two subsets):
+
+![E_split = N_1/N E_1+N_2/N E_2](http://chart.apis.google.com/chart?cht=tx&chl=E_%7B%5Crm%20split%7D%3D%5Cfrac%7BN_1%7D%7BN%7DE_1%2B%5Cfrac%7BN_2%7D%7BN%7DE_2)
+
+where ![n_1](http://chart.apis.google.com/chart?cht=tx&chl=n_1) and ![n_2](http://chart.apis.google.com/chart?cht=tx&chl=n_2) are the number of items of the each sets after the split and ![E_1](http://chart.apis.google.com/chart?cht=tx&chl=E_1) and ![E_2](http://chart.apis.google.com/chart?cht=tx&chl=E_2) are their respective entropy.
+It gives more importance to the set wich is larger (if any). The idea is that it is a bit better if the large set gets tidier, as it requires more efforts to tidy. Imagine the worst case where a set with 1000 elements is split in two, with a set of 999 elements and a set of 1 element. The latter set has an entropy of zero since it contains only one element, one label. But this is not really important as the vast majority of the data is still messy in the second set.
+
+
+
+
+
 
 ## Limits of decision trees
 
