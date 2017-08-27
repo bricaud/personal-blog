@@ -7,15 +7,19 @@ thumbnail: /images/Entropy.entropythumb.png
 published: false
 ---
 
-I recently wanted to refresh my memory about Machine Learning methods. I have spent some time reading tutorials, blogs and wikipedia. No doubts, Internet is really useful, this is great. I got back on tracks quickly with the general idea of the mainsteam algorithms. However, I find some points and explanations obscure and not adapted to beginners. Sometimes, there is a strong focus on maths, which is not bad in itself, but makes it difficult to grasp for people not used to high level maths (and there are many of them who wish to learn the basic concepts of Machine Learning!). Sometimes, the emphasis is on the main part of the algorithm and some details are left missing. Then you tend to think it is missing because it is so simple that everyone will understand. But in many case it is not! And it leaves the false impression that because you are not able to understand this step, you are not clever enough to grasp the concept. Pretty discouraging!
+I recently wanted to refresh my memory about Machine Learning methods. I have spent some time reading tutorials, blogs and wikipedia. No doubts, Internet is really useful, this is great. I got back on tracks quickly with the general idea of the mainstream algorithms. However, from time to time, I find some particular points and explanations obscure. This concerns often details about the algorithms which are overlooked. Sometimes, the emphasis is on the main part of the algorithm and some details are left missing. But I found these missing parts quite important to fully understand what's going on in the algorithm.
+
+In addition, you tend to think it is missing because it is so simple that everyone will understand. But in many case it is not! And it leaves the false impression that because you are not able to understand this step, you are not clever enough to grasp the concept. Pretty discouraging! Sometimes, the problem lies in the strong focus on maths, which is not bad in itself, but makes it difficult to grasp for people not used to high level maths (and there are many of them who wish to learn the basic concepts of Machine Learning!). As well as the equation, it is as interesting to get the ideas behind the equations.
 
 In this series of blog posts, I want to clarify or at least provide a different explanation of some of the concepts in machine learning, in the hope of helping people increasing their understanding about these methods.
 Since I have spent quite some time studying the concept of entropy in academia, I will start my Machine Learning tutorial with it.
-It is a key step in decision trees, however, entropy is often overlooked (as well as the Gini coefficient). This is really an important concept to get, in order to fully understand decision trees.
+It is a key step in decision trees, however, entropy is often overlooked (as well as the other measures of messiness of the data, like the Gini coefficient). This is really an important concept to get, in order to fully understand decision trees.
 
 ## Metaphoric definition of entropy
 
-Plato, with his cave, knew that metaphors are good for explaning deep ideas. Let try to get some inspiration from him. I like the definition of entropy given sometimes by physicists:
+Entropy is a concept used in Physics, mathematics, computer science (information theory) and other fields of science. You may have a look at [Wikipedia](https://en.wikipedia.org/wiki/Entropy_(disambiguation)) to see the many uses of entropy. Yet, its definition is not obvious for everyone.
+
+Plato, [with his cave](https://en.wikipedia.org/wiki/Allegory_of_the_Cave), knew that metaphors are good ways for explaning deep ideas. Let try to get some inspiration from him. I like the definition of entropy given sometimes by physicists:
 
 > Entropy is a measure of disorder
 
@@ -23,16 +27,17 @@ So let us take this point of view and think that our dataset is like a messy roo
 
 > Entropy is an indicator on how messy your data is.
 
+Imagine you are about to tidy your room, or your kids' room. Usually you use a subjective measure to estimate how messy is it. (not everyone has the same measure :), but this is not the topic here). You know that objects must be on the shelves and probably grouped together, by type: books with books, toys with other toys ...
+
 ![Messy room](/images/entropy/messy_room.jpg "My Kids messy room")
 
-Imagine you are about to tidy your room. Usually you use a subjective measure to estimate how messy is it. (not everyone has the same measure :), but this is not the topic here). You know that objects must be on the shelves and probably grouped together, by type: books with books, toys with other toys ...
 Fortunately, the visual inspection can be replaced by a more mathematical approach for the data. A mathematical function exists for estimating the mess among mathematical objects and we can apply it to our data.
 The requirement of this function is that it provides a minimal value if there is the same kind of objects in the set and a maximal value if there is a uniform mixing of objects with different labels (or categories) in the set. 
 
 
 
 
-## Why entropy and decision trees?
+## Why entropy in decision trees?
 
 In decision trees, the goal is to tidy the data. You try to separate your data and group the samples together in the classes they belong to. You know their label since you construct the trees from the training set. You maximize the purity of the groups as much as possible each time you create a new node of the tree (meaning you cut your set in two). Of course at the end of the tree you want to have a clear answer. 
 
