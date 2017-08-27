@@ -46,11 +46,12 @@ Before and after the decision, the sets have different sizes. However entropy ca
 
 ## Mathematical definition of entropy
 
-The entropy (for data with 2 different labels) is given by the following equation:
+Let us imagine we have a set of N items. These items fall in two categories, n have a label 1 and m=N-n have a label 2. To get our data a bit more ordered, we want to group them by label. We introduce the ratio p = n/N and ![q=m/N=1-p](http://chart.apis.google.com/chart?cht=tx&chl=q%3Dm%2FN%3D%201-p%0A).
+
+The entropy of our set is given by the following equation:
 
 ![Entropy formula](http://chart.apis.google.com/chart?cht=tx&chl=%24E%20%3D%20-p%20%5C%20%5Clog_2%20(p)%20-q%20%5C%20%5Clog_2%20(q)%24%0A)
 
-where p is the ratio of items with label 1 in the set and q=1-p the ratio of items with label 2.
 
 Now have a look at the Entropy function. When there is no item with label 1 in the set (p=0) or if the set is full of item with label 1 (p=1), the entropy is zero. If you have half with label 1 half with label2 (p=1/2), the entropy is maximal (equal to one since it is the log base 2).
 ![Entropy function](/images/entropy/entropyfunction2.png "Entropy function")
