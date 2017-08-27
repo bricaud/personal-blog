@@ -50,39 +50,39 @@ On the figure below is depicted the spliting process. Red rings and blue crosses
 
 So decision trees are here to tidy the dataset by looking at the values of the feature vector associated to each data point. Based on the values of each feature, decisions are made that eventually leads to a leaf and an answer. 
 
-At each step, each branching, you want to decrease the entropy, so this quantity is computed before the cut and after the cut. If it decreases, we can proceed to the next step otherwise we must stop. 
+At each step, each branching, you want to decrease the entropy, so this quantity is computed before the cut and after the cut. If it decreases, the split is validated and we can proceed to the next step, otherwise we must try to split with another feature or stop this branch. 
 
-Before and after the decision, the sets have different sizes. However entropy can be compared between these sets using a weighted sum, as we will see in the next section.
+Before and after the decision, the sets are different and have different sizes. Still, entropy can be compared between these sets, using a weighted sum, as we will see in the next section.
 
 ## Mathematical definition of entropy
 
-Let us imagine we have a set of ![N](http://chart.apis.google.com/chart?cht=tx&chl=N%0A) items. These items fall in two categories, ![n](http://chart.apis.google.com/chart?cht=tx&chl=n%0A) have a label 1 and ![m=N-n](http://chart.apis.google.com/chart?cht=tx&chl=m%3DN-n) have a label 2. To get our data a bit more ordered, we want to group them by label. We introduce the ratio ![p = n/N](http://chart.apis.google.com/chart?cht=tx&chl=p%3Dn%2FN) or ![p=n/N](http://chart.apis.google.com/chart?cht=tx&chl=p%3D%5Cfrac%7Bn%7D%7BN%7D) and ![q=m/N=1-p](http://chart.apis.google.com/chart?cht=tx&chl=q%3Dm%2FN%3D%201-p%0A).
+Let us imagine we have a set of ![N](http://chart.apis.google.com/chart?cht=tx&chl=N%0A) items. These items fall in two categories, ![n](http://chart.apis.google.com/chart?cht=tx&chl=n%0A) have a label 1 and ![m=N-n](http://chart.apis.google.com/chart?cht=tx&chl=m%3DN-n) have a label 2. To get our data a bit more ordered, we want to group them by label. We introduce the ratio 
+
+![p = n/N](http://chart.apis.google.com/chart?cht=tx&chl=p%3D%5Cfrac%7Bn%7D%7BN%7D%2C%20%5Cqquad%20q%3D%5Cfrac%7Bm%7D%7BN%7D%3D1-p.) 
 
 The entropy of our set is given by the following equation:
 
-![Entropy formula](http://chart.apis.google.com/chart?cht=tx&chl=%24E%20%3D%20-p%20%5C%20%5Clog_2%20(p)%20-q%20%5C%20%5Clog_2%20(q)%24%0A.)
+![Entropy formula](http://chart.apis.google.com/chart?cht=tx&chl=E%20%3D%20-p%20%5C%20%5Clog_2%20(p)%20-q%20%5C%20%5Clog_2%20(q).)
 
 A set is tidy if it contains only items with the same label, and messy if it is a mix of items with different labels.
 Now have a look at the Entropy function. When there is no item with label 1 in the set (p=0) or if the set is full of item with label 1 (p=1), the entropy is zero. If you have half with label 1 half with label2 (p=1/2), the entropy is maximal (equals to one since it is the log base 2).
+
 ![Entropy function](/images/entropy/entropyfunction2.png "Entropy function")
+
 This function reflects the messiness of the data.
 
 ## Evolution of entropy
 
 The entropy is an absolute measure which provide a number between 0 and 1, independently of the size of the set. It is not important if your room is small or large when it is messy. Also, if you separate your room in two, by building a wall in the middle, it does not look less messy! The entropy will remain the same on each part.
 
-In decision trees, at each branching, the input set to tidy is split in 2. Let us understand how you compare entropy before and after the split. Imagine you start with a messy set with entropy one (half/half, p=q). In the worst case, it could be split into 2 messy sets where half of the items are labelled 1 and the other half have label2 in each set. Hence the entropy of each of the 2 resulting sets is 1. In this scenario, the messiness has not changed and we would like to have the same entropy before and after the split. We can not just sum the entropies of the two sets. A solution, often used in mathematics, is to compute the mean entropy of the two sets. In this case, the mean is one. However, in decision trees, a weighted sum of entropies is computed instead (weighted by the size of the two subsets):
+In decision trees, at each branching, the input set is split in 2. Let us understand how you compare entropy before and after the split. Imagine you start with a messy set with entropy one (half/half, p=q). In the worst case, it could be split into 2 messy sets where half of the items are labelled 1 and the other half have label 2 in each set. Hence the entropy of each of the two resulting sets is 1. In this scenario, the messiness has not changed and we would like to have the same entropy before and after the split. We can not just sum the entropies of the two sets. A solution, often used in mathematics, is to compute the mean entropy of the two sets. In this case, the mean is one. However, in decision trees, a weighted sum of entropies is computed instead (weighted by the size of the two subsets):
 
 ![E_split = N_1/N E_1+N_2/N E_2](http://chart.apis.google.com/chart?cht=tx&chl=E_%7B%5Crm%20split%7D%3D%5Cfrac%7BN_1%7D%7BN%7DE_1%2B%5Cfrac%7BN_2%7D%7BN%7DE_2)
 
 where ![n_1](http://chart.apis.google.com/chart?cht=tx&chl=n_1) and ![n_2](http://chart.apis.google.com/chart?cht=tx&chl=n_2) are the number of items of the each sets after the split and ![E_1](http://chart.apis.google.com/chart?cht=tx&chl=E_1) and ![E_2](http://chart.apis.google.com/chart?cht=tx&chl=E_2) are their respective entropy.
-It gives more importance to the set wich is larger (if any). The idea is that it is a bit better if the large set gets tidier, as it requires more efforts to tidy. Imagine the worst case where a set with 1000 elements is split in two, with a set of 999 elements and a set of 1 element. The latter set has an entropy of zero since it contains only one element, one label. But this is not really important as the vast majority of the data is still messy in the second set.
-
-
-
-
+It gives more importance to the set wich is larger (if any). The idea is that it is a bit better if the large set gets tidier, as it requires more efforts to tidy. Imagine the worst case where a set with 1000 elements is split in two, with a set of 999 elements and a set of 1 element. The latter set has an entropy of zero since it contains only one element, one label. But this is not really important as the vast majority of the data is still messy in the second set. So the two sets should be given importance relative to their size.
 
 
 ## Limits of decision trees
 
-Since it goes step by step, decision trees may not provide the optimal classification. It minimizes the entropy at each step but has no global view on the optimization process. Let me explain this differently. Sometimes it may be more efficient to start to put in order the bigger items event if there are not many of them and the the impression of tidiness does not increase much after. You could then put the smaller items on top of the bigger to get a nicer view of your room. Starting the other way round might not lead to a room as neat.
+Since it goes step by step, decision trees may not provide the optimal classification. It minimizes the entropy at each step but has no global view on the optimization process. Let me explain this differently. Sometimes it may be more efficient to start to put in order the bigger items in a room, even if there are not many of them and the the impression of tidiness does not increase much after. You could then put the smaller items on top of the bigger to get a nicer view of your room. Starting the other way round might not lead to a room as neat.
