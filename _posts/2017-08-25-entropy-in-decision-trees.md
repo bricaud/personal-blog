@@ -35,8 +35,6 @@ Fortunately, the visual inspection can be replaced by a more mathematical approa
 The requirement of this function is that it provides a minimum value if there is the same kind of objects in the set and a maximal value if there is a uniform mixing of objects with different labels (or categories) in the set. 
 
 
-
-
 ## Why entropy in decision trees?
 
 In decision trees, the goal is to tidy the data. You try to separate your data and group the samples together in the classes they belong to. You know their label since you construct the trees from the training set. You maximize the purity of the groups as much as possible each time you create a new node of the tree (meaning you cut your set in two). Of course, at the end of the tree, you want to have a clear answer. 
@@ -69,6 +67,8 @@ Now have a look at the Entropy function, below. When there is no item with label
 
 ![Entropy function](/images/entropy/entropyfunction2.png "Entropy function")
 
+In addition to these properties, the function is symmetric with respect to p=0.5. Among the two category to classify, there not one which is more messy than the other.
+
 This function reflects the messiness of the data.
 
 ## Evolution of entropy
@@ -85,6 +85,15 @@ It gives more importance to the set which is larger (if any). The idea is that i
 
 ## Limits of decision trees
 
-Since it goes step by step, decision trees may not provide the optimal classification. It minimizes the entropy at each step but has no global view on the optimization process. Let me explain this differently. Sometimes it may be more efficient to start to put in order the bigger items in a room, even if there are not many of them and the impression of tidiness does not increase much after. You could then put the smaller items on top of the bigger to get a nicer view of your room. Starting the other way round might not lead to a room as neat.
+Since it goes step by step, decision trees may not provide the optimal classification. It minimizes the entropy at each step but has no global view on the optimization process. Let me explain this differently. Sometimes it may be more efficient to start to put in order the bigger items in a room, even if there are not many of them and the impression of tidiness does not increase much after. You could then put the smaller items on top of the bigger to get a nicer view of your room. Starting the other way round might not lead to a room as neat. This approach what is called a [greedy approach](https://en.wikipedia.org/wiki/Greedy_algorithm).
 
-I hope you have found this post useful.
+## Generalization
+
+If you have more than 2 labels, you can generalize the formula introduced above:
+![E=-sum_ip_ilogp_i](http://chart.apis.google.com/chart?cht=tx&chl=E%3D%5C-sum_ip_i%5Clog_2p_i%20%2C)
+where the ![p_i](http://chart.apis.google.com/chart?cht=tx&chl=p_i) are the ratio of elements of each label in the set.
+
+In physics, [the second law of thermodynamics](https://en.wikipedia.org/wiki/Second_law_of_thermodynamics) states that the entropy always increases over time, if you don't bring (or take) any energy to the system.
+Don't wait too long before tidying your room or your data!
+
+I hope you have found this post useful. More Machine Learning posts should come soon.
