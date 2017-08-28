@@ -3,6 +3,7 @@ layout: post
 comments: true
 title: A simple explanation of entropy in decision trees
 categories: [tutorial, machine learning]
+tags: [machine learning, decision trees, entropy]
 thumbnail: /images/Entropy/entropyfunction2.png
 published: true
 ---
@@ -62,7 +63,7 @@ The entropy of our set is given by the following equation:
 ![Entropy formula](http://chart.apis.google.com/chart?cht=tx&chl=E%20%3D%20-p%20%5C%20%5Clog_2%20(p)%20-q%20%5C%20%5Clog_2%20(q).)
 
 A set is tidy if it contains only items with the same label, and messy if it is a mix of items with different labels.
-Now have a look at the Entropy function, below. When there is no item with label 1 in the set (p=0) or if the set is full of items with Label 1 (p=1), the entropy is zero. If you have half with Label 1, half with Label 2 (p=1/2), the entropy is maximal (equals to 1 since it is the log base 2).
+Now have a look at the Entropy function, below. When there is no item with label 1 in the set (p=0) or if the set is full of items with Label 1 (p=1), the entropy is zero. If you have half with Label 1, half with Label 2 (p=1/2), the entropy is maximal (equals to 1 since it is the [log base 2](https://en.wikipedia.org/wiki/Binary_logarithm)).
 
 ![Entropy function]({{ site.baseurl }}/images/entropy/entropyfunction2.png "Entropy function")
 
