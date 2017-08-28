@@ -4,7 +4,7 @@ comments: true
 title: A simple explanation of entropy in decision trees
 categories: [tutorial, machine learning]
 tags: [machine learning, decision trees, entropy]
-thumbnail: /images/Entropy/entropyfunction2.png
+thumbnail: /images/entropy/entropyfunction2.png
 published: true
 ---
 
