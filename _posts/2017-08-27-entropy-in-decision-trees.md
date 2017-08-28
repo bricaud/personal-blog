@@ -4,7 +4,7 @@ comments: true
 title: A simple explanation of entropy in decision trees
 categories: [tutorial, machine learning]
 thumbnail: /images/Entropy.entropythumb.png
-published: false
+published: true
 ---
 
 I recently wanted to refresh my memory about Machine Learning methods. I have spent some time reading tutorials, blogs and Wikipedia. No doubts, the Internet is really useful, this is great. I got back on tracks quickly with the general idea of the mainstream algorithms. However, from time to time, I find some particular points and explanations obscure. This concerns often details about the algorithms which are overlooked. Sometimes, the emphasis is on the main part of the algorithm and some details are left missing. But I found these missing parts quite important to fully understand what's going on in the algorithm.
@@ -20,7 +20,7 @@ Entropy is a concept used in Physics, mathematics, computer science (information
 
 Plato, [with his cave](https://en.wikipedia.org/wiki/Allegory_of_the_Cave), knew that metaphors are good ways for explaining deep ideas. Let try to get some inspiration from him. I like the definition of entropy given sometimes by physicists:
 
-> Entropy is a measure of disorder
+> Entropy is a measure of disorder.
 
 So let us take this point of view and think that our dataset is like a messy room:
 
@@ -66,9 +66,9 @@ Now have a look at the Entropy function, below. When there is no item with label
 
 ![Entropy function](/images/entropy/entropyfunction2.png "Entropy function")
 
-In addition to these properties, the function is symmetric with respect to p=0.5: among the two categories to classify, there not one which is more messy than the other.
+In addition to these properties, the function is symmetric with respect to p=0.5: among the two categories to classify, there not one which is messier than the other.
 
-This function reflects the messiness of the data.
+This function quantifies the messiness of the data.
 
 ## Evolution of entropy
 
@@ -84,7 +84,7 @@ It gives more importance to the set which is larger (if any). The idea is that i
 
 ## Limits of decision trees
 
-Since it goes step by step, decision trees may not provide the optimal classification. It minimizes the entropy at each step but has no global view on the optimization process. Let me explain this differently. Sometimes it may be more efficient to start to put in order the bigger items in a room, even if there are not many of them and the impression of tidiness does not increase much after. You could then put the smaller items on top of the bigger to get a nicer view of your room. Starting the other way round might not lead to a room as neat. This approach is called a [greedy approach](https://en.wikipedia.org/wiki/Greedy_algorithm).
+Since it goes step by step, decision trees may not provide the optimal classification. It minimizes the entropy at each step but has no global view on the optimization process. Let me explain this differently. Sometimes it may be more efficient to start to put in order the bigger items in a room, even if there are not many of them and the impression of tidiness does not increase much after. You could then put the smaller items on top of the bigger to get a nicer view of your room. Starting the other way round might not lead to a room as neat. With the decision tree approach, you could also end up with many small groups of toys put in different parts of the room. They would be perfectly matched together however it would be better to group all the toys in one part of the room. This step by step approach is called a [greedy approach](https://en.wikipedia.org/wiki/Greedy_algorithm).
 
 ## Generalization
 
@@ -99,9 +99,9 @@ You may use different kinds of entropies, have a look at [Renyi entropy](https:/
 
 ## Conclusion
 
-We have seen that entropy is not just a mathematical formula. It has a simple interpretation that everyone can understand.If you now see what is entropy you should have a clearer idea of what are doing decisino trees. 
+We have seen that entropy is not just a mathematical formula. It has a simple interpretation that everyone can understand.If you now see what is entropy you should have a clearer idea of what are doing decision trees. 
 
-> By using entropy, Decision trees tidy more than they classify the data.
+> By using entropy, decision trees tidy more than they classify the data.
 
 In physics, [the second law of thermodynamics](https://en.wikipedia.org/wiki/Second_law_of_thermodynamics) states that the entropy always increases over time, if you don't bring (or take) any energy to the system.
 Don't wait too long before tidying your room or your data!
