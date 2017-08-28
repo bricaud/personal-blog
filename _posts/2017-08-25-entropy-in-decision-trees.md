@@ -9,15 +9,14 @@ published: false
 
 I recently wanted to refresh my memory about Machine Learning methods. I have spent some time reading tutorials, blogs and Wikipedia. No doubts, the Internet is really useful, this is great. I got back on tracks quickly with the general idea of the mainstream algorithms. However, from time to time, I find some particular points and explanations obscure. This concerns often details about the algorithms which are overlooked. Sometimes, the emphasis is on the main part of the algorithm and some details are left missing. But I found these missing parts quite important to fully understand what's going on in the algorithm.
 
-In addition, you tend to think it is missing because it is so simple that everyone will understand. But in many cases it is not! And it leaves the false impression that because you are not able to understand this step, you are not clever enough to grasp the concept. Pretty discouraging! Sometimes, the problem lies in the strong focus on maths, which is not bad in itself but makes it difficult to grasp for people not used to high-level maths (and there are many of them who wish to learn the basic concepts of Machine Learning!). As well as the equation, it is as interesting to get the ideas behind the equations.
 
 In this series of blog posts, I want to clarify or at least provide a different explanation of some of the concepts in machine learning, in the hope of helping people increase their understanding of these methods.
 Since I have spent quite some time studying the concept of entropy in academia, I will start my Machine Learning tutorial with it.
-It is a key step in decision trees, however, entropy is often overlooked (as well as the other measures of the messiness of the data, like the Gini coefficient). This is really an important concept to get, in order to fully understand decision trees.
+Evaluating the entropy is a key step in decision trees, however, it is often overlooked (as well as the other measures of the messiness of the data, like the Gini coefficient). This is really an important concept to get, in order to fully understand decision trees.
 
 ## Metaphoric definition of entropy
 
-Entropy is a concept used in Physics, mathematics, computer science (information theory) and other fields of science. You may have a look at [Wikipedia](https://en.wikipedia.org/wiki/Entropy_(disambiguation)) to see the many uses of entropy. Yet, its definition is not obvious for everyone.
+Entropy is a concept used in Physics, mathematics, computer science (information theory) and other fields of science. You may have a look at Wikipedia to see the many uses of [entropy](https://en.wikipedia.org/wiki/Entropy_(disambiguation)). Yet, its definition is not obvious for everyone.
 
 Plato, [with his cave](https://en.wikipedia.org/wiki/Allegory_of_the_Cave), knew that metaphors are good ways for explaining deep ideas. Let try to get some inspiration from him. I like the definition of entropy given sometimes by physicists:
 
@@ -54,9 +53,9 @@ Before and after the decision, the sets are different and have different sizes. 
 
 ## Mathematical definition of entropy
 
-Let us imagine we have a set of ![N](http://chart.apis.google.com/chart?cht=tx&chl=N%0A) items. These items fall into two categories, ![n](http://chart.apis.google.com/chart?cht=tx&chl=n%0A) have a label 1 and ![m=N-n](http://chart.apis.google.com/chart?cht=tx&chl=m%3DN-n) have a label 2. As we have seen, to get our data a bit more ordered, we want to group them by labels. We introduce the ratio 
+Let us imagine we have a set of ![N](http://chart.apis.google.com/chart?cht=tx&chl=N%0A) items. These items fall into two categories, ![n](http://chart.apis.google.com/chart?cht=tx&chl=n%0A) have Label 1 and ![m=N-n](http://chart.apis.google.com/chart?cht=tx&chl=m%3DN-n) have Label 2. As we have seen, to get our data a bit more ordered, we want to group them by labels. We introduce the ratio 
 
-![p = n/N](http://chart.apis.google.com/chart?cht=tx&chl=p%3D%5Cfrac%7Bn%7D%7BN%7D%2C%20%5Cqquad%20q%3D%5Cfrac%7Bm%7D%7BN%7D%3D1-p.) 
+![p = n/N](http://chart.apis.google.com/chart?cht=tx&chl=p%3D%5Cfrac%7Bn%7D%7BN%7D%2C%20%5Cqquad%7B%5Crm%20and%7D%5Cqquad%20q%3D%5Cfrac%7Bm%7D%7BN%7D%3D1-p.) 
 
 The entropy of our set is given by the following equation:
 
@@ -90,7 +89,9 @@ Since it goes step by step, decision trees may not provide the optimal classific
 ## Generalization
 
 If you have more than 2 labels, you can generalize the formula introduced above:
-![E=-sum_ip_ilogp_i](http://chart.apis.google.com/chart?cht=tx&chl=E%3D%5C-sum_ip_i%5Clog_2p_i%20%2C)
+
+![E=-sum_ip_ilogp_i](http://chart.apis.google.com/chart?cht=tx&chl=E%3D-%5Csum_ip_i%5Clog_2p_i%20%2C)
+
 where the ![p_i](http://chart.apis.google.com/chart?cht=tx&chl=p_i) are the ratio of elements of each label in the set.
 
 In physics, [the second law of thermodynamics](https://en.wikipedia.org/wiki/Second_law_of_thermodynamics) states that the entropy always increases over time, if you don't bring (or take) any energy to the system.
