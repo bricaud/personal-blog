@@ -3,7 +3,7 @@ layout: post
 comments: true
 title: A simple explanation of entropy in decision trees
 categories: [tutorial, machine learning]
-thumbnail: /images/Entropy.entropythumb.png
+thumbnail: /images/Entropy/entropyfunction2.png
 published: true
 ---
 
@@ -28,7 +28,7 @@ So let us take this point of view and think that our dataset is like a messy roo
 
 Imagine you are about to tidy your room or your kids' room. Usually, you use a subjective measure to estimate how messy is it. (not everyone has the same measure :), but this is not the topic here). You know that objects must be on the shelves and probably grouped together, by type: books with books, toys with other toys ...
 
-![Messy room](/images/entropy/messy_room.jpg "My Kids messy room")
+![Messy room]({{ site.baseurl }}/images/entropy/messy_room.jpg "My Kids messy room")
 
 Fortunately, the visual inspection can be replaced by a more mathematical approach for the data. A mathematical function exists for estimating the mess among mathematical objects and we can apply it to our data.
 The requirement of this function is that it provides a minimum value if there is the same kind of objects in the set and a maximal value if there is a uniform mixing of objects with different labels (or categories) in the set. 
@@ -42,7 +42,7 @@ In decision trees, the goal is to tidy the data. You try to separate your data a
 
 On the figure below is depicted the splitting process. Red rings and blue crosses symbolize elements with 2 different labels. The decision starts by evaluating the feature values of the elements inside the initial set. Based on their values, elements are put in Set 1 or Set 2. In this example, after the splitting, the state seems tidier, most of the red rings have been put in Set 1 while a majority of blue crosses are in Set 2.
 
-![Decision digram](/images/entropy/splitdiagram.png "Decision diagram")
+![Decision digram]({{ site.baseurl }}/images/entropy/splitdiagram.png "Decision diagram")
 
 
 So decision trees are here to tidy the dataset by looking at the values of the feature vector associated with each data point. Based on the values of each feature, decisions are made that eventually leads to a leaf and an answer. 
@@ -64,7 +64,7 @@ The entropy of our set is given by the following equation:
 A set is tidy if it contains only items with the same label, and messy if it is a mix of items with different labels.
 Now have a look at the Entropy function, below. When there is no item with label 1 in the set (p=0) or if the set is full of items with Label 1 (p=1), the entropy is zero. If you have half with Label 1, half with Label 2 (p=1/2), the entropy is maximal (equals to 1 since it is the log base 2).
 
-![Entropy function](/images/entropy/entropyfunction2.png "Entropy function")
+![Entropy function]({{ site.baseurl }}/images/entropy/entropyfunction2.png "Entropy function")
 
 In addition to these properties, the function is symmetric with respect to p=0.5: among the two categories to classify, there not one which is messier than the other.
 
