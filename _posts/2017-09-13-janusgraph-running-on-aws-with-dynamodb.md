@@ -14,7 +14,7 @@ To run the graph database, the idea is use the possibilities offered by a cloud 
 
 The idea is to run the JanusGraph on an [EC2](https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud) machine and make the interface with the DynamoDB for storing the data. Optionally, you may also set up an access to a disk storage (with [S3](https://en.wikipedia.org/wiki/Amazon_S3)) where you can save the configuration files.
 
-![Architecture view]({{ site.baseurl }}/images/janusGraph/install/janusGraphSchema.png "Architecture in the cloud")
+![Architecture view]({{ site.baseurl }}/images/janusGraphInstall/janusGraphSchema.png "Architecture in the cloud")
 
 In order to help setting up the graph database, the AWS team provides some [code and directions](https://github.com/awslabs/dynamodb-janusgraph-storage-backend). All is in there but the guidelines where not exactly leading to what I wanted. I did not want to run the script that launch an EC2 instance fully configured. I wanted to install JanusGraph on my already made EC2 instance and be able to add more applications on this instance.
 
