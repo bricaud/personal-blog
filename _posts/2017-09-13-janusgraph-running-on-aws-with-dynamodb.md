@@ -66,7 +66,7 @@ Details about the possible configuration choices are given [here](https://github
 ```
 storage.dynamodb.stores.edgestore.data-model=SINGLE
 storage.dynamodb.stores.graphindex.data-model=SINGLE
-storage.dynamodb.stores.titan_ids.data-model=SINGLE
+storage.dynamodb.stores.janusgraph_ids.data-model=SINGLE
 storage.dynamodb.stores.system_properties.data-model=SINGLE
 storage.dynamodb.stores.systemlog.data-model=SINGLE
 storage.dynamodb.stores.txlog.data-model=SINGLE
