@@ -6,26 +6,26 @@ categories: [graph, coding]
 thumbnail: /images/janusGraphInstall/gremlinconsole.png
 ---
 
-Graph Databases are not yet widely used and it is still not completely straighforward to run one in the cloud. I describe here the different steps I made to install and run the JanusGraph database, using the NoSQL database DynamoDB as a storage backend. The cloud is the one from Amazon (AWS).
+Graph Databases are not yet widely used and it is still not completely straightforward to run one in the cloud. I describe here the different steps I made to install and run the JanusGraph database, using the NoSQL database DynamoDB as a storage backend. The cloud is the one from Amazon (AWS).
 
 ## Architecture
 
-To run the graph database, the idea is use the possibilities offered by a cloud service such as AWS. The [JanusGraph](http://janusgraph.org/) is a scalable graph database for which you can choose a backend, in fact a NoSQL database, such as Cassandra, Hbase or BerkeleyDB, for storing the data. The licence is Apache 2.0 and the project is owned by the Linux Fundation (It is a fork from the Titan graph database). The repository is [here](https://github.com/JanusGraph/janusgraph). Although not in the official list, it is also possible to choose Amazon's [DynamoDB](https://en.wikipedia.org/wiki/Amazon_DynamoDB). This latter database is the one provided as a service in AWS. You can start it in a few clicks and you are billed on the amount of data it contains. You do not need any computer ressources, everything is handled by Amazon.
+To run the graph database, the idea is use the possibilities offered by a cloud service such as AWS. The [JanusGraph](http://janusgraph.org/) is a scalable graph database for which you can choose a backend, in fact a NoSQL database, such as Cassandra, Hbase or BerkeleyDB, for storing the data. The license is Apache 2.0 and the project is owned by the Linux Foundation (It is a fork from the Titan graph database). The repository is [here](https://github.com/JanusGraph/janusgraph). Although not in the official list, it is also possible to choose Amazon's [DynamoDB](https://en.wikipedia.org/wiki/Amazon_DynamoDB). This latter database is the one provided as a service in AWS. You can start it in a few clicks and you are billed on the amount of data it contains. You do not need any computer resources, everything is handled by Amazon.
 
 The idea is to run the JanusGraph on an [EC2](https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud) machine and make the interface with the DynamoDB for storing the data. Optionally, you may also set up an access to a disk storage (with [S3](https://en.wikipedia.org/wiki/Amazon_S3)) where you can save the configuration files or any kind of data needed for your app.
 
 ![Architecture view]({{ site.baseurl }}/images/janusGraphInstall/janusGraphSchema.png "Architecture in the cloud")
 
-In order to help setting up the graph database, the AWS team provides some [code and directions](https://github.com/awslabs/dynamodb-janusgraph-storage-backend). All is in there but the guidelines where not exactly leading to what I wanted. I did not want to run the script that launch an EC2 instance fully configured. I wanted to install JanusGraph on my already running EC2 instance and be able to customize it.
+In order to help set up the graph database, the AWS team provides some [code and directions](https://github.com/awslabs/dynamodb-janusgraph-storage-backend). All is in there but the guidelines were not exactly leading to what I wanted. I did not want to run the script that launches an EC2 instance fully configured. I wanted to install JanusGraph on my already running EC2 instance and be able to customize it.
 
 ## The EC2 instance
 
-First you need an EC2 instance where to install the graph server. Go to the [AWS console](http://console.aws.amazon.com/) and launch one (with Linux) if it is not already done. Get your keys (the .pem file) and connect to the instance using ssh. On your machine (Lunix or Mac) open a terminal and run
+First, you need an EC2 instance where to install the graph server. Go to the [AWS console](http://console.aws.amazon.com/) and launch one (with Linux) if it is not already done. Get your keys (the .pem file) and connect to the instance using ssh. On your machine (Linux or Mac) open a terminal and run
 ```
 ssh -i path_to_your_pem_file ec2-user@ip_address_of_your_machine
 ```
 
-Now your are logged in your EC2 instance, install the pre-requisites by typing in the terminal (first steps in the [awslabs' repo](https://github.com/awslabs/dynamodb-janusgraph-storage-backend)):
+Now you are logged in your EC2 instance, install the pre-requisites by typing in the terminal (first steps in the [awslabs' repo](https://github.com/awslabs/dynamodb-janusgraph-storage-backend)):
 
 ```
 curl https://raw.githubusercontent.com/awslabs/dynamodb-janusgraph-storage-backend/master/src/test/resources/install-reqs.sh
@@ -112,4 +112,4 @@ and inside the console, connect to the server:
 :remote console
 ```
 
-You should be able to query the graph database. For example you can load a part of the [Marvel database](https://github.com/awslabs/dynamodb-janusgraph-storage-backend#load-a-subset-of-the-marvel-universe-social-graph).
+You should be able to query the graph database. For example, you can load a part of the [Marvel database](https://github.com/awslabs/dynamodb-janusgraph-storage-backend#load-a-subset-of-the-marvel-universe-social-graph).
