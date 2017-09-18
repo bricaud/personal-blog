@@ -12,7 +12,7 @@ Graph Databases are not yet widely used and it is still not completely straighfo
 
 To run the graph database, the idea is use the possibilities offered by a cloud service such as AWS. The [JanusGraph](http://janusgraph.org/) is a scalable graph database for which you can choose a backend, in fact a NoSQL database, such as Cassandra, Hbase or BerkeleyDB, for storing the data. The licence is Apache 2.0 and the project is owned by the Linux Fundation (It is a fork from the Titan graph database). The repository is [here](https://github.com/JanusGraph/janusgraph). Although not in the official list, it is also possible to choose Amazon's [DynamoDB](https://en.wikipedia.org/wiki/Amazon_DynamoDB). This latter database is the one provided as a service in AWS. You can start it in a few clicks and you are billed on the amount of data it contains. You do not need any computer ressources, everything is handled by Amazon.
 
-The idea is to run the JanusGraph on an [EC2](https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud) machine and make the interface with the DynamoDB for storing the data. Optionally, you may also set up an access to a disk storage (with [S3](https://en.wikipedia.org/wiki/Amazon_S3)) where you can save the configuration files.
+The idea is to run the JanusGraph on an [EC2](https://en.wikipedia.org/wiki/Amazon_Elastic_Compute_Cloud) machine and make the interface with the DynamoDB for storing the data. Optionally, you may also set up an access to a disk storage (with [S3](https://en.wikipedia.org/wiki/Amazon_S3)) where you can save the configuration files or any kind of data needed for your app.
 
 ![Architecture view]({{ site.baseurl }}/images/janusGraphInstall/janusGraphSchema.png "Architecture in the cloud")
 
@@ -20,9 +20,12 @@ In order to help setting up the graph database, the AWS team provides some [code
 
 ## The EC2 instance
 
-First you need an EC2 instance where to install the graph server. Go to the [AWS console](http://console.aws.amazon.com/) and launch one if it is not already done. Get your keys (the .pem file) and connect to the instance using ssh.
+First you need an EC2 instance where to install the graph server. Go to the [AWS console](http://console.aws.amazon.com/) and launch one (with Linux) if it is not already done. Get your keys (the .pem file) and connect to the instance using ssh. On your machine (Lunix or Mac) open a terminal and run
+```
+ssh -i path_to_your_pem_file ec2-user@ip_address_of_your_machine
+```
 
-Install the pre-requisites (first steps in the [awslabs' repo](https://github.com/awslabs/dynamodb-janusgraph-storage-backend)):
+Now your are logged in your EC2 instance, install the pre-requisites by typing in the terminal (first steps in the [awslabs' repo](https://github.com/awslabs/dynamodb-janusgraph-storage-backend)):
 
 ```
 curl https://raw.githubusercontent.com/awslabs/dynamodb-janusgraph-storage-backend/master/src/test/resources/install-reqs.sh
@@ -34,33 +37,44 @@ and clone the repository
 git clone https://github.com/awslabs/dynamodb-janusgraph-storage-backend.git && cd dynamodb-janusgraph-storage-backend
 ```
 
-Now, inside the cloned repository, run
+Inside the cloned repository, the Awslab's team provide a script for installing JanusGraph. Install the JanusGraph and gremlin server by running, (Check and modify the JanusGraph version to install if needed)
 
 ```
 src/test/resources/install-gremlin-server.sh
 ```
 
-When this is done,
+When this is done, go to the folder where JanusGraph has been installed:
 
 ```
 cd server/dynamodb-janusgraph-storage-backend-1.1.1
 ```
 
+You need to configure your graph database server.
 In the `conf` folder, you will find the configuration files. You may have to modify the file `dynamodb.properties`, in particular the line
 
 ```
 storage.dynamodb.client.signing-region=us-west-2
 ```
 
-Put your region instead. You may do it with the nano editor
+Put your region instead. You may do it with the nano editor:
 
 ```
 nano conf/dynamodb.properties
 ```
+Details about the possible configuration choices are given [here](https://github.com/awslabs/dynamodb-janusgraph-storage-backend#dynamodb-keycolumnvalue-store-configuration-parameters). If you use single-items you must add
+
+```
+storage.dynamodb.stores.edgestore.data-model=SINGLE
+storage.dynamodb.stores.graphindex.data-model=SINGLE
+storage.dynamodb.stores.titan_ids.data-model=SINGLE
+storage.dynamodb.stores.system_properties.data-model=SINGLE
+storage.dynamodb.stores.systemlog.data-model=SINGLE
+storage.dynamodb.stores.txlog.data-model=SINGLE
+```
 
 
 ## DynamoDB
-You need DynamoDB and database tables configured to receive the data from JanusGraph. Go [here](https://console.aws.amazon.com/dynamodb/home) to check whether you can have access to it.
+You need DynamoDB and database tables configured to receive the data from JanusGraph. Go [here](https://console.aws.amazon.com/dynamodb/home) to check whether you can have access to DynamoDB.
 To create the table, you need to run the [script provided here](https://github.com/awslabs/dynamodb-janusgraph-storage-backend#cloudformation-template-table) in [CloudFormation](https://aws.amazon.com/cloudformation). You may access CoudFormation from the [AWS console](http://console.aws.amazon.com/), then create a new stack. Download the [script](https://github.com/awslabs/dynamodb-janusgraph-storage-backend#cloudformation-template-table) and choose to create the stack from this file.
 
 ## S3
@@ -71,13 +85,16 @@ aws s3 cp source_file destination_file
 ```
 
 ## Allow interactions between EC2 and dynamoDB
-To allow EC2 to access DynamoDB and S3, create a new [IAM role](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#attach-iam-role) and attach it to the EC2 instance. In this IAM role, choose full access to dynamoDB and read (or full) access to S3.
+To allow EC2 to access DynamoDB and S3, create a new [IAM role](https://console.aws.amazon.com/iam/) and [attach it](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#attach-iam-role) to the EC2 instance. In this IAM role, choose full access to dynamoDB and read (or full) access to S3.
 
 ## Running the server
-Coming back to the EC2 instance, launch the server (JanusGraph uss the Gremlin server):
+Coming back to the EC2 instance, launch the server (JanusGraph uses the Gremlin server). Go to the correct folder
 
 ```
 cd /home/ec2-user/dynamodb-janusgraph-storage-backend/server/dynamodb-janusgraph-storage-backend-1.1.1
+```
+Run the server:
+```
 bin/gremlin-server.sh conf/gremlin-server/gremlin-server.yaml
 ```
 
