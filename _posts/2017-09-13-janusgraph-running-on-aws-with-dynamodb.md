@@ -113,3 +113,26 @@ and inside the console, connect to the server:
 ```
 
 You should be able to query the graph database. For example, you can load a part of the [Marvel database](https://github.com/awslabs/dynamodb-janusgraph-storage-backend#load-a-subset-of-the-marvel-universe-social-graph).
+
+## Adding Python to the server
+*Section added on the 19th of September 2017*
+
+If you need to query the graph database server using Python, you have to make an additional configuration step for the server ( besides the [gremlin python](https://pypi.python.org/pypi/gremlinpython) module to include in the code Python).
+
+First note that the following step are for JanusGraph version 0.1.1 and gremlin server 3.2.3, which is the version available for download at the time of writing.
+First you must load the Python libraries using:
+```
+bin/gremlin-server.sh -i org.apache.tinkerpop gremlin-python 3.2.3
+```
+Make sure you are using the correct version of gremlin-python. I made the mistake of installing 3.2.5 instead and it did not work. I found the correct answer [here](https://groups.google.com/forum/#!topic/janusgraph-dev/_EbTdatQ39k).
+Then the gremlin server configuration file must be changed. `gremlin-python` must be added in the `scriptEngines` section:
+```
+scriptEngines: {
+  gremlin-groovy: {
+    imports: [java.lang.Math],
+    staticImports: [java.lang.Math.PI],
+    scripts: [scripts/generate-modern.groovy]},
+  gremlin-jython: {},
+  gremlin-python: {}
+}
+```
