@@ -3,11 +3,13 @@ layout: post
 comments: true
 title: Testing the Cosmos DB graph database
 categories: [graph, coding, cloud]
-thumbnail: /images/cosmosgraph
-published: false
+thumbnail: /images/cosmosgraph/cosmosdbdashboard.png
+published: true
 ---
 
-Graph databases raise more and more interest as alternatives to standard SQL databases. Indeed, the graph structure may be better suited when queries are focusing on relationships between entities stored in the database. Cloud companies have spotted this trend and provide new solutions to set up graph databases in the cloud. Amazon and Google have made the choice of providing ways to connect JanusGraph to DynamoDB and BigTable respectively. Microsoft has chosen to provide its own graph database while relying on Gremlin for handling queries. Azure is using Cosmos DB as a backend for it. I has tested the Cosmos graph DB and I want here to share my first impressions. It is important to understand that graph databases are cutting edge tools, they are rapidly evolving, with new versions coming at a fast pace and scarse documentation and tutorials. We are just at the beginning of this new concept, this new way of thinking and structuring data. Observing its evolution is fascinating. 
+Graph databases raise more and more interest as alternatives to standard SQL databases. Indeed, the graph structure may be better suited when queries are focusing on relationships between entities stored in the database. Cloud companies have spotted this trend and provide new solutions to set up graph databases in the cloud. Amazon and Google have made the choice of providing ways to connect JanusGraph to DynamoDB and BigTable respectively. Microsoft has chosen to provide its own graph database while relying on Gremlin for handling queries. Azure is using Cosmos DB as a backend for it. I have tested the Cosmos graph DB and I want here to share my first impressions. 
+
+
 
 # Introduction
 
@@ -21,7 +23,6 @@ Microsoft has made the choice of providing a graph database service easy to set 
 
 The first impression is pretty good. The user and password for the ssl connection is automatically generated, and ready to use. In addition, no need to configure the Gremlin server or its interaction with the Cosmos database. This is quite comfortable, even more when you compare to the set up of a graph database on AWS (see my previous [blog post]({{ site.baseurl }}{% post_url 2017-09-13-janusgraph-running-on-aws-with-dynamodb %})).
 
-However, at least to me, it looks like an oversimplification to the expense of flexibility. The troubles appear as soon as you want to communicate with the server...
 
 # Connecting to the Gremlin server
 
@@ -76,7 +77,9 @@ As we have seen in the previous section, when you start setting up a database, y
 
 # Conclusion
 
-To conclude, the graph setting of Cosmos DB is perfectly suited for users willing to learn and get a grip on graph models and a graph database. Azure avoid us the painful configuration of the server and the database, and we can concentrate on learning the graph logic and the Gremlin language. Meanwhile, the service will evolve and hopefully provide more advanced settings, more tutorials and documentation, and more open-source code at our disposal in the near future.
+To conclude, the graph setting of Cosmos DB is perfectly suited for users willing to learn and get a grip on graph models and a graph database. Azure avoid us the painful configuration of the server and the database, and we can concentrate on learning the graph logic and the Gremlin language. However, this simplicity does not allow for flexibility and the advanced graph users might be a bit disappointed. Meanwhile, the service will evolve and hopefully provide more advanced settings, more tutorials and documentation, and more open-source code at our disposal in the near future.
+
+It is important to understand that graph databases are cutting edge tools, they are rapidly evolving, with new versions coming at a fast pace and scarse documentation and tutorials. We are just at the beginning of this new concept, this new way of thinking and structuring data. Observing its evolution is fascinating.
 
 
 [^1]: There is an issue with the serialization, the way the server receive and send data. The Cosmos DB graph is configured to accept only data in GraphSON v1 format (see [here](https://docs.microsoft.com/en-us/azure/cosmos-db/create-graph-gremlin-console)). Unfortunately, [pythongremlin](http://tinkerpop.apache.org/docs/current/reference/#gremlin-python) only handle GraphSON v2. (At the time of writing the latest version of gremlinpython is 3.3.0).
