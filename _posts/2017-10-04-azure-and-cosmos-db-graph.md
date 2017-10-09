@@ -7,11 +7,11 @@ thumbnail: /images/cosmosgraph
 published: false
 ---
 
-Graph databases raise more and more interest as alternatives to standard SQL databases. The graph structure may be better suited when queries are focusing on relationships between entities stored in the database. Cloud companies have spotted this trend and provide new solutions to set up graph databases in the cloud. Amazon and Google have made the choice of providing ways to connect JanusGraph to DynamoDB and BigTable respectively. Microsoft has chosen to provide its own solution for the server while relying on Gremlin for handling queries. It is important to understand that graph databases are cutting edge tools, they are rapidly evolving, with new versions coming at a fast pace and scarse documentation and tutorials. It may be difficult to grasp for beginners. I propose here a tutorial for setting up a graph database on the Microsoft cloud "Azure" as well as a small test of it, giving my first impressions. A graph database solution has been recently released within Cosmos db.
+Graph databases raise more and more interest as alternatives to standard SQL databases. Indeed, the graph structure may be better suited when queries are focusing on relationships between entities stored in the database. Cloud companies have spotted this trend and provide new solutions to set up graph databases in the cloud. Amazon and Google have made the choice of providing ways to connect JanusGraph to DynamoDB and BigTable respectively. Microsoft has chosen to provide its own graph database while relying on Gremlin for handling queries. Azure is using Cosmos DB as a backend for it. It is important to understand that graph databases are cutting edge tools, they are rapidly evolving, with new versions coming at a fast pace and scarse documentation and tutorials. We are just at the beginning of this new concept, this new way of thinking and structuring data. Observing its evolution is fascinating. I has tested the Cosmos graph DB and I want here to share my first impressions. 
 
 # Introduction
 
-Graph databases and their pluggins/modules are rapidly evolving and I am convinced that the present tutorial will be quickly out of date. Because of its lack of maturity, this field of engineering is not as neat and documented as what we are used to (for instance with SQL). If I point out the weaknesses here, I also acknowledge the efforts and work of the persons designing the solutions or providing open source code that simplify the life of users. I want to thank them for helping widespread the graph approach and the elegance of graph modelling. I encourage courageous or curious minds to try out and discover the word of graphs.
+Graph databases and their pluggins/modules are rapidly evolving and I am convinced that the present tutorial will be quickly out of date. Because of its lack of maturity, this field of engineering is not as neat and documented as what we are used to (for instance with SQL). If I point out the weaknesses here, I also acknowledge the efforts and work of the persons designing the solutions or providing open source code that simplify the life of users. I want to thank them for helping widespread the graph approach and the elegance of graph modelling. I encourage curious minds to try out and discover the word of graphs.
 
 # Setting up the Graph database server
 
@@ -31,6 +31,8 @@ However, at least to me, it looks like an oversimplification to the expense of f
 
  So I decided to have a try with a different language and I picked the popular Javascript (Node.js). At first I found it confusing as the address of the graph given by the Azure portal contains `https` while the gremlin module for Javascript explicitly states that it only handles websocket connections. I found out that, although not documented, you can connect (and you do in all the tutorials!) to the server using secure websocket `wss`. I was also a bit perplex about the [javascript module](https://github.com/CosmosDB/gremlin-javascript) used which is just a fork of a project made by a contributor of Gremlin Tinkerpop. This module is not in the official Tinkerpop repository. Of course, being on the repository of an individual does not preclude a an efficient module of good quality. It just raises questions about the continuity of the work. Microsoft engineers have started to contribute to this module, adding security handling, so it is going in a good direction.
 
+You may connect to the Gremlin server using the function `Gremlin.createClient` (form the gremlin module), specifying the port `443`, the address `config.endpoint` and the ssl credentials `user` and `password` (stored in the config file, `config.js`).
+
 ~~~ javascript
 const client = Gremlin.createClient(
     443, 
@@ -43,13 +45,32 @@ const client = Gremlin.createClient(
     });
 ~~~
 
-# Test of th writing in the data base
+Then a query can be sent using the `client.execute` function. That's it! Pretty easy. You have to find by yourself the structure of the returned data but that should not be too difficult, it uses the JSON format. For each vertex the data is organized as a dictionary with keys `id`, `label`, `type` and `properties`. The value associated to `properties` is again a dictionary with all property names as keys, and values being lists. 
 
-# Questions about the optimization and tuning of the database
+# Writing to the database
+
+I have used the [code from the javascript tutorial](https://github.com/Azure-Samples/azure-cosmos-db-graph-nodejs-getting-started) to insert some data to the database. I wanted to know the speed for loading data into the graph. This can only be done by sending Gremlin requests to the server. You have to insert one node at a time (one per gremlin query). Typically, it is of the following form:
+
+~~~ javascript
+var gremlin_query = "g.addV('person').property('name', name)"
+var bindings = {name: 'Benjamin'}
+client.execute(gremlin_query, bindings, function_to_process_the_results);
+~~~
+
+The `function_to_process_the_results` may be a function that calls recursively `client.execute`, in order to process sequencially the requests. In that case the bindings are changing with the node to add. For the `i`th node and assuming the node has only a `name` property:
+
+~~~ javascript
+var node_name = data[i].name
+var bindings = {name: node_name}
+~~~
+
+According to my tests, I got a writing speed of 6 node written per second. This is a bit slow if you want to load a large database.
+
+# Optimizing and tuning of the database
 
 The [list of Gremlin steps](https://docs.microsoft.com/en-us/azure/cosmos-db/gremlin-support) supported by Cosmos DB does not yet contain all the possible steps. However, this reduced list will be sufficient for most usecases and for users willing to learn Gremlin and graph databases. Strangely, the steps `loop` and `choose` are stated on this [tutorial-query-graph page](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-graph) but they are not on the list of supported steps.
 
-Indexing is really important in graph databases as you need to start from somewhere before you travel through the connections and relationships. The starting point(s) is (are) chosen according to a keyword or a value and if there is not any index, you have to scan the full graph to find them. According to Azure webpages, all entries in the DB are automatically indexed (vertex and edge properties) avoiding the need to manually creating them. However, it does not allow for partial or fuzzy matching. For example, with JanusGraph, users can combine Elasticsearch with the graph, which makes the keywords `textContains` or `textRegex` [available as gremlin predicates](http://docs.janusgraph.org/latest/search-predicates.html), to search in strings.
+Indexing is really important in graph databases as you need to start from somewhere before you travel through the connections and relationships. The starting point(s) is (are) chosen according to a keyword or a value and if there is no index, you have to scan the full graph to find them. According to Azure webpages, all entries in the DB are automatically indexed (vertex and edge properties) avoiding the need to manually creating them. However, it does not allow for partial or fuzzy matching. For example, with JanusGraph, users can combine Elasticsearch with the graph, which makes the keywords `textContains` or `textRegex` [available as gremlin predicates](http://docs.janusgraph.org/latest/search-predicates.html), to search in strings.
 
 When you start setting up a database, you may need to load a large amount of data at the beginning. If you need to load a large amount of data at once, you can rely on specific functions that speed up the process. [Here is an example](http://docs.janusgraph.org/latest/bulk-loading.html) concerning JanusGraph. You may also rely on the Gremlin console with [bulkloadervertexprogram](http://tinkerpop.apache.org/docs/3.1.0-incubating/#bulkloadervertexprogram). It is available for several backends but I do not know if this works with Cosmos. The Azure tutorials do not say anything about bulk loading. Still, relying on the `bindings` mechanism in traversals (see this [thread](https://groups.google.com/forum/?utm_medium=email&utm_source=footer#!msg/gremlin-users/lE67mACc3QM/xrdvkjniAwAJ)) is always available and should be fine for most users.
 
