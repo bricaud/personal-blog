@@ -13,24 +13,24 @@ Graph databases raise more and more interest as alternatives to standard SQL dat
 
 # Introduction
 
-Graph databases and their surrounding pluggins/modules are rapidly evolving and I am convinced that the present tutorial will be quickly out of date. Because of its lack of maturity, this field of engineering is not as neat and documented as what we are used to (for instance with SQL). If I point out the weaknesses here, I also acknowledge the efforts and work of the persons designing the solutions or providing open source code that simplify the life of users. I want to thank them for helping widespread the graph approach and the elegance of graph modelling. It is time now to encourage curious minds to try out and discover the word of graphs.
+Graph databases and their surrounding plugins/modules are rapidly evolving and I am convinced that the present tutorial will be quickly out of date. Because of its lack of maturity, this field of engineering is not as neat and documented as what we are used to (for instance with SQL). If I point out the weaknesses here, I also acknowledge the efforts and work of the persons designing the solutions or providing open source code that simplify the life of users. I want to thank them for helping widespread the graph approach and the elegance of graph modeling. It is time now to encourage curious minds to try out and discover the word of graphs.
 
 # Setting up the Graph database server
 
-Microsoft has made the choice of providing a graph database service easy to set up and start. Indeed, in a few clicks, the server is up and running. Without exagerating much, it is one click to create a Cosmos database and one click to create the graph DB. The Gremlin server is automatically launched with a domain name `YOURGRAPHNAME.graphs.azure.com` ready to listen any ssl connection on port `443`. It avoids the burden of configuring the database. You just need to choose the name of your graph (and of the collection). The [tutorial](https://docs.microsoft.com/en-us/azure/cosmos-db/create-graph-gremlin-console) for creating the graph is straight forward (first part of the web page).
+Microsoft has made the choice of providing a graph database service easy to set up and start. Indeed, in a few clicks, the server is up and running. Without exaggerating much, it is one click to create a Cosmos database and one click to create the graph DB. The Gremlin server is automatically launched with a domain name `YOURGRAPHNAME.graphs.azure.com` ready to listen to any ssl connection on port `443`. It avoids the burden of configuring the database. You just need to choose the name of your graph (and of the collection). The [tutorial](https://docs.microsoft.com/en-us/azure/cosmos-db/create-graph-gremlin-console) for creating the graph is straightforward (first part of the webpage).
 
 ![Screenshot of the Cosmos DB dashboard]({{ site.baseurl }}/images/cosmosGraph/cosmosdbdashboard.png "The Cosmos DB dashboard")
 
-The first impression is pretty good. The user and password for the ssl connection is automatically generated, and ready to use. In addition, no need to configure the Gremlin server or its interaction with the Cosmos database. This is quite comfortable, even more when you compare to the set up of a graph database on AWS (see my previous [blog post]({{ site.baseurl }}{% post_url 2017-09-13-janusgraph-running-on-aws-with-dynamodb %})).
+The first impression is pretty good. The user and password for the ssl connection are automatically generated, and ready to use. In addition, no need to configure the Gremlin server or its interaction with the Cosmos database. This is quite comfortable, even more when you compare to the set up of a graph database on AWS (see my previous [blog post]({{ site.baseurl }}{% post_url 2017-09-13-janusgraph-running-on-aws-with-dynamodb %})).
 
 
 # Connecting to the Gremlin server
 
  Several tutorials are available to explain how to interact with the server. They cover .Net, Java, Javascript and the Gremlin Console.
 
- As you may know I am a big fan of Python and I felt a bit frustrated  when I noticed I can not use it to query the server[^1].
+ As you may know, I am a big fan of Python and I felt a bit frustrated when I noticed I can not use it to query the server[^1].
 
- So I decided to have a try with a different language and I picked the popular Javascript (Node.js). At first I found it confusing as the address of the graph given by the Azure portal contains `https` while the gremlin module for Javascript explicitly states that it only handles websocket connections. I found out that, although not documented, you can connect (and you do in all the tutorials!) to the server using secure websocket `wss`. I was also a bit perplex about the [javascript module](https://github.com/CosmosDB/gremlin-javascript) used which is just a fork of a project made by a contributor of Gremlin Tinkerpop. This module is not in the official Tinkerpop repository. Of course, being on the repository of an individual does not preclude a an efficient module of good quality. It just raises questions about the continuity of the work. Microsoft engineers have started to contribute to this module, adding security handling, so it is going in a good direction.
+ So I decided to have a try with a different language and I picked the popular Javascript (Node.js). At first I found it confusing as the address of the graph given by the Azure portal contains `https` while the gremlin module for Javascript explicitly states that it only handles websocket connections. I found out that, although not documented, you can connect (and you do in all the tutorials!) to the server using secure websocket `wss`. I was also a bit perplex about the [javascript module](https://github.com/CosmosDB/gremlin-javascript) used which is just a fork of a project made by a contributor of Gremlin Tinkerpop. This module is not in the official Tinkerpop repository. Of course, being on the repository of an individual does not preclude an efficient module of good quality. It just raises questions about the continuity of the work. Microsoft engineers have started to contribute to this module, adding security handling, so it is going in a good direction.
 
 You may connect to the Gremlin server using the function `Gremlin.createClient` (form the gremlin module), specifying the port `443`, the address `config.endpoint` and the ssl credentials `user` and `password` (stored in the config file, `config.js`).
 
@@ -46,11 +46,11 @@ const client = Gremlin.createClient(
     });
 {% endhighlight %}
 
-Then a query can be sent using the `client.execute` function. That's it! Pretty easy. You have to find by yourself the structure of the returned data but that should not be too difficult, it uses the JSON format. For each vertex the data is organized as a dictionary with keys `id`, `label`, `type` and `properties`. The value associated to `properties` is again a dictionary with all property names as keys, and values being lists. 
+Then a query can be sent using the `client.execute` function. That's it! Pretty easy. You have to find by yourself the structure of the returned data but that should not be too difficult, it uses the JSON format. For each vertex, the data is organized as a dictionary with keys `id`, `label`, `type` and `properties`. The value associated to `properties` is again a dictionary with all property names as keys, and values being lists. 
 
 # Writing to the database
 
-I have used the [code from the javascript tutorial](https://github.com/Azure-Samples/azure-cosmos-db-graph-nodejs-getting-started) to insert some data to the database. I wanted to know the speed for loading data into the graph. This can only be done by sending Gremlin requests to the server. You have to insert one node at a time (one per gremlin query). Typically, it is of the following form:
+I have used the [code from the javascript tutorial](https://github.com/Azure-Samples/azure-cosmos-db-graph-nodejs-getting-started) to insert some data to the database. I wanted to know the speed of loading data into the graph. This can only be done by sending Gremlin requests to the server. You have to insert one node at a time (one per gremlin query). Typically, it is of the following form:
 
 ~~~ javascript
 var gremlin_query = "g.addV('person').property('name', name)"
@@ -65,11 +65,11 @@ var node_name = data[i].name
 var bindings = {name: node_name}
 ~~~
 
-According to my tests, I got a writing speed of 6 nodes per second. This is a bit slow if you want to load a large database. It would be more than 11 days for a dataset of 1 million nodes. But of course you can make it parallel and reduce this time. Unfortunately, an efficient loading has to be coded by the user as there is no ready to use function available for it (so far).
+According to my tests, I got a writing speed of 6 nodes per second. This is a bit slow if you want to load a large database. It would be more than 11 days for a dataset of 1 million nodes. But of course, you can make it parallel and reduce this time. Unfortunately, an efficient loading has to be coded by the user as there is no ready to use function available for it (so far).
 
 # Optimizing and tuning of the database
 
-The [list of Gremlin steps](https://docs.microsoft.com/en-us/azure/cosmos-db/gremlin-support) supported by Cosmos DB does not yet contain all the possible steps. However, this reduced list will be sufficient for most usecases and for users willing to learn Gremlin and graph databases. Strangely, the steps `loop` and `choose` are stated on this [tutorial-query-graph page](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-graph) but they are not on the list of supported steps.
+The [list of Gremlin steps](https://docs.microsoft.com/en-us/azure/cosmos-db/gremlin-support) supported by Cosmos DB does not yet contain all the possible steps. However, this reduced list will be sufficient for most use-cases and for users willing to learn Gremlin and graph databases. Strangely, the steps `loop` and `choose` are stated on this [tutorial-query-graph page](https://docs.microsoft.com/en-us/azure/cosmos-db/tutorial-query-graph) but they are not on the list of supported steps.
 
 Indexing is really important in graph databases as you need to start from somewhere before you travel through the connections and relationships. The starting point(s) is (are) chosen according to a keyword or a value and if there is no index, you have to scan the full graph to find them. According to Azure webpages, all entries in the DB are automatically indexed (vertex and edge properties) avoiding the need to manually creating them. However, it does not allow for partial or fuzzy matching. For example, with JanusGraph, users can combine Elasticsearch with the graph, which makes the keywords `textContains` or `textRegex` [available as gremlin predicates](http://docs.janusgraph.org/latest/search-predicates.html), to search in strings.
 
@@ -79,7 +79,7 @@ As we have seen in the previous section, when you start setting up a database, y
 
 To conclude, the graph setting of Cosmos DB is perfectly suited for users willing to learn and get a grip on graph models and a graph database. Azure avoid us the painful configuration of the server and the database, and we can concentrate on learning the graph logic and the Gremlin language. However, this simplicity does not allow for flexibility and the advanced graph users might be a bit disappointed. Meanwhile, the service will evolve and hopefully provide more advanced settings, more tutorials and documentation, and more open-source code at our disposal in the near future.
 
-It is important to understand that graph databases are cutting edge tools, they are rapidly evolving, with new versions coming at a fast pace and scarse documentation and tutorials. We are just at the beginning of this new concept, this new way of thinking and structuring data. Observing its evolution is fascinating.
+It is important to understand that graph databases are cutting edge tools, they are rapidly evolving, with new versions coming at a fast pace and scarce documentation and tutorials. We are just at the beginning of this new concept, this new way of thinking and structuring data. Observing its evolution is fascinating.
 
 
 [^1]: There is an issue with the serialization, the way the server receive and send data. The Cosmos DB graph is configured to accept only data in GraphSON v1 format (see [here](https://docs.microsoft.com/en-us/azure/cosmos-db/create-graph-gremlin-console)). Unfortunately, [pythongremlin](http://tinkerpop.apache.org/docs/current/reference/#gremlin-python) only handle GraphSON v2. (At the time of writing the latest version of gremlinpython is 3.3.0).
