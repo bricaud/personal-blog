@@ -3,7 +3,7 @@ layout: post
 comments: true
 title: Testing the Cosmos DB graph database
 categories: [graph, coding, cloud]
-thumbnail: /images/cosmosgraph/cosmosdbdashboard.png
+thumbnail: /images/cosmosGraph/cosmosdbdashboard.png
 published: true
 ---
 
@@ -28,13 +28,13 @@ The first impression is pretty good. The user and password for the ssl connectio
 
  Several tutorials are available to explain how to interact with the server. They cover .Net, Java, Javascript and the Gremlin Console.
 
- As you may know I am a big fan of Python and I felt a bit frustrated  when I noticed I can not use it to query the server [^1].
+ As you may know I am a big fan of Python and I felt a bit frustrated  when I noticed I can not use it to query the server[^1].
 
  So I decided to have a try with a different language and I picked the popular Javascript (Node.js). At first I found it confusing as the address of the graph given by the Azure portal contains `https` while the gremlin module for Javascript explicitly states that it only handles websocket connections. I found out that, although not documented, you can connect (and you do in all the tutorials!) to the server using secure websocket `wss`. I was also a bit perplex about the [javascript module](https://github.com/CosmosDB/gremlin-javascript) used which is just a fork of a project made by a contributor of Gremlin Tinkerpop. This module is not in the official Tinkerpop repository. Of course, being on the repository of an individual does not preclude a an efficient module of good quality. It just raises questions about the continuity of the work. Microsoft engineers have started to contribute to this module, adding security handling, so it is going in a good direction.
 
 You may connect to the Gremlin server using the function `Gremlin.createClient` (form the gremlin module), specifying the port `443`, the address `config.endpoint` and the ssl credentials `user` and `password` (stored in the config file, `config.js`).
 
-~~~ javascript
+{% highlight javascript %}
 const client = Gremlin.createClient(
     443, 
     config.endpoint, 
@@ -44,7 +44,7 @@ const client = Gremlin.createClient(
         "user": `/dbs/${config.database}/colls/${config.collection}`,
         "password": config.primaryKey
     });
-~~~
+{% endhighlight %}
 
 Then a query can be sent using the `client.execute` function. That's it! Pretty easy. You have to find by yourself the structure of the returned data but that should not be too difficult, it uses the JSON format. For each vertex the data is organized as a dictionary with keys `id`, `label`, `type` and `properties`. The value associated to `properties` is again a dictionary with all property names as keys, and values being lists. 
 
