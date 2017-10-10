@@ -17,7 +17,7 @@ Graph databases and their surrounding plugins/modules are rapidly evolving and I
 
 # Setting up the Graph database server
 
-Microsoft has made the choice of providing a graph database service easy to set up and start. Indeed, in a few clicks, the server is up and running. Without exaggerating much, it is one click to create a Cosmos database and one click to create the graph DB. The Gremlin server is automatically launched with a domain name `YOURGRAPHNAME.graphs.azure.com` ready to listen to any ssl connection on port `443`. It avoids the burden of configuring the database. You just need to choose the name of your graph (and of the collection). The [tutorial](https://docs.microsoft.com/en-us/azure/cosmos-db/create-graph-gremlin-console) for creating the graph is straightforward (first part of the webpage).
+Microsoft provides a graph database service easy to set up and start. Indeed, in a few clicks, the server is up and running. Without exaggerating much, it is one click to create a Cosmos database and one click to create the graph DB. The Gremlin server is automatically launched with a domain name `YOURGRAPHNAME.graphs.azure.com`, ready to listen to any ssl connection on port `443`. It avoids the burden of configuring the database. You just need to choose the name of your graph (and of the collection). The [tutorial](https://docs.microsoft.com/en-us/azure/cosmos-db/create-graph-gremlin-console) for creating the graph is straightforward (first part of the webpage).
 
 ![Screenshot of the Cosmos DB dashboard]({{ site.baseurl }}/images/cosmosGraph/cosmosdbdashboard.png "The Cosmos DB dashboard")
 
@@ -26,9 +26,9 @@ The first impression is pretty good. The user and password for the ssl connectio
 
 # Connecting to the Gremlin server
 
- Several tutorials are available to explain how to interact with the server. They cover .Net, Java, Javascript and the Gremlin Console.
+ Several tutorials are available to explain how to interact with the server. They cover [.Net](https://docs.microsoft.com/en-us/azure/cosmos-db/create-graph-dotnet), [Java](https://docs.microsoft.com/en-us/azure/cosmos-db/create-graph-java), [Javascript](https://docs.microsoft.com/en-us/azure/cosmos-db/create-graph-nodejs) and the [Gremlin Console](https://docs.microsoft.com/en-us/azure/cosmos-db/create-graph-gremlin-console).
 
- As you may know, I am a big fan of Python and I felt a bit frustrated when I noticed I can not use it to query the server[^1].
+ As you may know, I am a big fan of Python and I felt a bit frustrated when I noticed I can not use it to query the server [[^1]].
 
  So I decided to have a try with a different language and I picked the popular Javascript (Node.js). At first I found it confusing as the address of the graph given by the Azure portal contains `https` while the gremlin module for Javascript explicitly states that it only handles websocket connections. I found out that, although not documented, you can connect (and you do in all the tutorials!) to the server using secure websocket `wss`. I was also a bit perplex about the [javascript module](https://github.com/CosmosDB/gremlin-javascript) used which is just a fork of a project made by a contributor of Gremlin Tinkerpop. This module is not in the official Tinkerpop repository. Of course, being on the repository of an individual does not preclude an efficient module of good quality. It just raises questions about the continuity of the work. Microsoft engineers have started to contribute to this module, adding security handling, so it is going in a good direction.
 
@@ -50,7 +50,7 @@ Then a query can be sent using the `client.execute` function. That's it! Pretty 
 
 # Writing to the database
 
-I have used the [code from the javascript tutorial](https://github.com/Azure-Samples/azure-cosmos-db-graph-nodejs-getting-started) to insert some data to the database. I wanted to know the speed of loading data into the graph. This can only be done by sending Gremlin requests to the server. You have to insert one node at a time (one per gremlin query). Typically, it is of the following form:
+I have used and modified the [code from the javascript tutorial](https://github.com/Azure-Samples/azure-cosmos-db-graph-nodejs-getting-started) to insert some data to the database. I wanted to know the speed of loading data into the graph. No batch / bulk loading here. This can only be done by sending Gremlin requests to the server, and you have to insert one node at a time (one per gremlin query). Typically, it is of the following form if you want to add a person with name `Benjamin`:
 
 ~~~ javascript
 var gremlin_query = "g.addV('person').property('name', name)"
@@ -58,14 +58,14 @@ var bindings = {name: 'Benjamin'}
 client.execute(gremlin_query, bindings, function_to_process_the_results);
 ~~~
 
-The `function_to_process_the_results` may be a function that calls recursively `client.execute`, in order to process sequencially the requests. In that case the bindings are changing with the node to add. For the `i`th node and assuming the node data is stored in a object `data[i]`:
+The `function_to_process_the_results` may be a function that calls recursively `client.execute`, in order to process sequencially the requests. In that case the bindings are changing with the node to add. For the `i`th node and assuming the node data is stored in an object called `data[i]`:
 
 ~~~ javascript
 var node_name = data[i].name
 var bindings = {name: node_name}
 ~~~
 
-According to my tests, I got a writing speed of 6 nodes per second. This is a bit slow if you want to load a large database. It would be more than 11 days for a dataset of 1 million nodes. But of course, you can make it parallel and reduce this time. Unfortunately, an efficient loading has to be coded by the user as there is no ready to use function available for it (so far).
+According to my tests, I got a writing speed of 6 nodes per second. This is a bit slow if you want to load a large database. It would be more than 11 days for a dataset of 6 million nodes. But of course, you can make it parallel and reduce this time. Unfortunately, an efficient loading has to be coded by the user as there is no ready to use function available for it (so far).
 
 # Optimizing and tuning of the database
 
