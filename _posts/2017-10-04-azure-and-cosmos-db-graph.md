@@ -65,7 +65,9 @@ var node_name = data[i].name
 var bindings = {name: node_name}
 ~~~
 
-According to my tests, I got a writing speed of 6 nodes per second. This is a bit slow if you want to load a large database. It would be more than 11 days for a dataset of 6 million nodes. But of course, you can make it parallel and reduce this time. Unfortunately, an efficient loading has to be coded by the user as there is no ready to use function available for it (so far).
+*(The following part was updated on 12th October 2017, thank to the comments and suggestions of [jbmusso](https://github.com/jbmusso) and of the Cosmos graph DB team)*.
+
+According to my tests, If I simply send the requests for writing nodes one by one, the writing speed is roughly around 6 to 12 nodes per second (it is fluctuating, but I don't know exactly why. It might be because of my internet connection). However, if I run two such sequential requests in parallel, it takes roughly the same time, but it writes twice the number of nodes. It shows that the Cosmos DB database is not to be blamed here. It answers nicely to the requests in parallel. It just says that loading a large number of nodes sequentially to a graph database is not the most efficient way. I did not perform the test on other graph databases but this should hold for any databases (not only Cosmos DB). A function that efficiently loads large datasets into a graph database is something which would be quite useful and is missing at the moment. According to the Cosmos graph DB team, who contacted me, they are working on a bulk import tool. I look forward to it! Meanwhile, I may make a pull request with such a function to [gremlin-javascript](https://github.com/jbmusso/gremlin-javascript).
 
 # Optimizing and tuning of the database
 
