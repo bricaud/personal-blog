@@ -22,6 +22,9 @@ For the two days, I teamed up with [Camille Le Guen](http://camleguen.wixsite.co
 
 Antartica is the large continent around the South Pole. It is a part of the earth which is still largely unknown. Yet it has a rich ecosystem, in particular in the oceans around it. Birds, mammals, fishes, Krill, plankton are everywhere. I found it really interesting and motivating to work on data from this continent.
 
+
+The code written during the workshop is available on [Github](https://github.com/bricaud/AntarticSonarData). The data should be available soon.
+
 # The dataset 
 
 Several datasets were presented and I chose to work on the one from the [Antartic Circumnavigation Expedition](http://spi-ace-expedition.ch/). This is one of the 22 scientific experiments done during the expedition. Sonar signals were collected continuously while the ship was traveling around Antartica. The purpose was to extract echoes in the data that are due to [krill swarms](https://en.wikipedia.org/wiki/Antarctic_krill) (mainly but can also be due to other living organisms). The swarms reflect the acoustic waves and this is detected by the sonar. Unfortunately, these reflections are weak and it is difficult to distinguish them from the noise and the other sonar artifacts. 
