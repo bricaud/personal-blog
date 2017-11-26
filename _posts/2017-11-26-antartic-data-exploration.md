@@ -23,9 +23,11 @@ For the two days, I teamed up with [Camille Le Guen](http://camleguen.wixsite.co
 # The dataset 
 Several datasets were presented and I chose to work on the one from the [Antartic Circumnavigation Expedition](http://spi-ace-expedition.ch/). This is one of the 22 scientific experiments done during the expedition. Sonar signals were collected continuously while the ship was travelling around Antartica. The purpose is to extract echos in the data that are due to krill swarms (mainly but can also be due to other living organisms). The swarms reflect the acoustic waves and this is detected by the sonar. Unfortunately, these reflections are weak and it is difficult to distinguish them from the noise and the other sonar artefacts. 
 
-Let us look at a plot of the sonar data. On the image below, we can see the ocean depth on the y axis. The top is just below the surface, were the sonar emitter is located. The bottom is here at around 30m below the suface. We decided to focus on this region as it is were the krill swarms are supposed to be, and were the signal is of better quality. The x axis represents the time. The sonar emits a ping every 8 seconds, so each value is a 8 second time frame. As the ship is moving you can also see the x axis as a distance.
+Let us look at a plot of the sonar data. On the image below, we can see the ocean depth on the y axis. The top is just below the surface, were the sonar emitter is located. The bottom is here at around 30m below the suface. We decided to focus on this region as it is were the krill swarms are supposed to be, and were the signal is of better quality. The x axis represents the time. The sonar emits a ping every 8 seconds, so each value is a 8 second time frame. As the ship is moving you can also see the x axis as a distance. For each point, the color represents the amplitude of the sonar echo (in a log scale). It ranges from blue and green for small values to yellow for strong echos.
 
 ![Example of sonogram data]({{ site.baseurl }}/images/ACE/sonogramexample.png "Sonogram data")
+
+If you look carefully, you may see shade of green and yellow forming patterns, that is were the krill swarms are. It is not so easy!
 
 Each ping of the sonar is tagged with it GPS coordinates and the time. Hence we can find the precise location of the krill swarm when we have detected one.
 
@@ -48,9 +50,13 @@ The main task for us was to extract the krill swarm signature among the noise. A
 
 Fortunately for us, there is a great Python module called [scikit-image](http://scikit-image.org/) or skimage that helped us to quickly apply different denoising techniques as see what gave the best outcome.
 
+In the dataset there are particular noise pattern forming straight vertical lines. We used a hand made variant of the median filter from [Roland Proud](https://rolandproud.github.io/), a former postdoc working on sonar data.
+In order to remove isolated high values appearing in the data, often called [salt-and-pepper noise](https://en.wikipedia.org/wiki/Salt-and-pepper_noise), we used a median filter. We took [medfilt](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.medfilt.html) from Scipy.
 
-## Removing salt-and-pepper noise with a median filter
+After some trial and errors, we found out that the relevant signal values range from -70 to -65 while the full range is from around -100 (event less) to around 10 for the most powerful echos and artefacts. Reducing to the former range gave us a better view of the potential krill swarms. 
 
+Eventually, we suppressed event more noise by applying a [Gaussian filter](http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.gaussian).
 
+Eventually, we summed up the echo values along the depth axis and got a binary "krill presence function" that took a value of one if there was some krill detected during a ping.
 
-## Smoothing the signal with a Gaussian filter
+The denoising and detection part took us the entire first day and half of the second day. We were glad to get such a nice "krill detector" after all the time and effort sped on it. Of course, the signal processing is not optimal. I am sure we got several false positives and false negatives. The denoising a crude, we could refine it in the future.
