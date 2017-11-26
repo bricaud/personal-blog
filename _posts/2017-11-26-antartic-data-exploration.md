@@ -8,7 +8,7 @@ published: true
 ---
 
 
-The Antartic Curcumnavigation Expedition is a scientific expedition that has collected a large amount of data from Antartica. Scientist working on the project would be happy to get some help from experts in data analysis and data scientists. They plan to make the data open and during the first Data Jam at EPFL in Lausanne some of their data were presented. The goal and the dataset convinced me to join them on the analysis of the sonar data. This post is a short presentation of what we managed to do during the 2 Data Jam days. It reveals some interesting information about Antartica and on the methods used to analyze sonar signals.
+The Antartic Curcumnavigation Expedition is a scientific expedition that has collected a large amount of data from Antartica. Scientists working on the project would be happy to get some help from experts in data analysis and data scientists. They plan to make the data open and during the first Data Jam at EPFL in Lausanne some of their data were presented. The goal and the dataset convinced me to join them on the analysis of the sonar data. This post is a short presentation of what we managed to do during the 2 Data Jam Days. It reveals some interesting information about Antartica and on the methods used to analyze sonar signals.
 
 
 # Context
@@ -23,7 +23,7 @@ For the two days, I teamed up with [Camille Le Guen](http://camleguen.wixsite.co
 Antartica is the large continent around the South Pole. It is a part of the earth which is still largely unknown. Yet it has a rich ecosystem, in particular in the oceans around it. Birds, mammals, fishes, Krill, plankton are everywhere. I found it really interesting and motivating to work on data from this continent.
 
 # The dataset 
-Several datasets were presented and I chose to work on the one from the [Antartic Circumnavigation Expedition](http://spi-ace-expedition.ch/). This is one of the 22 scientific experiments done during the expedition. Sonar signals were collected continuously while the ship was travelling around Antartica. The purpose is to extract echos in the data that are due to krill swarms (mainly but can also be due to other living organisms). The swarms reflect the acoustic waves and this is detected by the sonar. Unfortunately, these reflections are weak and it is difficult to distinguish them from the noise and the other sonar artefacts. 
+Several datasets were presented and I chose to work on the one from the [Antartic Circumnavigation Expedition](http://spi-ace-expedition.ch/). This is one of the 22 scientific experiments done during the expedition. Sonar signals were collected continuously while the ship was travelling around Antartica. The purpose was to extract echos in the data that are due to krill swarms (mainly but can also be due to other living organisms). The swarms reflect the acoustic waves and this is detected by the sonar. Unfortunately, these reflections are weak and it is difficult to distinguish them from the noise and the other sonar artefacts. 
 
 Let us look at a plot of the sonar data. On the image below, we can see the ocean depth on the y axis. The top is just below the surface, were the sonar emitter is located. The bottom is here at around 30m below the suface. We decided to focus on this region as it is were the krill swarms are supposed to be, and were the signal is of better quality. The x axis represents the time. The sonar emits a ping every 8 seconds, so each value is a 8 second time frame. As the ship is moving you can also see the x axis as a distance. For each point, the color represents the amplitude of the sonar echo (in a log scale). It ranges from blue and green for small values to yellow for strong echos.
 
@@ -38,7 +38,7 @@ Each ping of the sonar is tagged with it GPS coordinates and the time. Hence we 
 
 The main motivation for collecting and studying these sonar signals is to detect the presence of [krill swarms](https://en.wikipedia.org/wiki/Antarctic_krill). What is inside the oceans around Antartica is still largely unknown.
 
-[Antartic krill]({{ site.baseurl }}/images/ACE/320px-Antarctic_krill_(Euphausia_superba).jpg)
+![Antartic krill]({{ site.baseurl }}/images/ACE/320px-Antarctic_krill_(Euphausia_superba).jpg)
 
 Two days is very short and it is difficult to ask for ambitious results. After a few minutes of brainstorming and a coffee, we settled a roadmap. We wanted to have at the end an image of the earth and some ticks where krill swarms were detected. If we had time we could add information on each swarm, like its width and depth and play with color and size of the ticks. 
 
@@ -65,7 +65,7 @@ Eventually, we suppressed event more noise by applying a [Gaussian filter](http:
 
 Eventually, we summed up the echo values along the depth axis and got a binary "krill presence function" that took a value of one if there was some krill detected during a ping.
 
-[Krill detector]({{ site.baseurl }}/images/ACE/krilldetector.png "The krill detector")
+![Krill detector]({{ site.baseurl }}/images/ACE/krilldetector.png "The krill detector")
 
 On the above figure the top plot is the raw signal where the highest values have been decreased (in particular near the surface). The middle image shows the result of the Gaussian filter that smooth out most of the noise. The krill signals become smooth bumps. The bottom function is the detection funtion which has value zero in the absence of krill and take the value 100 when krill is detected.
 
@@ -80,6 +80,7 @@ During the last hours of the workshop, [Quentin](https://people.epfl.ch/quentin.
 
 We studied 2 consecutive days of sonar data (14th and 15th of February 2017). The marks on the map correspond to krill swarms detected along the path of the ship during these 2 days. You might be surprised by the number of swarms but it is not unusual. In this region the ice melt and the presence of warm and cold water create good conditions for the krill to multiply.
 A zoom on the area belong shows the irregular distribution of krill.
+
 ![Zoom on the krill swarms around Antartica]({{ site.baseurl }}/images/ACE/krillzoom.png "Krill swarms, zoom")
 
 
