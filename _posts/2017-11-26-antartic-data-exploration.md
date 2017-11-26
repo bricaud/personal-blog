@@ -8,17 +8,19 @@ published: false
 ---
 
 
-The South Pole is
+The Antartic Curcumnavigation Expedition is a scientific expedition that has collected a large amount of data from Antartica. Scientist working on the project would be happy to get some help from experts in data analysis and data scientists. They plan to make the data open and during the first Data Jam at EPFL in Lausanne some of their data were presented. The goal and the dataset convinced me to join them on the analysis of the sonar data. This post is a short presentation of what we managed to do during the 2 Data Jam days. It reveals some interesting information about Antartica and on the methods used to analyze sonar signals.
+
 
 # Context
 
-Recently, I have participated to my first "data jam days". It took place at EPFL in Lausanne, Switzerland. The concept is to invite people of various backgrounds in one place during two days, and let them work together on some nice datasets. It was a cool experience and I look forward to the next one.
+Recently, I had the opportunity to participate to the first "data jam days" that took place at EPFL in Lausanne, Switzerland. The concept is to invite people of various backgrounds in one place during two days, and let them work together on some nice datasets. It was a cool experience and I look forward to the next one.
 
-For the two days, I teamed up with [Camille Le Guen](http://camleguen.wixsite.com/monsite), the ACE expert who presented us the dataset. She is doing her PhD and has spent several weeks on the ship around Antartica. She has many fun stories about her experience on the ship, camping on some of the Islands, catching pingouins, puting GPS trackers to find out were they find their food.
+For the two days, I teamed up with [Camille Le Guen](http://camleguen.wixsite.com/monsite), the ACE expert who presented us one of the datasets. She is doing her PhD and has spent several weeks on a ship around Antartica. She has many fun stories about her experience on the ship, camping on some of the Islands, catching pingouins, puting GPS trackers to find out were they find their food.
 
 
 ![Antartica]({{ site.baseurl }}/images/ACE/481px-Antarctica.svg.png "Antartica")
 
+Antartica is the large continent around the South Pole. It is a part of the earth which is still largely unknown. Yet it has a rich ecosystem, in particular in the oceans around it. Birds, mammals, fishes, Krill, plankton are everywhere. I found it really interesting and motivating to work on data from this continent.
 
 # The dataset 
 Several datasets were presented and I chose to work on the one from the [Antartic Circumnavigation Expedition](http://spi-ace-expedition.ch/). This is one of the 22 scientific experiments done during the expedition. Sonar signals were collected continuously while the ship was travelling around Antartica. The purpose is to extract echos in the data that are due to krill swarms (mainly but can also be due to other living organisms). The swarms reflect the acoustic waves and this is detected by the sonar. Unfortunately, these reflections are weak and it is difficult to distinguish them from the noise and the other sonar artefacts. 
@@ -72,3 +74,7 @@ The denoising and detection part took us the entire first day and half of the se
 
 # Data visualization
 
+
+# Conclusion
+
+I was really happy of the outcome of these data jam days. I enjoyed coding in Python and using image and signal processing methods to extract meaningful information. The results exceeded our expectations. Of course, there is still some work to be done before reaching conclusions of scientific value: the false positive and false negative rate must be assessed. We made a great team with complementary skills: the combination of an expert in the data on one hand and an expert in signal processing on the other hand. We had a lot of discussions and exchanges about the data. I felt useful and happy to make a small contribution to a better understanding of Antartica.
