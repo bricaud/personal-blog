@@ -83,7 +83,7 @@ During the last hours of the workshop, [Quentin](https://people.epfl.ch/quentin.
 ![Krill swarms around Antartica]({{ site.baseurl }}/images/ACE/krill.png "Krill swarms")
 
 We studied 2 consecutive days of sonar data (14th and 15th of February 2017). The marks on the map correspond to krill swarms detected along the path of the ship during these 2 days. You might be surprised by the number of swarms but it is not unusual. In this region the ice melt and the presence of warm and cold water create good conditions for the krill to multiply.
-A zoom on the area belong shows the irregular distribution of krill.
+A zoom on the area (below) shows the irregular distribution of krill.
 
 ![Zoom on the krill swarms around Antartica]({{ site.baseurl }}/images/ACE/krillzoom.png "Krill swarms, zoom")
 
