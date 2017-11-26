@@ -4,7 +4,7 @@ comments: true
 title: Exploring the oceans, around Antartica
 categories: [signal processing, python, sonar, biology]
 thumbnail: /images/ACE/145px-Antarctica.svg.png
-published: false
+published: true
 ---
 
 
@@ -74,7 +74,15 @@ The denoising and detection part took us the entire first day and half of the se
 
 # Data visualization
 
+During the last hours of the workshop, [Quentin](https://people.epfl.ch/quentin.cavillier) came to us and offered to help us. He is an expert in web applications and that was perfect for us as we were in need of a visualization on a map of the location of the krill swarms. He suggested to use the Google map API and asked us for a `json` file with the latitude and longitude of our swarms. He prepared a quick web page where we could put the json file and get the visualization. Here is the result.
+
+![Krill swarms around Antartica]({{ site.baseurl }}/images/ACE/krill.png "Krill swarms")
+
+We studied 2 consecutive days of sonar data (14th and 15th of February 2017). The marks on the map correspond to krill swarms detected along the path of the ship during these 2 days. You might be surprised by the number of swarms but it is not unusual. In this region the ice melt and the presence of warm and cold water create good conditions for the krill to multiply.
+A zoom on the area belong shows the irregular distribution of krill.
+![Zoom on the krill swarms around Antartica]({{ site.baseurl }}/images/ACE/krillzoom.png "Krill swarms, zoom")
+
 
 # Conclusion
 
-I was really happy of the outcome of these data jam days. I enjoyed coding in Python and using image and signal processing methods to extract meaningful information. The results exceeded our expectations. Of course, there is still some work to be done before reaching conclusions of scientific value: the false positive and false negative rate must be assessed. We made a great team with complementary skills: the combination of an expert in the data on one hand and an expert in signal processing on the other hand. We had a lot of discussions and exchanges about the data. I felt useful and happy to make a small contribution to a better understanding of Antartica.
+I was really happy of the outcome of these data jam days. I enjoyed coding in Python and using image and signal processing methods to extract meaningful information. The results exceeded our expectations. Of course, there is still some work to be done before reaching conclusions of scientific value: the false positive and false negative rate must be assessed. We made a great team with complementary skills: the combination of an expert in the data on one hand and an expert in signal processing on the other hand. We had a lot of discussions and exchanges about the data, the kind of pattern to look for, where to look for it, what is meaningful what is not. I felt useful and happy to make a small contribution to a better understanding of Antartica.
