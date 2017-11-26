@@ -34,6 +34,10 @@ Each ping of the sonar is tagged with it GPS coordinates and the time. Hence we 
 
 # Our goal
 
+The main motivation for collecting and studying these sonar signals is to detect the presence of [krill swarms](https://en.wikipedia.org/wiki/Antarctic_krill). What is inside the oceans around Antartica is still largely unknown.
+
+[Antartic krill]({{ site.baseurl }}/images/ACE/320px-Antarctic_krill_(Euphausia_superba).jpg)
+
 Two days is very short and it is difficult to ask for ambitious results. After a few minutes of brainstorming and a coffee, we settled a roadmap. We wanted to have at the end an image of the earth and some ticks where krill swarms were detected. If we had time we could add information on each swarm, like its width and depth and play with color and size of the ticks. 
 
 We fixed several milestones: 
@@ -59,4 +63,12 @@ Eventually, we suppressed event more noise by applying a [Gaussian filter](http:
 
 Eventually, we summed up the echo values along the depth axis and got a binary "krill presence function" that took a value of one if there was some krill detected during a ping.
 
-The denoising and detection part took us the entire first day and half of the second day. We were glad to get such a nice "krill detector" after all the time and effort sped on it. Of course, the signal processing is not optimal. I am sure we got several false positives and false negatives. The denoising a crude, we could refine it in the future.
+[Krill detector]({{ site.baseurl }}/images/ACE/krilldetector.png "The krill detector")
+
+On the above figure the top plot is the raw signal where the highest values have been decreased (in particular near the surface). The middle image shows the result of the Gaussian filter that smooth out most of the noise. The krill signals become smooth bumps. The bottom function is the detection funtion which has value zero in the absence of krill and take the value 100 when krill is detected.
+
+
+The denoising and detection part took us the entire first day and half of the second day. We were glad to get such a nice "krill detector" after all the time and effort sped on it. Of course, the signal processing is not optimal. I am sure we got several false positives and false negatives. The denoising is crude but we could refine it in the future.
+
+# Data visualization
+
