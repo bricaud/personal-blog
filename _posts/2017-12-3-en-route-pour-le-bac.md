@@ -4,11 +4,11 @@ comments: true
 title: En route pour le Bac
 categories: [lycee, statistiques]
 thumbnail: /images/lycee/loinormale.svg
-published: true
+published: false
 ---
 
 
-For my english readers, this post is in French. It is talking about student data from the French education system so I thought it would be better to write it in French.
+*For my english readers, this post is in French. It is talking about student data from the French education system so I thought it would be better to write it in French.*
 L'analyse des notes au cours du temps en dit long sur le comportement des élèves. C'est ce que nous allons voir dans cet article de blog. J'avais à disposition les notes d'élèves de la filiaire Bac Pro d'un lycée, donc les classes de seconde, première et terminale Bac Pro. Cette filiaire est particuliaire dans le sens ou il y a en proportion plus d'élèves en difficulté avec le système scolaire standard, ce qui les poussent à choisir un débouché plus rapide dans la vie active et donc à s'orienter en Bac Pro. Je les ai eu en classe pendant 2 mois et en regardant les notes de leur contrôles je dois dire que j'étais un peu perplexe. En effet, la distribution des notes autour de la moyenne est singulière. Elle semble évoluer d'une forme Gaussienne en seconde vers une séparation en 2 groupes (2 gaussiennes) en terminale. Comme j'adore l'analyse de données et que j'ai tous les outils à ma disposition avec Python, j'ai plongé dans l'analyse des notes. J'ai utilisé non seulement des statistiques que je leur ai enseigné (au programme du Bac Pro), mais c'était aussi l'occasion d'utiliser mes algorithmes favoris d'apprentissage automatique et intelligence artificielle, ici le modèle de mélange gaussien. Les résultats et l'analyse en elle-meme sont interessants et c'est pour ca que je le partage. Voilà ce que j'ai découvert... 
 
 
@@ -22,11 +22,11 @@ C'est une drôle d'expérience pour moi. Je dois avouer que je n'étais pas pré
 
 # Avertissement
 
-L'analyse statistique portent sur 2 mois de cours et 3 classes de 30 élèves chacunes. L'effectif est donc assez faible. Le lecteur ne doit rien conclure hativement car les résultats sur un si faible echantillon peuvent être simplement dûs à des fluctuations statistiques.
+L'analyse statistique portent sur 2 mois de cours et 3 classes de 30 élèves chacunes. L'effectif est donc assez faible. Le lecteur ne doit rien conclure hativement car les résultats sur un si faible échantillon peuvent être simplement dûs à des fluctuations statistiques.
 
 # But de l'analyse
 
-On va étudier la distribution des notes des élèves autour de la moyenne. Ce que l'on s'attend à trouver, c'est une distribution gaussienne, la fameuse courbe en cloche que l'on voit sur la figure ci-dessous. [Par Nusha sur Wikipedia slovène — Transféré de sl.wikipedia à Commons., GFDL](https://commons.wikimedia.org/w/index.php?curid=8710900)
+On va étudier la distribution des notes des élèves autour de la moyenne. Ce que l'on s'attend à trouver, c'est une distribution gaussienne, la fameuse courbe en cloche que l'on voit sur la figure ci-dessous. On l'appelle encore "[loi normale](https://fr.wikipedia.org/wiki/Loi_normale)". [Par Nusha sur Wikipedia slovène — Transféré de sl.wikipedia à Commons., GFDL](https://commons.wikimedia.org/w/index.php?curid=8710900)
 
 ![Loi normale]({{ site.baseurl }}/images/lycee/loinormale.svg "Loi normale")
 
@@ -56,6 +56,7 @@ Le phénomène observé en 1PRO est confirmé ici. Il semble y avoir 2 groupes d
 
 # Estimation des distributions
 
+Il existe des algorithmes pour trouver la gaussienne la plus adaptée à la distribution de valeur de nos données. J'utilise ici le [modèle de mélanges gaussiens](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_m%C3%A9langes_gaussiens).
 
 ![Distribution 2PRO]({{ site.baseurl }}/images/lycee/distribution2PROfit.png "Distribution 2PRO")
 
