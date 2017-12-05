@@ -4,7 +4,7 @@ comments: true
 title: En route pour le Bac
 categories: [lycee, statistiques]
 thumbnail: /images/lycee/
-published: false
+published: true
 ---
 
 
@@ -52,3 +52,9 @@ Voyons maintenant ce que donne la distribution pour les terminales (TPRO). On a 
 ![Distribution TPRO]({{ site.baseurl }}/images/lycee/DistributionTPRO.png "Distribution TPRO")
 
 Le phénomène observé en 1PRO est confirmé ici. Il semble y avoir 2 groupes dans la classe: le groupe des bons élèves et le groupes des élèves qui ont décroché.
+
+# Estimation des distributions
+
+
+![Distribution 2PRO]({{ site.baseurl }}/images/lycee/Distribution2PROfit.png "Distribution 2PRO")
+
