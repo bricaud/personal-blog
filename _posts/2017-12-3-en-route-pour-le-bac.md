@@ -3,7 +3,7 @@ layout: post
 comments: true
 title: En route pour le Bac
 categories: [lycee, statistiques]
-thumbnail: /images/lycee/
+thumbnail: /images/lycee/loinormale.svg
 published: true
 ---
 
@@ -26,10 +26,11 @@ L'analyse statistique portent sur 2 mois de cours et 3 classes de 30 élèves ch
 
 # But de l'analyse
 
-On va étudier la distribution des notes des élèves autour de la moyenne. Ce que l'on s'attend à trouver, c'est une distribution gaussienne, la fameuse courbe en cloche que l'on voit sur la figure ci-dessous. 
+On va étudier la distribution des notes des élèves autour de la moyenne. Ce que l'on s'attend à trouver, c'est une distribution gaussienne, la fameuse courbe en cloche que l'on voit sur la figure ci-dessous. [Par Nusha sur Wikipedia slovène — Transféré de sl.wikipedia à Commons., GFDL](https://commons.wikimedia.org/w/index.php?curid=8710900)
 
 ![Loi normale]({{ site.baseurl }}/images/lycee/loinormale.svg "Loi normale")
-[Par Nusha sur Wikipedia slovène — Transféré de sl.wikipedia à Commons., GFDL](https://commons.wikimedia.org/w/index.php?curid=8710900)
+
+
 
 Beaucoup d'élèves se situent autour de la moyenne de la classe et plus les notes sont élevés plus le nombre d'élèves qui ont de telles notes diminue. De la même manière pour les notes basses. Il faut imaginer que sur la figure, le centre de la courbe (le zéro) est en fait la note moyenne. Le symbole sigma est l'écart type et permet de caractériser l'étalement de la distribution autour de la moyenne. Pour les classes de Bac Pro, on va d'estimer ce sigma et vérifier aussi qe l'on a bien une gaussienne.
 
@@ -37,24 +38,24 @@ Beaucoup d'élèves se situent autour de la moyenne de la classe et plus les not
 
 Pour les seconde Pro (2PRO), la moyenne de chaque élèves a été obtenue avec 2 interrogations coefficient 2 et un devoir à la maison coefficient 1. J'ai été plutôt indulgent sur les notes et la moyenne de la classe est à 11.39. Ci-dessous, on peut voir la distribution des notes autour de la moyenne. L'histogramme montre le nombre d'élèves pour chaque note de 0 à 20. Par exemple, 2 élèves ont une note comprise entre 7 et 8 (les moins bonnes notes).
 
-![Distribution 2PRO]({{ site.baseurl }}/images/lycee/Distribution2PRO.png "Distribution 2PRO")
+![Distribution 2PRO]({{ site.baseurl }}/images/lycee/distribution2PRO.png "Distribution 2PRO")
 
 La distribution n'est pas une belle courbe en cloche et c'est normal. Quand on a peu de résultats, on a de fortes fluctuations statistiques. Mais on a quand même, grossièrement, une forme avec beaucoup de personnes avec des notes autour de la moyenne de la classe, puis une diminution assez forte quand on s'en éloigne.
 
 Pour les premières (1PRO), la moyenne a été calculée à partir de 2 interrogations. La moyenne est de 7.9. J'ai été plus sévère sur les notes mais je ne crois pas que ca ait eu un impact sur leur travail. Voici la distribution des notes.
 
-![Distribution 1PRO]({{ site.baseurl }}/images/lycee/Distribution1PRO.png "Distribution 1PRO")
+![Distribution 1PRO]({{ site.baseurl }}/images/lycee/distribution1PRO.png "Distribution 1PRO")
 
 On remarque tout de suite que la distribution est plus étalée. Si on fait l'hypothèse que c'est une gaussienne, l'écart type est plus grand ici. Néanmoins, la distribution ne ressemble pas vraiment à une cloche. Il y aurait plutôt 2 bosses de part et d'autre de la moyenne, un peu comme s'il y avait 2 gaussiennes cote à cote.
 
 Voyons maintenant ce que donne la distribution pour les terminales (TPRO). On a ici seulement une interrrogation. 
 
-![Distribution TPRO]({{ site.baseurl }}/images/lycee/DistributionTPRO.png "Distribution TPRO")
+![Distribution TPRO]({{ site.baseurl }}/images/lycee/distributionTPRO.png "Distribution TPRO")
 
 Le phénomène observé en 1PRO est confirmé ici. Il semble y avoir 2 groupes dans la classe: le groupe des bons élèves et le groupes des élèves qui ont décroché.
 
 # Estimation des distributions
 
 
-![Distribution 2PRO]({{ site.baseurl }}/images/lycee/Distribution2PROfit.png "Distribution 2PRO")
+![Distribution 2PRO]({{ site.baseurl }}/images/lycee/distribution2PROfit.png "Distribution 2PRO")
 
