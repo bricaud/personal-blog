@@ -26,7 +26,7 @@ L'analyse statistique portent sur 2 mois de cours et 3 classes de 30 élèves ch
 
 # But de l'analyse
 
-On va étudier la distribution des notes des élèves autour de la moyenne. Ce que l'on s'attend à trouver, c'est une distribution gaussienne, la fameuse courbe en cloche que l'on voit sur la figure ci-dessous. On l'appelle encore "[loi normale](https://fr.wikipedia.org/wiki/Loi_normale)". [Par Nusha sur Wikipedia slovène — Transféré de sl.wikipedia à Commons., GFDL](https://commons.wikimedia.org/w/index.php?curid=8710900)
+On va étudier la distribution des notes des élèves autour de la moyenne. Ce que l'on s'attend à trouver, c'est une [distribution gaussienne](https://fr.wikipedia.org/wiki/Fonction_gaussienne), la fameuse courbe en cloche que l'on voit sur la figure ci-dessous. On l'appelle encore "[loi normale](https://fr.wikipedia.org/wiki/Loi_normale)". [Par Nusha sur Wikipedia slovène — Transféré de sl.wikipedia à Commons., GFDL](https://commons.wikimedia.org/w/index.php?curid=8710900)
 
 ![Loi normale]({{ site.baseurl }}/images/lycee/loinormale.svg "Loi normale")
 
@@ -46,17 +46,63 @@ Pour les premières (1PRO), la moyenne a été calculée à partir de 2 interrog
 
 ![Distribution 1PRO]({{ site.baseurl }}/images/lycee/distribution1PRO.png "Distribution 1PRO")
 
-On remarque tout de suite que la distribution est plus étalée. Si on fait l'hypothèse que c'est une gaussienne, l'écart type est plus grand ici. Néanmoins, la distribution ne ressemble pas vraiment à une cloche. Il y aurait plutôt 2 bosses de part et d'autre de la moyenne, un peu comme s'il y avait 2 gaussiennes cote à cote.
+On remarque tout de suite que la distribution est plus étalée. Si on fait l'hypothèse que c'est une gaussienne, l'écart type est plus grand ici. Néanmoins, la distribution ne ressemble pas vraiment à une cloche. Il y aurait plutôt 2 bosses de part et d'autre de la moyenne, un peu comme s'il y avait 2 gaussiennes cote à cote. Ce pourrrait être comme dans la figure ci-dessous (prise sur [wikipedia](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_m%C3%A9langes_gaussiens)):
+
+![Distribution double gaussienne]({{ site.baseurl }}/images/lycee/Double_Gauss.png "Distribution double gaussienne")
+
+La courbe bleu est la somme des fonctions gaussiennes rouge et verte.
+
 
 Voyons maintenant ce que donne la distribution pour les terminales (TPRO). On a ici seulement une interrrogation. 
 
 ![Distribution TPRO]({{ site.baseurl }}/images/lycee/distributionTPRO.png "Distribution TPRO")
 
-Le phénomène observé en 1PRO est confirmé ici. Il semble y avoir 2 groupes dans la classe: le groupe des bons élèves et le groupes des élèves qui ont décroché.
+Le phénomène observé en 1PRO est confirmé ici. Il semble y avoir 2 groupes dans la classe: le groupe des bons élèves et le groupe des élèves qui ont décroché. On va maintenant essayer de confirmer ou infimer cette hypothèse.
 
 # Estimation des distributions
 
-Il existe des algorithmes pour trouver la gaussienne la plus adaptée à la distribution de valeur de nos données. J'utilise ici le [modèle de mélanges gaussiens](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_m%C3%A9langes_gaussiens).
+Il existe des algorithmes pour trouver la gaussienne la plus adaptée à la distribution de nos données. J'utilise ici le [modèle de mélanges gaussiens](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_m%C3%A9langes_gaussiens). On doit faire l'hypothèse que les données sont issues de plusieurs groupes indépendants, suivant chacun une loi normale avec une moyenne et un écart type different. Les informations à donner pour construire le modèle sont les notes et le nombre de groupes que l'on suppose avoir dans la classe. Le programme va automatiquement donner les moyennes et écart types pour chaque groupe. les valeurs trouvées sont celles qui maximisent une quantité qui s'appelle la [vraisemblance](https://fr.wikipedia.org/wiki/Maximum_de_vraisemblance).
+
+Ce modèle a bien sur des limites. Il ne trouve pas forcement le maximum global de la vraisemblance et peut converger sur un maximum local. De plus le nombre de notes reste faible pour faire une étude statistiques et cela a une influence sur les résultats du modèle. Les algorithmes d'apprentissage automatiques ne font pas des miracles et restent tributaires de la qualité et la quantité des données.
+
+En pratique, avec Python, on peut utiliser le module [scikit-learn](http://scikit-learn.org) qui contient un ensemble assez complet de programmes d'[apprentissage automatique](https://fr.wikipedia.org/wiki/Apprentissage_automatique) (machine learning). On y trouve une version du [modèle de mélanges gaussiens](http://scikit-learn.org/stable/modules/generated/sklearn.mixture.GaussianMixture.html#sklearn.mixture.GaussianMixture) (Gaussian Mixture Model en anglais).
+
+On importe et on lance la fonction comme suit:
+
+```
+from sklearn.mixture import GaussianMixture
+n_groups=1
+g = GaussianMixture(n_groups)
+g.fit(notes)
+```
+ où `n_groups` est le nombre de groupes que l'on suppose dans la classe et `notes` est la liste des notes sur une colonne. La commande `g.fit` va lancer l'algorithme et stocker les résultats dans differentes variables associées à `g`. Pour obtenir les résultats de chaque groupe, on peut utiliser la routine iterative suivante:
+
+```
+for group_id in range(n_groups):
+    weight = g.weights_[group_id]
+    mean = g.means_[group_id][0]
+    sigma = np.sqrt(g.covariances_[group_id][0][0])
+    print("GROUP",group_id)
+    print("Weight",round(weight,2))
+    print("Mean",round(mean,2))
+    print("Sigma",round(sigma,2))
+```
+Ici, `weight` est le poids de chaque gaussienne, `mean` sa moyenne et `sigma` son écart type.
+
+Voici ce que l'on obtient pour les notes des 2PRO si on suppose un seul groupe:
 
 ![Distribution 2PRO]({{ site.baseurl }}/images/lycee/distribution2PROfit.png "Distribution 2PRO")
 
+La gaussienne centrée en 11.39 et d'écart type 2.45 semble bien coller avec les données.
+Passons maintenant au 1PRO.
+Supposons d'abord qu'il y a un seul groupe dans la classe. On obtient le résultat suivant.
+
+![Distribution 1PRO 1 groupe]({{ site.baseurl }}/images/lycee/distribution1PROfit1.png "Distribution 1PRO 1 groupe")
+
+Si l'on suppose qu'il existe 2 groupes.
+
+![Distribution 1PRO 2 groupes]({{ site.baseurl }}/images/lycee/distribution1PROfit2.png "Distribution 1PRO 2 groupe")
+
+Il est difficile de départager ces résultats
+
+# Conclusion
