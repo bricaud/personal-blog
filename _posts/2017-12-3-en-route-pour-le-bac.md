@@ -103,6 +103,22 @@ Si l'on suppose qu'il existe 2 groupes.
 
 ![Distribution 1PRO 2 groupes]({{ site.baseurl }}/images/lycee/distribution1PROfit2.png "Distribution 1PRO 2 groupe")
 
-Il est difficile de départager ces résultats
+Il est difficile de départager ces résultats en regardant les graphiques. On va essayer un autre critère, celui du score "BIC" pour [Bayesian Information Criterion](https://en.wikipedia.org/wiki/Bayesian_information_criterion) ou critère d'information Bayésien. La fonction GaussianMixture nous donne accès au BIC qu'elle a obtenue avec `g.bic(notes)`. Pour 1 groupe cette valeur est 163.96 et pour 2 groupes elle est de 166.87. Le modèle pour lequel la valeur BIC est la plus petite est le meilleur (le plus adapté à la distribution). On a donc ici un modèle à un groupe d'élèves qui décrit (légèrement) mieux notre distribution de notes.
+
+Remarquons que l'écart type de la gaussienne pour les 2PRO vaut 2.45 et pour les 1PRO il vaut 3.32. On a donc une distribution des notes bien plus étalée pour les 1PRO, ce qu'on voit sur le graphique. Les différences entre bon élèves et élèves en difficultés sont plus accentués dans la classe de 1PRO.
+
+Finissons par la classe de TPRO. J'ai écarté la note zéro d'une élève qui est sortie de l'interrogation sans me rendre sa copie. Je ne pense pas qu'elle soit représentative et elle fausse la distribution des notes, d'autant plus que les notes n'ont pas été moyennées sur plusieurs interrogations. Voici ce que l'on obtient avec un groupe.
+
+![Distribution TPRO 1 groupe]({{ site.baseurl }}/images/lycee/distributionTPROfit1.png "Distribution TPRO 1 groupe")
+
+Il est plus difficile de voir la correspondence entre la distribution des notes et le modèle. Si l'on suppose qu'il existe 2 groupes.
+
+![Distribution TPRO 2 groupes]({{ site.baseurl }}/images/lycee/distributionTPROfit2.png "Distribution TPRO 2 groupe")
+
+La représentation semble plus adaptée.
+Si l'on compare le BIC des 2 résultats, on a 127.37 pour le modèle à un groupe et 124.07 pour le modèle à 2 groupe. Il semble donc que le modèle à 2 groupes soit plus fidèle pour décrire la distribution des notes de TPRO. Cela confirme la tendance de séparation entre les élèves de la classe avec le groupe des "bon" et le groupe des élèves en difficultés qui ont baissé les bras.
+
 
 # Conclusion
+
+Il faut rester prudent dans les conclusions, avec une aussi faible quantité de données.
