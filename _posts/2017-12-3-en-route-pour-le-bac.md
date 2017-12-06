@@ -118,7 +118,16 @@ Il est plus difficile de voir la correspondence entre la distribution des notes 
 La représentation semble plus adaptée.
 Si l'on compare le BIC des 2 résultats, on a 127.37 pour le modèle à un groupe et 124.07 pour le modèle à 2 groupe. Il semble donc que le modèle à 2 groupes soit plus fidèle pour décrire la distribution des notes de TPRO. Cela confirme la tendance de séparation entre les élèves de la classe avec le groupe des "bon" et le groupe des élèves en difficultés qui ont baissé les bras.
 
+Pour montrer les limites de cette étude, voici maintenant la distribution des notes pour une classe de Seconde générale, sur une interrogation courte de 30 minutes.
+
+![Distribution 2 générale]({{ site.baseurl }}/images/lycee/distribution2generale.png "Distribution 2 générale")
+
+On voit ici aussi une séparation en 2 groupes, comme pour les TPRO. L'évolution en 2 groupes distincts en filiaire Bac Pro n'est finalement peut être pas une évolution mais juste le fait que la classe, pour cette interrogation, est divisée en 2. Il faudrait confirmer sur les prochaines interrogations.
 
 # Conclusion
 
-Il faut rester prudent dans les conclusions, avec une aussi faible quantité de données.
+Il faut rester prudent dans les conclusions avec une aussi faible quantité de données. Les résultats pourraient être dû purement au hasard mais je dois noter qu'ils sont en accord avec l'impression que j'ai eu en classe. En effet, j'ai trouvé la classe très inhomogène avec certains élèves attentifs et interessés, qui posent des questions et d'autre totalemet démotivés. Comme je le disais au début, certains élèves sont convaincus qu'ils ne sont pas bon en math et que ca ne sert à rien pour eux d'essayer de travailler. 
+
+Il reste donc le problème de gestion de la classe. Comment combiner de la meilleure manière ces différences de niveaux afin que les élèves en difficulté se motivent et suive et que les bon élèves ne s'ennuient pas non plus. Sinon, c'est eux qui vont commencer à bavarder et à géner le cours. Je n'ai pour le moment pas de solution pour cela.
+
+C'est tout de meme un bon exercice d'apprentissage automatique. Un algorithme important du domaine (le modèle de mélanges gaussiens) est utilisé. On voit aussi un poblème central dans l'analyse de données en intelligence artificielle : on a besoin d'un grand voire très grand nombre de données pour avoir un apprentissage de qualité, et pouvoir extraire de l'information pertinante de celles-ci.
