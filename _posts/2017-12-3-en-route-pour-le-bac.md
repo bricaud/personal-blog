@@ -75,15 +75,17 @@ En pratique, avec Python, on peut utiliser le module [scikit-learn](http://sciki
 
 On importe et on lance la fonction comme suit:
 
-```
+```python
 from sklearn.mixture import GaussianMixture
 n_groups=1
 g = GaussianMixture(n_groups)
 g.fit(notes)
 ```
+
  où `n_groups` est le nombre de groupes que l'on suppose dans la classe et `notes` est la liste des notes sur une colonne. La commande `g.fit` va lancer l'algorithme et stocker les résultats dans differentes variables associées à `g`. Pour obtenir les résultats de chaque groupe, on peut utiliser la routine itérative suivante:
 
-```
+
+```python
 for group_id in range(n_groups):
     weight = g.weights_[group_id]
     mean = g.means_[group_id][0]
@@ -93,6 +95,7 @@ for group_id in range(n_groups):
     print("Mean",round(mean,2))
     print("Sigma",round(sigma,2))
 ```
+
 Ici, `weight` est le poids de chaque gaussienne, `mean` sa moyenne et `sigma` son écart type.
 
 Voici ce que l'on obtient pour les notes des 2PRO si on suppose un seul groupe:
