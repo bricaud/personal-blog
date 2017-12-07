@@ -100,9 +100,10 @@ for group_id in range(n_groups):
     print("Sigma",round(sigma,2))
 ```
 
-## Résultats
-
 Ici, `weight` est le poids de chaque gaussienne, `mean` sa moyenne et `sigma` son écart type.
+
+
+## Résultats
 
 Voici ce que l'on obtient pour les notes des 2PRO si on suppose un seul groupe:
 
@@ -118,7 +119,7 @@ Si l'on suppose qu'il existe 2 groupes.
 
 ![Distribution 1PRO 2 groupes]({{ site.baseurl }}/images/lycee/distribution1PROfit2.png "Distribution 1PRO 2 groupe")
 
-Il est difficile de départager ces résultats en regardant les graphiques. On va essayer dele faire plus objectivement, en utilisant le score "BIC" pour [Bayesian Information Criterion](https://en.wikipedia.org/wiki/Bayesian_information_criterion) ou critère d'information Bayésien. 
+Il est difficile de départager ces résultats en regardant les graphiques. On va essayer de le faire plus objectivement, en utilisant le score "BIC" pour [Bayesian Information Criterion](https://en.wikipedia.org/wiki/Bayesian_information_criterion) ou critère d'information Bayésien. 
 Selon ce critère, le modèle pour lequel la valeur BIC est la plus petite est le meilleur (le plus adapté à la distribution).
 La fonction GaussianMixture nous donne accès au BIC qu'elle a obtenue avec `g.bic(notes)`. Pour 1 groupe cette valeur est 163.96 et pour 2 groupes elle est de 166.87.
 
