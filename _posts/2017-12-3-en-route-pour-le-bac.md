@@ -62,7 +62,7 @@ Voyons maintenant ce que donne la distribution pour les terminales (TPRO). On a 
 
 ![Distribution TPRO]({{ site.baseurl }}/images/lycee/distributionTPRO.png "Distribution TPRO")
 
-Le phénomène observé en 1PRO est ici encore plus criant. Il semble y avoir 2 groupes dans la classe: le groupe des bons élèves (entre 11 et 16) et le groupe des élèves qui ont décroché (majoritairement entre 4 et 8). On va maintenant essayer de confirmer ou infirmer l'existence de groupes de niveau à l'intérieur des classes.
+Le phénomène observé en 1PRO est ici encore plus criant. Il semble y avoir 2 groupes dans la classe: le groupe des bons élèves (entre 11 et 16) et le groupe des élèves qui ont décroché (majoritairement entre 4 et 8). On peut se demander d'abord si c'est une effet statistique et ensuite s'il s'agit d'une évolution des élèves vers 2 groupes distincts, au fur et à mesure des années de lycée. On va maintenant essayer de confirmer ou infirmer ce phénomène.
 
 # Estimation des distributions à l'aide d'apprentissage automatique
 
@@ -71,9 +71,13 @@ Si les données sont issues d'une somme de plusieurs distributions gaussiennes, 
 
 Ce modèle a bien sûr des limites. Il ne trouve pas forcement le maximum global de la vraisemblance et peut converger sur un maximum local. De plus, le nombre de notes reste faible pour faire une étude statistiques et cela a une influence sur les résultats du modèle. Les algorithmes d'apprentissage automatiques ne font pas des miracles et restent tributaires de la qualité et la quantité des données.
 
-En pratique, avec Python, on peut utiliser le module [scikit-learn](http://scikit-learn.org) qui contient un ensemble assez complet de programmes d'[apprentissage automatique](https://fr.wikipedia.org/wiki/Apprentissage_automatique) (machine learning). On y trouve une version du [modèle de mélanges gaussiens](http://scikit-learn.org/stable/modules/generated/sklearn.mixture.GaussianMixture.html#sklearn.mixture.GaussianMixture) (Gaussian Mixture Model en anglais).
+En pratique, avec Python, on peut utiliser le module [scikit-learn](http://scikit-learn.org) qui contient un ensemble assez complet de programmes d'[apprentissage automatique](https://fr.wikipedia.org/wiki/Apprentissage_automatique) (machine learning). On y trouve une version du [modèle de mélanges gaussiens](http://scikit-learn.org/stable/modules/generated/sklearn.mixture.GaussianMixture.html#sklearn.mixture.GaussianMixture) (Gaussian Mixture Model en anglais). 
 
-On importe et on lance la fonction comme suit:
+## Détails d'implémentation
+
+Ceci est une parenthèse sur l'utilisation de Python pour les calculs. Le lecteur qui n'est pas intéressé par le détail des calculs peut directement passer à la section "résultats".
+
+On importe le module `scikit-learn` et on lance la fonction comme suit:
 
 ```python
 from sklearn.mixture import GaussianMixture
@@ -82,7 +86,7 @@ g = GaussianMixture(n_groups)
 g.fit(notes)
 ```
 
- où `n_groups` est le nombre de groupes que l'on suppose dans la classe et `notes` est la liste des notes sur une colonne. La commande `g.fit` va lancer l'algorithme et stocker les résultats dans differentes variables associées à `g`. Pour obtenir les résultats de chaque groupe, on peut utiliser la routine itérative suivante:
+où `n_groups` est le nombre de groupes que l'on suppose dans la classe et `notes` est la liste des notes sur une colonne. La commande `g.fit` va lancer l'algorithme et stocker les résultats dans differentes variables associées à `g`. Pour obtenir les résultats de chaque groupe, on peut utiliser la routine itérative suivante:
 
 
 ```python
@@ -95,6 +99,8 @@ for group_id in range(n_groups):
     print("Mean",round(mean,2))
     print("Sigma",round(sigma,2))
 ```
+
+## Résultats
 
 Ici, `weight` est le poids de chaque gaussienne, `mean` sa moyenne et `sigma` son écart type.
 
@@ -112,15 +118,18 @@ Si l'on suppose qu'il existe 2 groupes.
 
 ![Distribution 1PRO 2 groupes]({{ site.baseurl }}/images/lycee/distribution1PROfit2.png "Distribution 1PRO 2 groupe")
 
-Il est difficile de départager ces résultats en regardant les graphiques. On va essayer un autre critère, celui du score "BIC" pour [Bayesian Information Criterion](https://en.wikipedia.org/wiki/Bayesian_information_criterion) ou critère d'information Bayésien. La fonction GaussianMixture nous donne accès au BIC qu'elle a obtenue avec `g.bic(notes)`. Pour 1 groupe cette valeur est 163.96 et pour 2 groupes elle est de 166.87. Le modèle pour lequel la valeur BIC est la plus petite est le meilleur (le plus adapté à la distribution). On a donc ici un modèle à un groupe d'élèves qui décrit (légèrement) mieux notre distribution de notes.
+Il est difficile de départager ces résultats en regardant les graphiques. On va essayer dele faire plus objectivement, en utilisant le score "BIC" pour [Bayesian Information Criterion](https://en.wikipedia.org/wiki/Bayesian_information_criterion) ou critère d'information Bayésien. 
+Selon ce critère, le modèle pour lequel la valeur BIC est la plus petite est le meilleur (le plus adapté à la distribution).
+La fonction GaussianMixture nous donne accès au BIC qu'elle a obtenue avec `g.bic(notes)`. Pour 1 groupe cette valeur est 163.96 et pour 2 groupes elle est de 166.87.
 
-Remarquons que l'écart type de la gaussienne pour les 2PRO vaut 2.45 et pour les 1PRO il vaut 3.32. On a donc une distribution des notes bien plus étalée pour les 1PRO, ce qu'on voit sur le graphique. Les différences entre bon élèves et élèves en difficultés sont plus accentués dans la classe de 1PRO.
+On a donc ici un modèle à un groupe d'élèves qui décrit (légèrement) mieux notre distribution de notes.
+Remarquons que l'écart type de la gaussienne pour les 2PRO vaut 2.45 et pour les 1PRO, 3.32. On a donc une distribution des notes bien plus étalée pour les 1PRO, ce qu'on voit sur le graphique. Les différences entre bon élèves et élèves en difficultés sont plus accentués dans la classe de 1PRO, même si on ne peut pas parler de 2 groupes bien distincts.
 
-Finissons par la classe de TPRO. J'ai écarté la note zéro d'une élève qui est sortie de l'interrogation sans me rendre sa copie. Je ne pense pas qu'elle soit représentative et elle fausse la distribution des notes, d'autant plus que les notes n'ont pas été moyennées sur plusieurs interrogations. Voici ce que l'on obtient avec un groupe.
+Finissons par la classe de TPRO. J'ai écarté la note zéro d'une élève qui est sortie de l'interrogation sans me rendre sa copie. Je ne pense pas qu'elle soit représentative et elle fausse la distribution des notes, d'autant plus que les notes n'ont pas été moyennées sur plusieurs interrogations. Voici ce que l'on obtient avec l'hypothèse d'un groupe.
 
 ![Distribution TPRO 1 groupe]({{ site.baseurl }}/images/lycee/distributionTPROfit1.png "Distribution TPRO 1 groupe")
 
-Il est plus difficile de voir la correspondence entre la distribution des notes et le modèle. Si l'on suppose qu'il existe 2 groupes.
+Il est plus difficile de voir la correspondence entre la distribution des notes et le modèle. Si l'on suppose qu'il existe 2 groupes:
 
 ![Distribution TPRO 2 groupes]({{ site.baseurl }}/images/lycee/distributionTPROfit2.png "Distribution TPRO 2 groupe")
 
