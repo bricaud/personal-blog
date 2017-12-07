@@ -10,7 +10,7 @@ published: true
 
 *For my english readers, this post is in French. It is talking about student data from the French education system so I thought it would be better to write it in French.*
 Je suis récemment retourné au Lycée. Non pas comme élève mais comme professeur de mathématiques.
-Pendant 2 mois j'ai enseigné les mathématiques (ou du moins j'ai essayé!) et en regardant les notes de leurs contrôles je dois dire que j'étais un peu perplexe. En effet, la distribution des notes autour de la moyenne est singulière. Elle semble avoir parfois une forme Gaussienne, plus ou moins étalés et d'autre fois une forme plus complexe avec, semble-t-il, une séparation en 2 groupes (2 gaussiennes). Comme j'adore l'analyse de données et que j'ai tous les outils à ma disposition avec Python, j'ai plongé dans l'analyse des notes. J'ai utilisé non seulement des statistiques que je leur ai enseigné (au programme du Bac), mais c'était aussi l'occasion d'utiliser mes algorithmes favoris d'apprentissage automatique et intelligence artificielle, ici le modèle de mélange gaussien. Les résultats et l'analyse en elle-même sont intéressants et c'est pour ca que je les partage. Voilà ce que j'ai découvert... 
+Pendant 2 mois j'ai enseigné les mathématiques (ou du moins j'ai essayé!) et en regardant les notes des différents contrôles je dois dire que j'étais un peu perplexe. En effet, la distribution des notes autour de la moyenne est singulière. Elle semble avoir parfois une forme Gaussienne, plus ou moins étalés et d'autre fois une forme plus complexe avec, semble-t-il, une séparation en 2 groupes (2 gaussiennes). Comme j'adore l'analyse de données et que j'ai tous les outils à ma disposition avec Python, j'ai plongé dans l'analyse des notes. J'ai utilisé non seulement des statistiques que je leur ai enseigné (au programme du Bac), mais c'était aussi l'occasion d'utiliser mes algorithmes favoris d'apprentissage automatique et intelligence artificielle, ici le modèle de mélange gaussien. Les résultats et l'analyse en elle-même sont intéressants et c'est pour ca que je les partage. Voilà ce que j'ai découvert... 
 
 
 
@@ -20,53 +20,54 @@ Comme mon entreprise a encore du mal à décoller, j'ai décidé de chercher des
 
 C'est une drôle d'expérience pour moi. Je dois avouer que je n'étais pas préparé à ca. J'ai appris beaucoup de choses durant ces 2 mois au contact des élèves. J'ai pu remarquer une première chose, les élèves n'ont pas le niveau de maturité auquel je m'attendais. Je les ai pris pour des adultes, je leur ai donné trop de liberté, et certain en ont profité. A la fin, bien sur, cela se voit sur les notes. 
 
-J'ai enseigné les mathématiques aux d'élèves de la filière Bac Pro d'un lycée, donc les classes de seconde, première et terminale Bac Pro. Cette filière est particulière dans le sens ou il y a en proportion plus d'élèves en difficulté avec le système scolaire standard. Cette difficulté les poussent à choisir un débouché plus rapide dans la vie active et donc à s'orienter en Bac Pro. Il y a aussi des élèves qui n'ont pas de difficultés particulières et qui ont fait le choix de cette filière par goût.
+J'ai enseigné les mathématiques aux élèves de la filière Bac Pro d'un lycée, donc les classes de seconde, première et terminale Bac Pro. Cette filière est particulière dans le sens ou il y a en proportion plus d'élèves ayant difficulté avec le système scolaire standard. Cela les pousse à choisir un débouché plus rapide dans la vie active et donc à s'orienter en Bac Pro. Il y a aussi des élèves qui n'ont pas de difficulté particulière et qui ont fait le choix de cette filière par goût.
 
 J'ai trouvé un niveau très hétérogène qui va des bons élèves sérieux et motivés jusqu'aux élèves en grande difficultés et totalement fermés aux mathématiques. Ces derniers ont toujours été en échec en mathématiques et ont baissé les bras, comme ils me l'ont dit en classe. Je me suis demandé comment ces personnes là évolueraient à l'approche du Bac. Prendraient-elles conscience de l'enjeu et se mettraient-elles au travail en classe de première ou de terminale? j'ai trouvé un début de réponse, en étudiant la distribution des notes de chaque classe.
 
 
 # Avertissement
 
-L'analyse statistique portent sur 2 mois de cours et 3 classes de 30 élèves chacune. L'effectif est donc assez faible. Le lecteur ne doit rien conclure hâtivement car les résultats sur un si faible échantillon peuvent être simplement dus à des fluctuations statistiques.
+L'analyse statistique porte sur 2 mois de cours et 3 classes de 30 élèves chacune. L'effectif est donc assez faible. Le lecteur ne doit rien conclure hâtivement car les résultats sur un si faible échantillon peuvent être simplement dus à des fluctuations statistiques.
 
 # But de l'analyse
 
-On va étudier la distribution des notes des élèves autour de la moyenne. Ce que l'on s'attend à trouver, c'est une [distribution gaussienne](https://fr.wikipedia.org/wiki/Fonction_gaussienne), la fameuse courbe en cloche que l'on voit sur la figure ci-dessous. On l'appelle encore "[loi normale](https://fr.wikipedia.org/wiki/Loi_normale)". [Par Nusha sur Wikipedia slovène — Transféré de sl.wikipedia à Commons., GFDL](https://commons.wikimedia.org/w/index.php?curid=8710900)
+On va étudier la distribution des notes des élèves autour de la moyenne. Ce que l'on s'attend à trouver, c'est une [distribution gaussienne](https://fr.wikipedia.org/wiki/Fonction_gaussienne), la fameuse courbe en cloche que l'on voit sur la figure ci-dessous. On l'appelle encore "[loi normale](https://fr.wikipedia.org/wiki/Loi_normale)".
 
-![Loi normale]({{ site.baseurl }}/images/lycee/loinormale.svg "Loi normale")
+![Loi normale]({{ site.baseurl }}/images/lycee/loinormale.svg "Loi normale par Nusha sur Wikipedia slovène — Transféré de sl.wikipedia à Commons., GFDL")
 
 
 
-Beaucoup d'élèves se situent autour de la moyenne de la classe et plus les notes sont élevés plus le nombre d'élèves qui ont de telles notes diminue. De la même manière pour les notes basses. Il faut imaginer que sur la figure, le centre de la courbe (le zéro) est en fait la note moyenne. Le symbole sigma est l'écart type et permet de caractériser l'étalement de la distribution autour de la moyenne. Pour les classes de Bac Pro, on va d'estimer ce sigma et vérifier aussi que l'on a bien une gaussienne.
+Dans une telle configuration, beaucoup d'élèves se situent autour de la moyenne de la classe et plus les notes sont élevés plus le nombre d'élèves qui ont de telles notes diminue. De la même manière pour les mauvaises notes. Il faut imaginer que sur la figure, le centre de la courbe (le zéro) est en fait la note moyenne. Le symbole sigma est l'écart type et permet de caractériser l'étalement de la distribution autour de la moyenne. Si toutes les notes sont concentrées dans un petit intervalle autour de la moyenne, sigma aura une valeur faible. Pour les classes de Bac Pro, on va estimer ce sigma et vérifier aussi que l'on a bien une gaussienne.
 
 # Les Données
 
-Pour les seconde Pro (2PRO), la moyenne de chaque élèves a été obtenue avec 2 interrogations coefficient 2 et un devoir à la maison coefficient 1. J'ai été plutôt indulgent sur les notes et la moyenne de la classe est à 11.39. Ci-dessous, on peut voir la distribution des notes autour de la moyenne. L'histogramme montre le nombre d'élèves pour chaque note de 0 à 20. Par exemple, 2 élèves ont une note comprise entre 7 et 8 (les moins bonnes notes).
+Pour les seconde Pro (2PRO), la moyenne de chaque élève a été obtenue avec 2 interrogations coefficient 2 et un devoir à la maison coefficient 1. J'ai été plutôt indulgent sur les notes et la moyenne de la classe est à 11.39. Ci-dessous, on peut voir la distribution des notes autour de la moyenne. L'histogramme montre le nombre d'élèves pour chaque note de 0 à 20. Par exemple, 2 élèves ont une note comprise entre 7 et 8 (les moins bonnes notes).
 
 ![Distribution 2PRO]({{ site.baseurl }}/images/lycee/distribution2PRO.png "Distribution 2PRO")
 
-La distribution n'est pas une belle courbe en cloche et c'est normal. Quand on a peu de résultats, on a de fortes fluctuations statistiques. Mais on a quand même, grossièrement, une forme avec beaucoup de personnes avec des notes autour de la moyenne de la classe, puis une diminution assez forte quand on s'en éloigne.
+La distribution n'est pas une belle courbe en cloche et c'est normal. Quand on a peu de données (ici les notes de 30 élèves sur 3 interrogations), on a de fortes fluctuations statistiques. Un peu comme quand on fait des enfants, on a une chance sur 2 d'avoir une fille mais si on a 6 enfants, il est bien possible d'avoir 4, 5 voire même 6 filles. On a quand même, grossièrement, une allure de gaussienne, avec beaucoup d'élèves qui ont des notes autour de la moyenne de la classe, puis une diminution assez forte quand on s'en éloigne.
 
 Pour les premières (1PRO), la moyenne a été calculée à partir de 2 interrogations. La moyenne est de 7.9. J'ai été plus sévère sur les notes mais je ne crois pas que ca ait eu un impact sur leur travail. Voici la distribution des notes.
 
 ![Distribution 1PRO]({{ site.baseurl }}/images/lycee/distribution1PRO.png "Distribution 1PRO")
 
-On remarque tout de suite que la distribution est plus étalée. Si on fait l'hypothèse que c'est une gaussienne, l'écart type est plus grand ici. Néanmoins, la distribution ne ressemble pas vraiment à une cloche. Il y aurait plutôt 2 bosses de part et d'autre de la moyenne, un peu comme s'il y avait 2 gaussiennes cote à cote. ce pourrait être comme dans la figure ci-dessous (prise sur [wikipedia](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_m%C3%A9langes_gaussiens)):
+On remarque tout de suite que la distribution est plus étalée. Si on fait l'hypothèse que c'est une gaussienne, l'écart type est ici plus grand. Néanmoins, la distribution ne ressemble pas vraiment à une cloche. Il y aurait plutôt 2 bosses de part et d'autre de la moyenne, un peu comme s'il y avait 2 gaussiennes côte à côte. Ce pourrait être comme dans la figure ci-dessous (prise sur [wikipedia](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_m%C3%A9langes_gaussiens)):
 
 ![Distribution double gaussienne]({{ site.baseurl }}/images/lycee/Double_Gauss.png "Distribution double gaussienne")
 
-La courbe bleu est la somme des fonctions gaussiennes rouge et verte.
+La courbe bleue est la somme des fonctions gaussiennes rouge et verte. Remarquez comme l'allure de cette courbe bleue ressemble à la distribution des notes, avec 2 "bosses" est un creux au milieu.
 
 
 Voyons maintenant ce que donne la distribution pour les terminales (TPRO). On a ici seulement une interrogation. 
 
 ![Distribution TPRO]({{ site.baseurl }}/images/lycee/distributionTPRO.png "Distribution TPRO")
 
-Le phénomène observé en 1PRO est confirmé ici. Il semble y avoir 2 groupes dans la classe: le groupe des bons élèves et le groupe des élèves qui ont décroché. On va maintenant essayer de confirmer ou infimer cette hypothèse.
+Le phénomène observé en 1PRO est ici encore plus criant. Il semble y avoir 2 groupes dans la classe: le groupe des bons élèves (entre 11 et 16) et le groupe des élèves qui ont décroché (majoritairement entre 4 et 8). On va maintenant essayer de confirmer ou infirmer l'existence de groupes de niveau à l'intérieur des classes.
 
-# Estimation des distributions
+# Estimation des distributions à l'aide d'apprentissage automatique
 
-Il existe des algorithmes pour trouver la gaussienne la plus adaptée à la distribution de nos données. J'utilise ici le [modèle de mélanges gaussiens](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_m%C3%A9langes_gaussiens). On doit faire l'hypothèse que les données sont issues de plusieurs groupes indépendants, suivant chacun une loi normale avec une moyenne et un écart type different. Les informations à donner pour construire le modèle sont les notes et le nombre de groupes que l'on suppose avoir dans la classe. Le programme va automatiquement donner les moyennes et écart types pour chaque groupe. les valeurs trouvées sont celles qui maximisent une quantité qui s'appelle la [vraisemblance](https://fr.wikipedia.org/wiki/Maximum_de_vraisemblance).
+Pour trouver la courbe gaussienne la plus proche des données, il suffit de calculer la moyenne et l'écart-type des données (ces 2 fonctions sont disponible sur les calculatrices scientifiques, Excel ou bien en langage Python). On peut ainsi tracer la gaussienne paramétrée par ces 2 valeurs.
+Si les données sont issues d'une somme de plusieurs distributions gaussiennes, cela se complique un petit peu. Mais il existe des algorithmes pour résoudre ce problème, pourvu qu'on leur spécifie le nombre de gaussiennes à trouver. J'utilise ici le [modèle de mélanges gaussiens](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_m%C3%A9langes_gaussiens). On doit faire l'hypothèse que les données sont issues de plusieurs groupes indépendants, suivant chacun une loi normale avec une moyenne et un écart type different. Les informations à donner pour construire le modèle sont les notes et le nombre de groupes (le nombre de gaussiennes) que l'on suppose avoir dans la classe. Le programme va automatiquement donner les moyennes et écart types pour chaque groupe. les valeurs trouvées sont celles qui maximisent une quantité qui s'appelle la [vraisemblance](https://fr.wikipedia.org/wiki/Maximum_de_vraisemblance). L'algorithme en lui-même est intéressant mais je ne vais pas l'expliquer ici. Il mériterai une article de blog pour lui tout seul...
 
 Ce modèle a bien sur des limites. Il ne trouve pas forcement le maximum global de la vraisemblance et peut converger sur un maximum local. De plus le nombre de notes reste faible pour faire une étude statistiques et cela a une influence sur les résultats du modèle. Les algorithmes d'apprentissage automatiques ne font pas des miracles et restent tributaires de la qualité et la quantité des données.
 
