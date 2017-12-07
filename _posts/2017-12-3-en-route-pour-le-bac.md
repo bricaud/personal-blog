@@ -4,12 +4,12 @@ comments: true
 title: En route pour le Bac
 categories: [lycee, statistiques]
 thumbnail: /images/lycee/loinormale.svg
-published: false
+published: true
 ---
 
 
 *For my english readers, this post is in French. It is talking about student data from the French education system so I thought it would be better to write it in French.*
-L'analyse des notes au cours du temps en dit long sur le comportement des élèves. C'est ce que nous allons voir dans cet article de blog. J'avais à disposition les notes d'élèves de la filiaire Bac Pro d'un lycée, donc les classes de seconde, première et terminale Bac Pro. Cette filiaire est particuliaire dans le sens ou il y a en proportion plus d'élèves en difficulté avec le système scolaire standard, ce qui les poussent à choisir un débouché plus rapide dans la vie active et donc à s'orienter en Bac Pro. Je les ai eu en classe pendant 2 mois et en regardant les notes de leur contrôles je dois dire que j'étais un peu perplexe. En effet, la distribution des notes autour de la moyenne est singulière. Elle semble évoluer d'une forme Gaussienne en seconde vers une séparation en 2 groupes (2 gaussiennes) en terminale. Comme j'adore l'analyse de données et que j'ai tous les outils à ma disposition avec Python, j'ai plongé dans l'analyse des notes. J'ai utilisé non seulement des statistiques que je leur ai enseigné (au programme du Bac Pro), mais c'était aussi l'occasion d'utiliser mes algorithmes favoris d'apprentissage automatique et intelligence artificielle, ici le modèle de mélange gaussien. Les résultats et l'analyse en elle-meme sont interessants et c'est pour ca que je le partage. Voilà ce que j'ai découvert... 
+L'analyse des notes au cours du temps en dit long sur le comportement des élèves. C'est ce que nous allons voir dans cet article de blog. J'avais à disposition les notes d'élèves de la filière Bac Pro d'un lycée, donc les classes de seconde, première et terminale Bac Pro. Cette filière est particulière dans le sens ou il y a en proportion plus d'élèves en difficulté avec le système scolaire standard, ce qui les poussent à choisir un débouché plus rapide dans la vie active et donc à s'orienter en Bac Pro. Je les ai eu en classe pendant 2 mois et en regardant les notes de leur contrôles je dois dire que j'étais un peu perplexe. En effet, la distribution des notes autour de la moyenne est singulière. Elle semble évoluer d'une forme Gaussienne en seconde vers une séparation en 2 groupes (2 gaussiennes) en terminale. Comme j'adore l'analyse de données et que j'ai tous les outils à ma disposition avec Python, j'ai plongé dans l'analyse des notes. J'ai utilisé non seulement des statistiques que je leur ai enseigné (au programme du Bac Pro), mais c'était aussi l'occasion d'utiliser mes algorithmes favoris d'apprentissage automatique et intelligence artificielle, ici le modèle de mélange gaussien. Les résultats et l'analyse en elle-même sont intéressants et c'est pour ca que je le partage. Voilà ce que j'ai découvert... 
 
 
 
@@ -22,7 +22,7 @@ C'est une drôle d'expérience pour moi. Je dois avouer que je n'étais pas pré
 
 # Avertissement
 
-L'analyse statistique portent sur 2 mois de cours et 3 classes de 30 élèves chacunes. L'effectif est donc assez faible. Le lecteur ne doit rien conclure hativement car les résultats sur un si faible échantillon peuvent être simplement dûs à des fluctuations statistiques.
+L'analyse statistique portent sur 2 mois de cours et 3 classes de 30 élèves chacune. L'effectif est donc assez faible. Le lecteur ne doit rien conclure hâtivement car les résultats sur un si faible échantillon peuvent être simplement dus à des fluctuations statistiques.
 
 # But de l'analyse
 
@@ -32,7 +32,7 @@ On va étudier la distribution des notes des élèves autour de la moyenne. Ce q
 
 
 
-Beaucoup d'élèves se situent autour de la moyenne de la classe et plus les notes sont élevés plus le nombre d'élèves qui ont de telles notes diminue. De la même manière pour les notes basses. Il faut imaginer que sur la figure, le centre de la courbe (le zéro) est en fait la note moyenne. Le symbole sigma est l'écart type et permet de caractériser l'étalement de la distribution autour de la moyenne. Pour les classes de Bac Pro, on va d'estimer ce sigma et vérifier aussi qe l'on a bien une gaussienne.
+Beaucoup d'élèves se situent autour de la moyenne de la classe et plus les notes sont élevés plus le nombre d'élèves qui ont de telles notes diminue. De la même manière pour les notes basses. Il faut imaginer que sur la figure, le centre de la courbe (le zéro) est en fait la note moyenne. Le symbole sigma est l'écart type et permet de caractériser l'étalement de la distribution autour de la moyenne. Pour les classes de Bac Pro, on va d'estimer ce sigma et vérifier aussi que l'on a bien une gaussienne.
 
 # Les Données
 
@@ -46,14 +46,14 @@ Pour les premières (1PRO), la moyenne a été calculée à partir de 2 interrog
 
 ![Distribution 1PRO]({{ site.baseurl }}/images/lycee/distribution1PRO.png "Distribution 1PRO")
 
-On remarque tout de suite que la distribution est plus étalée. Si on fait l'hypothèse que c'est une gaussienne, l'écart type est plus grand ici. Néanmoins, la distribution ne ressemble pas vraiment à une cloche. Il y aurait plutôt 2 bosses de part et d'autre de la moyenne, un peu comme s'il y avait 2 gaussiennes cote à cote. Ce pourrrait être comme dans la figure ci-dessous (prise sur [wikipedia](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_m%C3%A9langes_gaussiens)):
+On remarque tout de suite que la distribution est plus étalée. Si on fait l'hypothèse que c'est une gaussienne, l'écart type est plus grand ici. Néanmoins, la distribution ne ressemble pas vraiment à une cloche. Il y aurait plutôt 2 bosses de part et d'autre de la moyenne, un peu comme s'il y avait 2 gaussiennes cote à cote. ce pourrait être comme dans la figure ci-dessous (prise sur [wikipedia](https://fr.wikipedia.org/wiki/Mod%C3%A8le_de_m%C3%A9langes_gaussiens)):
 
 ![Distribution double gaussienne]({{ site.baseurl }}/images/lycee/Double_Gauss.png "Distribution double gaussienne")
 
 La courbe bleu est la somme des fonctions gaussiennes rouge et verte.
 
 
-Voyons maintenant ce que donne la distribution pour les terminales (TPRO). On a ici seulement une interrrogation. 
+Voyons maintenant ce que donne la distribution pour les terminales (TPRO). On a ici seulement une interrogation. 
 
 ![Distribution TPRO]({{ site.baseurl }}/images/lycee/distributionTPRO.png "Distribution TPRO")
 
@@ -75,7 +75,7 @@ n_groups=1
 g = GaussianMixture(n_groups)
 g.fit(notes)
 ```
- où `n_groups` est le nombre de groupes que l'on suppose dans la classe et `notes` est la liste des notes sur une colonne. La commande `g.fit` va lancer l'algorithme et stocker les résultats dans differentes variables associées à `g`. Pour obtenir les résultats de chaque groupe, on peut utiliser la routine iterative suivante:
+ où `n_groups` est le nombre de groupes que l'on suppose dans la classe et `notes` est la liste des notes sur une colonne. La commande `g.fit` va lancer l'algorithme et stocker les résultats dans differentes variables associées à `g`. Pour obtenir les résultats de chaque groupe, on peut utiliser la routine itérative suivante:
 
 ```
 for group_id in range(n_groups):
@@ -122,12 +122,12 @@ Pour montrer les limites de cette étude, voici maintenant la distribution des n
 
 ![Distribution 2 générale]({{ site.baseurl }}/images/lycee/distribution2generale.png "Distribution 2 générale")
 
-On voit ici aussi une séparation en 2 groupes, comme pour les TPRO. L'évolution en 2 groupes distincts en filiaire Bac Pro n'est finalement peut être pas une évolution mais juste le fait que la classe, pour cette interrogation, est divisée en 2. Il faudrait confirmer sur les prochaines interrogations.
+On voit ici aussi une séparation en 2 groupes, comme pour les TPRO. L'évolution en 2 groupes distincts en filière Bac Pro n'est finalement peut être pas une évolution mais juste le fait que la classe, pour cette interrogation, est divisée en 2. La manière dont les questions sont posées dans l'interrogation peut avoir eu une influence, dans le sens où soit on sait faire l'exercice et on a tous les points, soit on a aucun point. Ceci creuse l'écart entre les élèves qui ont compris et les autres. Il faudrait confirmer sur les prochaines interrogations.
 
 # Conclusion
 
-Il faut rester prudent dans les conclusions avec une aussi faible quantité de données. Les résultats pourraient être dû purement au hasard mais je dois noter qu'ils sont en accord avec l'impression que j'ai eu en classe. En effet, j'ai trouvé la classe très inhomogène avec certains élèves attentifs et interessés, qui posent des questions et d'autre totalemet démotivés. Comme je le disais au début, certains élèves sont convaincus qu'ils ne sont pas bon en math et que ca ne sert à rien pour eux d'essayer de travailler. 
+Il faut rester prudent dans les conclusions avec une aussi faible quantité de données. Les résultats pourraient être dû purement au hasard mais je dois noter qu'ils sont en accord avec l'impression que j'ai eu en classe. En effet, j'ai trouvé la classe très inhomogène avec certains élèves attentifs et intéressés, qui posent des questions et d'autre totalement démotivés. Comme je le disais au début, certains élèves sont convaincus qu'ils ne sont pas bon en math et que ca ne sert à rien pour eux d'essayer de travailler. 
 
-Il reste donc le problème de gestion de la classe. Comment combiner de la meilleure manière ces différences de niveaux afin que les élèves en difficulté se motivent et suive et que les bon élèves ne s'ennuient pas non plus. Sinon, c'est eux qui vont commencer à bavarder et à géner le cours. Je n'ai pour le moment pas de solution pour cela.
+Au delà de ces résultats, il reste donc le problème de gestion de la classe. Comment combiner de la meilleure manière ces différences de niveaux afin que les élèves en difficulté se motivent et suivent et que les bon élèves ne s'ennuient pas non plus (sinon, c'est eux qui vont commencer à bavarder et à gêner le cours). Je n'ai pour le moment pas de solution pour cela.
 
-C'est tout de meme un bon exercice d'apprentissage automatique. Un algorithme important du domaine (le modèle de mélanges gaussiens) est utilisé. On voit aussi un poblème central dans l'analyse de données en intelligence artificielle : on a besoin d'un grand voire très grand nombre de données pour avoir un apprentissage de qualité, et pouvoir extraire de l'information pertinante de celles-ci.
+Même s'il est difficile de conclure, c'est tout de même un bon exercice d'apprentissage automatique. Un algorithme important du domaine (le modèle de mélanges gaussiens) est utilisé et on voit son application pratique, avec les conditions dans lesquelles on peut l'utiliser, comment l'appliquer et ses limites. On voit aussi un problème central dans l'analyse de données en intelligence artificielle : on a besoin d'un grand voire très grand nombre de données pour avoir un apprentissage de qualité, et pouvoir extraire de l'information pertinante de celles-ci.
