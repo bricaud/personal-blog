@@ -3,7 +3,7 @@ layout: post
 comments: true
 title: En route pour le Bac
 categories: [lycee, statistiques, mathématiques, apprentissage automatique, machine learning]
-thumbnail: /images/lycee/loinormale.svg
+thumbnail: /images/lycee/loinormale.png
 published: true
 ---
 
