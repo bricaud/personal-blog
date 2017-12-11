@@ -31,7 +31,9 @@ Now you are logged in your EC2 instance, install the pre-requisites by typing in
 curl https://raw.githubusercontent.com/awslabs/dynamodb-janusgraph-storage-backend/master/src/test/resources/install-reqs.sh
 ```
 
-and clone the repository
+The command above prints out a list of instructions which you can inspect and copy+paste the executable shell script to execute to start the pre-requisites. 
+
+Then, clone the repository
 
 ```
 git clone https://github.com/awslabs/dynamodb-janusgraph-storage-backend.git && cd dynamodb-janusgraph-storage-backend
