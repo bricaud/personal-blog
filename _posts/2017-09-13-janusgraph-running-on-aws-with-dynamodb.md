@@ -31,13 +31,24 @@ Now you are logged in your EC2 instance, install the pre-requisites by typing in
 curl https://raw.githubusercontent.com/awslabs/dynamodb-janusgraph-storage-backend/master/src/test/resources/install-reqs.sh
 ```
 
-and clone the repository
+and clone the repository (requires git, run `sudo yum install git` if you do not have git)
 
 ```
 git clone https://github.com/awslabs/dynamodb-janusgraph-storage-backend.git && cd dynamodb-janusgraph-storage-backend
 ```
 
-Inside the cloned repository, the Awslab's team provide a script for installing JanusGraph. Install the JanusGraph and gremlin server by running, (Check and modify the JanusGraph version to install if needed)
+Inside the cloned repository, the Awslab's team provide a script for installing JanusGraph. 
+
+This requires mvn. If your EC2 instance is a fresh AWS AIM instance, install mvn using these commands: 
+```
+sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+sudo yum install -y apache-maven
+mvn --version
+```
+
+
+Install the JanusGraph and gremlin server by running, (Check and modify the JanusGraph version to install if needed)
 
 ```
 src/test/resources/install-gremlin-server.sh
