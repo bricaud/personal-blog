@@ -26,10 +26,17 @@ J'ai séparé en 3 parties les démarches à faire pour cloturer son exercice. E
 
 Une des principales raisons du bilan et pour le calcul de l'impôt. Pour ma SAS, je dois remplir plusieurs fiches cerfa, regroupées dans ce qui est appelé "la liasse fiscale". Ce sont les formulaires 2033-A à 2033-G (une page chacun). Il y a aussi le formulaire 2065-SD qui résume les données importantes pour le calcul de l'impôt.
 
+Le logiciel Openconcerto, a rempli automatiquement le bilan (2033-A) et le compte de résultats (2033-B). J'ai dû compléter le compte de résultats car j'ai le statut Jeune Entreprise Innovante qui permet une exonération d'impôts la première année.
+Le formulaire 3 (2033-C) concerne les immobilisations et leur amortissement. J'ai dû compléter cette feuille car j'ai acheté du matériel informatique (qui s'amortit sur 3 ans).
+
 # l'Assemblée générale
 
 Comme je suis l'associé unique, le PV d'assemblée générale se réduit à un PV de décision de l'associé unique. Dans le PV, j'approuve les comptes (ceci est facultatif puisque l'unique associé fait les comptes et donc est supposé être d'accord avec lui-même!) et je statue sur la distribution des bénéfices. Cette année, je garde les bénéfices dans l'entreprise. Je remplie la réserve règlementaire (10% du capital social) et je fais un report à nouveau du reste. Je ne me verse donc aucun dividende.
 
+L'assemblée générale doit être faite au plus tard 6 mois après la cloture de l'exercice.
+
 # Le greffe du tribunal de commerce
 
-La liasse fiscale remplie pour la déclaration des résultats aux impôts peut être utilisée pour transmettre les informations demandées par le greffe.
+La liasse fiscale remplie pour la déclaration des résultats aux impôts [peut être utilisée](https://www.infogreffe.fr/informations-et-dossiers-entreprises/dossiers-thematiques/vie-de-entreprise/depot-des-comptes-sociaux.html?onglet=2) pour transmettre les informations demandées par le greffe. Il faut le bilan (formulaire 2033-A), le compte de résultats (2033-B) contenus dans la liasse. A ceci il faut rajouter "l'annexe" sauf si l'entreprise est très petite et c'est le cas d'Evia. Dernier document, le PV de décision sur la proposition et résolution d'affectation votée. La liste des documents est [ici](https://www.infogreffe.fr/documents/10179/0/liste_pieces_depot_comptes.pdf/a76662fc-dce6-4718-b79b-c774d7f8e6e9). 
+
+Les documents doivent être déposés au plus tard un mois après l'AG qui statue sur les comptes.
