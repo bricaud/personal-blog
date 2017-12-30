@@ -4,7 +4,7 @@ comments: true
 title: Les démarches pour la cloture de l'exercice comptable
 categories: [entreprise, comptabilité, francais]
 thumbnail: /images/exerciceComptable/imagecerfa.png
-published: true
+published: false
 ---
 
 Chaque année, les entreprises doivent faire un bilan et communiquer des informations clefs aux diverses administrations. Pour la première année d'exercice d'Evia Cybernetics, j'ai décidé de faire cela moins même. Le but était à la fois de réduire les dépenses et d'apprendre un peu les bases de la comptabilité et de l'administration d'une entreprise. J'ai appris beaucoup de choses. Je relate ici mon expérience sur les différentes étapes pour clore un exercice comptable.
@@ -29,7 +29,7 @@ J'ai séparé en 3 parties les démarches à faire pour cloturer son exercice. E
 Une des principales raisons du bilan et pour le calcul de l'impôt. Pour ma SAS, je dois remplir plusieurs fiches cerfa, regroupées dans ce qui est appelé "[la liasse fiscale](https://www.impots.gouv.fr/portail/formulaire/2033-sd/bilan-simplifie)". Ce sont les formulaires 2033-A à 2033-G (une page chacun). Il y a aussi le formulaire 2065-SD qui résume les données importantes pour le calcul de l'impôt.
 
 Le logiciel Openconcerto, a rempli automatiquement le bilan (2033-A) et le compte de résultats (2033-B). J'ai dû compléter le compte de résultats car j'ai le statut [Jeune Entreprise Innovante](https://www.legifrance.gouv.fr/affichCodeArticle.do;jsessionid=5FC3EE6C1A5F22E8450F0F89536A1068.tplgfr29s_2?idArticle=LEGIARTI000031011840&cidTexte=LEGITEXT000006069577&categorieLien=id&dateTexte=) qui permet une exonération d'impôts la première année.
-Le formulaire 3 (2033-C) concerne les immobilisations et leur amortissement. J'ai dû compléter cette feuille car j'ai acheté du matériel informatique (qui s'amortit sur 3 ans), et OpenConcerto ne calcule pas les amortissements. J'ai coché néant pour les feuilles 4, 5 et 7.
+Le formulaire 3 (2033-C) concerne les immobilisations et leur amortissement. J'ai dû compléter cette feuille car j'ai acheté du matériel informatique (qui s'amortit sur 3 ans), et OpenConcerto ne calcule pas les amortissements. J'ai coché "néant" pour les feuilles 4, 5 et 7.
 
 Comme il faut télédéclarer toute ces informations, il faut remplir les formulaires en ligne sur [le site des impots](https://www.impots.gouv.fr/portail/).
 
