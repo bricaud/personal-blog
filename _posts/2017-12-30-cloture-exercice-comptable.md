@@ -35,7 +35,6 @@ Comme il faut télédéclarer toute ces informations, il faut remplir les formul
 
 # l'Assemblée générale
 
-![PV approbation comptes]({{ site.baseurl }}/images/exerciceComptable/PVcomptes2017.png "PV approbation comptes")
 
 Comme je suis l'associé unique, le PV d'assemblée générale se réduit à un PV de décision de l'associé unique. Il est inspiré de [ce modèle](http://www.sas-sasu.info/sas-modele-de-pv-de-lassemblee-annuelle-pour-lapprobation-des-comptes/). Dans le PV, j'approuve les comptes (ceci est facultatif puisque l'unique associé fait les comptes et donc est supposé être d'accord avec lui-même!) et je statue sur [l'affectation des bénéfices](https://www.l-expert-comptable.com/a/37382-l-affectation-du-resultat-benefices-en-dividendes-ou-reserve.html). Cette année, je garde les bénéfices dans l'entreprise: je remplie la [réserve légale](https://www.lecoindesentrepreneurs.fr/reserve-legale-definition-dotation-fonctionnement/) (10% du capital social) et je fais un report à nouveau du reste. Je ne me verse donc aucun dividende. 
 
@@ -44,6 +43,8 @@ Pour comptabiliser l'affectation des résultats dans un logiciel de comptabilit�
 L'assemblée générale doit être faite au plus tard 6 mois après la cloture de l'exercice.
 
 # Le greffe du tribunal de commerce
+
+![Image greffe]({{ site.baseurl }}/images/exerciceComptable/imagegreffe.jpeg "Image greffe")
 
 La liasse fiscale remplie pour la déclaration des résultats aux impôts [peut être utilisée](https://www.infogreffe.fr/informations-et-dossiers-entreprises/dossiers-thematiques/vie-de-entreprise/depot-des-comptes-sociaux.html?onglet=2) pour transmettre les informations demandées par le greffe. Il faut le bilan (formulaire 2033-A) et le compte de résultats (2033-B) contenus dans la liasse. A ceci il faut rajouter "l'annexe" [sauf si l'entreprise est très petite](https://www.compta-facile.com/simplifications-comptables-pour-les-micros-et-petites-entreprises/) (micro-entreprise) et c'est le cas d'Evia. Dernier document, le PV de décision sur la proposition et résolution d'affectation votée (PV de l'assemblée générale). La liste des documents est [ici](https://www.infogreffe.fr/documents/10179/0/liste_pieces_depot_comptes.pdf/a76662fc-dce6-4718-b79b-c774d7f8e6e9). 
 
