@@ -4,7 +4,7 @@ comments: true
 title: Les démarches pour la cloture de l'exercice comptable
 categories: [entreprise, comptabilité, francais]
 thumbnail: /images/exerciceComptable/imagecerfa.png
-published: false
+published: true
 ---
 
 Chaque année, les entreprises doivent faire un bilan et communiquer des informations clefs aux diverses administrations. Pour la première année d'exercice d'Evia Cybernetics, j'ai décidé de faire cela moins même. Le but était à la fois de réduire les dépenses et d'apprendre un peu les bases de la comptabilité et de l'administration d'une entreprise. J'ai appris beaucoup de choses. Je relate ici mon expérience sur les différentes étapes pour clore un exercice comptable.
