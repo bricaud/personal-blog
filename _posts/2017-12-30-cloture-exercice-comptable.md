@@ -46,9 +46,9 @@ L'assemblée générale doit être faite au plus tard 6 mois après la cloture d
 
 ![Image greffe]({{ site.baseurl }}/images/exerciceComptable/imagegreffe.jpeg "Image greffe")
 
-La liasse fiscale remplie pour la déclaration des résultats aux impôts [peut être utilisée](https://www.infogreffe.fr/informations-et-dossiers-entreprises/dossiers-thematiques/vie-de-entreprise/depot-des-comptes-sociaux.html?onglet=2) pour transmettre les informations demandées par le greffe. Il faut le bilan (formulaire 2033-A) et le compte de résultats (2033-B) contenus dans la liasse. A ceci il faut rajouter "l'annexe" [sauf si l'entreprise est très petite](https://www.compta-facile.com/simplifications-comptables-pour-les-micros-et-petites-entreprises/) (micro-entreprise) et c'est le cas d'Evia. Dernier document, le PV de décision sur la proposition et résolution d'affectation votée (PV de l'assemblée générale). La liste des documents est [ici](https://www.infogreffe.fr/documents/10179/0/liste_pieces_depot_comptes.pdf/a76662fc-dce6-4718-b79b-c774d7f8e6e9). 
+La liasse fiscale remplie pour la déclaration des résultats aux impôts [peut être utilisée](https://www.infogreffe.fr/informations-et-dossiers-entreprises/dossiers-thematiques/vie-de-entreprise/depot-des-comptes-sociaux.html?onglet=2) pour transmettre les informations demandées par le greffe. Il faut le bilan (formulaire 2033-A) et le compte de résultats (2033-B) contenus dans la liasse. A ceci il faut rajouter "l'annexe" [sauf si l'entreprise est très petite](https://www.compta-facile.com/simplifications-comptables-pour-les-micros-et-petites-entreprises/) (micro-entreprise) et c'est le cas d'Evia. Dernier document, le PV de décision sur la proposition et résolution d'affectation votée (PV de l'assemblée générale). La liste des documents est [ici](https://www.infogreffe.fr/documents/10179/0/liste_pieces_depot_comptes.pdf/a76662fc-dce6-4718-b79b-c774d7f8e6e9). Il ne faut pas oublier non plus que le dépot et payant. Comptez une cinquantaine d'euros.
 
-Les documents doivent être déposés au plus tard un mois après l'AG qui statue sur les comptes.
+Les documents doivent être déposés au plus tard un mois après l'AG qui statue sur les comptes. On peut déposer ses documents en ligne sur le site [infogreffe](www.infogreffe.fr), comme je l'ai fait.
 
 # Les autres déclarations de décembre
 
