@@ -29,7 +29,7 @@ The analysis of Tweeter and Reddit data gave us several insights about the Coron
 ## Graph of users
 
 The first results came directly from the tools developed for the research project. Starting from a list of users, a graph was created where nodes are users and connections are mention or retweets between users. This graph shows the organization of the social network around users sharing news about the COVID19. 
-![Graph of tweeter users](/home/benjamin/Documents/EPFL/hackathlon/redditgraphwithclusters3.png)
+![Graph of tweeter users]({{site.baseurl}}/images/hackathlon/redditgraphwithclusters3.png)
 
 We started from the tweets referenced in the 3 subreddits, identified the users and made the graph from their interactions. The first fact to notice is that this network is not made of isolated clusters. There are different communities (at least the 3: diffusing controversies, neutral and scientific info) but there is no clear separation between them. A closer look reveals regions in the network that have different topics. These regions are indicated on the figure by large colored circles. Some parts focus on the events of specific country or areas (UK on top, India on the right and New York at the bottom). Other regions are distinguished by their orientation. In the large green circle, in the middle, are located established institution such as WHO and CDC and regular news NY times, Washigton post or CNN. These users mainly share fact-checked information and scientific news. A region in light red concentrates several accounts sharing controversies. We can see the account of the US president as they often refer to him.
 
@@ -37,23 +37,23 @@ We started from the tweets referenced in the 3 subreddits, identified the users 
 
 Second result was obtained by extracting the text of all the tweets extracted from Reddit. Selecting the most popular keywords (made of one, two or three words) apearing we got this interesting word cloud having the shape of a virus.
 
-![Word cloud from tweets about COVID-19](/home/benjamin/Documents/EPFL/hackathlon/23312.tif_wc.png)
+![Word cloud from tweets about COVID-19]({{site.baseurl}}/images/hackathlon/23312.tif_wc.png)
 
 ## Evolution of the number of tweets
 
 We also ploted the number tweets per day appearing in the subreddits, talking about a particular country.
-![Evolution of the number of tweets](/home/benjamin/Documents/EPFL/hackathlon/evolutionoftweets.png)
-![Evolution of the number of tweets not including China and the US](/home/benjamin/Documents/EPFL/hackathlon/evolutionoftweets_woUS.png)
+![Evolution of the number of tweets]({{site.baseurl}}/images/hackathlon/evolutionoftweets.png)
+![Evolution of the number of tweets not including China and the US]({{site.baseurl}}/images/hackathlon/evolutionoftweets_woUS.png)
 
 Peaks can be seen when particular events or news about the virus appears. For example Italy red curve peaks on the 25/02 when north of Italy was confined and on the 10/03 when all of Italy was confined.
 
 The number of posts in the controversial subreddit r/china_flu shows several peaks between January and April.
-![evolutionofredditposts](/home/benjamin/Documents/EPFL/hackathlon/reddit_china_flu_submissions_activity.png)
+![evolutionofredditposts]({{site.baseurl}}/images/hackathlon/reddit_china_flu_submissions_activity.png)
 
 ## Difference between countries
 
 The top countries discussed in the subreddits are shown on the following figure. It reflects exactly the countries where the epidemy spreading is the highest. Of course, the USA is the most discussed country as the language of the subreddits is english and most of the users are from the USA.
-![Reddit posts per country](/home/benjamin/Documents/EPFL/hackathlon/postspercountries.png)
+![Reddit posts per country]({{site.baseurl}}/images/hackathlon/postspercountries.png)
 
 
 ## Conclusion
