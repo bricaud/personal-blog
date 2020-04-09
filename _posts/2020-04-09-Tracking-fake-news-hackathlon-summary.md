@@ -4,7 +4,7 @@ comments: true
 title: Hackathlon project, tracking fake news in social networks
 categories: [Scientific projects]
 tags: [Social networks, fake news, data science, graphs, hackathlon]
-thumbnail: /images/hackathlon/redditgraphwithclusters3.png
+thumbnail: /images/hackathlon/redditgraphwithclusters_thumb.png
 published: true
 ---
 
