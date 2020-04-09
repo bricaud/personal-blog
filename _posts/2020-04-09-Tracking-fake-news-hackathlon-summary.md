@@ -1,6 +1,12 @@
-Summary hackathlon
-
-Hackathlon project: Tracking fake news in social networks
+---
+layout: post
+comments: true
+title: Hackathlon project: Tracking fake news in social networks
+categories: [Scientific projects]
+tags: [Social networks, fake news, data science, graphs, hackathlon]
+thumbnail: /images/hackathlon/redditgraphwithclusters3.png
+published: true
+---
 
 On April 3-6 2020 I took part in the Hackathlon [LauzHack against COVID-19](https://covid19.lauzhack.com/) organized by the LauzHack association and EPFL. It was an interesting experience and I would like to summarize here the results we got during the 3 days on our project, as well as my impressions.
 
