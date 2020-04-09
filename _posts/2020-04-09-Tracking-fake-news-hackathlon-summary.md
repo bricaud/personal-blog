@@ -3,7 +3,7 @@ layout: post
 comments: true
 title: Hackathon project, tracking fake news in social networks
 categories: [Scientific projects]
-tags: [Social networks, fake news, data science, graphs, hackathlon]
+tags: [Social networks, fake news, data science, graphs, hackathon]
 thumbnail: /images/hackathlon/redditgraphwithclusters_thumb.png
 published: true
 ---
@@ -16,7 +16,7 @@ I was glad to see people supporting this project and commenting on it. About 25 
 
 # Goal
 
-The goal of the project was to collect posts on different social networks and detect fake news or controversies about the COVID-19. Several objectives were defined with different level of difficulties. The most ambitious goal was to detect automatically fake news. Intermediate objectives were to collect the fake news of the past weeks and make a historical timeline about them, or at least to produce some statistics about controversies and news concerning the COVID-19 in social networks.
+The goal of the project was to collect posts in different social networks and detect fake news or controversies about the COVID-19. Several objectives were defined with different level of difficulties. The most ambitious goal was to detect automatically fake news. Intermediate objectives were to collect the fake news of the past weeks and make a historical timeline about them, or at least to produce some statistics about controversies and news concerning the COVID-19 in social networks.
 
 # Method
 
@@ -25,29 +25,33 @@ The difficult task was to detect fake news (or controversies) among the huge amo
 After a short discussion, and based on participants preferences, Reddit and Twitter were selected as the social networks we would investigate.
 We organized the project into 2 focused subteams and an additional group of participants, making the connection between the teams and suggesting ideas in an 'agile' way. The first subteam was dedicated to the collection of Reddit data related to the COVID and the other to the collection of Tweets. For that, they used Python and the APIs provided by the 2 platforms.
 
-Experience from the research project was very helpful to get a quick start. We had already analyzed several subreddits for the project and the choice was easy. We quickly oriented our focus on subreddits related to the coronavirus. We knew 3 interesting ones, each of them with a different 'editorial line'. The subreddit r/China_flu has more posts sharing controversial topics, r/Coronavirus is rather neutral and r/COVID-19 contains more scientific discussions. In order to design an automatic detection, tagging posts and topics as controversial, neutral or scientific would be indeed valuable. We collected posts and links inside posts, especially links referring to tweets. The list of tweets in each subreddit was then given to the second team, dedicated to the extraction of tweets. During the 3 days, tweets were extracted to be analyzed using different methods.
+Experience from the research project was very helpful to get a quick start. We had already analyzed several subreddits for the project and the choice was easy. We quickly oriented our focus on subreddits related to the coronavirus. We knew 3 interesting ones, each of them with a different 'editorial line'. The subreddit r/China_flu has more posts sharing controversial topics, r/Coronavirus is rather neutral and r/COVID-19 contains more scientific discussions. In order to design an automatic detection, tagging posts and topics as controversial, neutral or scientific would be indeed valuable. We collected posts and links inside posts, especially links referring to tweets. The list of tweets in each subreddit was then given to the second team, dedicated to the extraction of tweets. During the 3 days, tweets and twitter users from the Reddit list were extracted to be analyzed.
 
 
 # The results
 
-The analysis of Tweeter and Reddit data gave us several insights about the Coronavirus and the sharing of information in these social networks.
+The analysis of Tweeter and Reddit data gave us several insights about the Coronavirus and the sharing of information inside these social networks.
 
 ## Graph of users
 
-The first results came directly from the tools developed for the research project. Starting from a list of users, a graph was created where nodes are users and connections are mention or retweets between users. This graph shows the organization of the social network around users sharing news about the COVID19. 
+The first results came directly from the tools developed for the research project. Starting from a list of users, a graph was created where nodes are users and connections are mention or retweets between users. This graph (seen below) shows the organization of the social network around users sharing news about the COVID19. 
 ![Graph of tweeter users]({{site.baseurl}}/images/hackathlon/redditgraphwithclusters3.png)
 
-We started from the tweets referenced in the 3 subreddits, identified the users and made the graph from their interactions. The first fact to notice is that this network is not made of isolated clusters. There are different communities (at least the 3: diffusing controversies, neutral and scientific info) but there is no clear separation between them. A closer look reveals regions in the network that have different topics. These regions are indicated on the figure by large coloured circles. Some parts focus on the events of specific country or areas (the UK on top, India on the right and New York at the bottom). Other regions are distinguished by their orientation. In the large green circle, in the middle, are located established institution such as WHO and CDC and regular news NY times, Washington post or CNN. These users mainly share fact-checked information and scientific news. A region in light red concentrates several accounts sharing controversies. We can see the account of the US president as they often refer to him.
+We started from the tweets referenced in the 3 subreddits, identified the users and made the graph from their interactions. 
+
+The first fact to notice is that this network is not made of isolated clusters. There are different communities (at least the 3: diffusing controversies, neutral and scientific info) but there is no clear separation between them. A closer look reveals regions in the network that have different topics. These regions are indicated on the figure by large coloured circles. Some parts focus on the events of specific countries or areas (the UK on top, India on the right and New York at the bottom). Other regions are distinguished by their orientation. In the large green circle, in the middle, are located established institution such as WHO and CDC as well as regular news, the NY times, Washington post or CNN. These users mainly share fact-checked information and scientific news. A region in light red concentrates several accounts sharing controversies. We can see the account of the US president in this region as they often refer to him.
 
 ## Word cloud
 
-The second result was obtained by extracting the text of all the tweets extracted from Reddit. Selecting the most popular keywords (made of one, two or three words) appearing we got this interesting word cloud having the shape of a virus.
+The second result was obtained by extracting the text of all the tweets extracted from Reddit. Selecting the most popular keywords (made of one, two or three words), we got this interesting word cloud having the shape of a virus.
 
 ![Word cloud from tweets about COVID-19]({{site.baseurl}}/images/hackathlon/23312.tif_wc.png)
 
+No surprise, the most popular expressions contain 'coronavirus',  'outbreak' or 'pandemic'.
+
 ## Evolution of the number of tweets
 
-We also plotted the number of tweets per day appearing in the subreddits, talking about a particular country.
+We also plotted the number of tweets per day appearing in the subreddits, concerning a particular country.
 ![Evolution of the number of tweets]({{site.baseurl}}/images/hackathlon/evolutionoftweets.png)
 ![Evolution of the number of tweets not including China and the US]({{site.baseurl}}/images/hackathlon/evolutionoftweets_woUS.png)
 
@@ -59,6 +63,7 @@ The number of posts in the controversial subreddit r/china_flu shows several pea
 ## Difference between countries
 
 The top countries discussed in the subreddits are shown in the following figure. It reflects exactly the countries where epidemy spreading is the highest. Of course, the USA is the most discussed country as the language of the subreddits is English and most of the users are from the USA.
+
 ![Reddit posts per country]({{site.baseurl}}/images/hackathlon/postspercountries.png)
 
 
