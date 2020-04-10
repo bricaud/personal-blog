@@ -57,11 +57,11 @@ We also plotted the number of tweets per day appearing in the subreddits, concer
 ![Evolution of the number of tweets]({{site.baseurl}}/images/hackathlon/evolutionoftweets.png)
 ![Evolution of the number of tweets not including China and the US]({{site.baseurl}}/images/hackathlon/evolutionoftweets_woUS.png)
 
-The US is over-represented as the subreddits are in English and most of its users are from the US. That is why we provide a second plot without it. On the first plot, it is interesting to notice the high number of tweets concerning China at the beginning of the epidemy. One can remember the [numerous fake news](https://en.wikipedia.org/wiki/Misinformation_related_to_the_2019%E2%80%9320_coronavirus_pandemic#Accidental_leakage) at that time about how the virus was supposed to be a Chinese biological weapon, an accidental leakage from a Wuhan lab or due to 5G.
+The US is over-represented as the subreddits are in English and most of its users are from the US. That is why we provide a second plot without it. On the first plot, it is interesting to notice the high number of tweets concerning China at the beginning of the epidemy. One can remember the [numerous fake news](https://en.wikipedia.org/wiki/Misinformation_related_to_the_2019%E2%80%9320_coronavirus_pandemic#Accidental_leakage) at that time about how the virus was supposed to be a Chinese biological weapon, an accidental leakage from a Wuhan lab or due to 5G. Videos of the streets of Wuhan and overcrowded hospitals went viral too.
 
 Concerning the other countries, on the second plot, peaks can be seen when particular events or news about the virus appears. For example, Italy red curve peaks on the 25/02 when north of Italy was confined and on the 10/03 when all of Italy was confined.
 
-Outside of Twitter, the number of posts per day in the controversial subreddit r/china_flu (next figure) shows several peaks between January and April. It highlights periods when major events occurred, triggering many discussions and a higher exchange of information. Starting from mid-January the subreddit users are increasingly sharing information as the virus is spreading in China and outside until a peak is reached at the end of the month when the WHO declares coronavirus a global health emergency. There is also a sharp increase after the 15th of February when people started to realize the epidemy was becoming a pandemy with the increasing number of deaths in Europe. A peak can be seen around the 15th of March where several European countries decided to confine their population (Italy fully on the 10th, Spain 14th, France 17th, Belgium 18th). 
+Outside of Twitter, the number of posts per day in the controversial subreddit r/china_flu (next figure) shows several peaks between January and April. It highlights periods when major events occurred, triggering many discussions and a higher exchange of information. Starting from mid-January the subreddit users are increasingly sharing information about the situation in Wuhan and the spreading of the virus in China and outside. It reaches a peak at the end of the month when the WHO declares coronavirus a global health emergency. There is also a sharp increase after the 15th of February when people started to realize the epidemy was becoming a pandemy with the increasing number of deaths in Europe. A peak can be seen around the 15th of March where several European countries decided to confine their population (Italy fully on the 10th, Spain 14th, France 17th, Belgium 18th). 
 ![evolutionofredditposts]({{site.baseurl}}/images/hackathlon/reddit_china_flu_submissions_activity.png)
 
 ## Difference between countries
@@ -70,6 +70,9 @@ The top countries discussed in the subreddits are shown in the following figure.
 
 ![Reddit posts per country]({{site.baseurl}}/images/hackathlon/postspercountries.png)
 
+## Limits of the Twitter data
+
+Twitter is doing a good job of removing fake news from its platform. Several tweets found in Reddit were not available anymore to us. That may explain why we did not get as many fake news as we expected.
 
 ## Conclusion
 
