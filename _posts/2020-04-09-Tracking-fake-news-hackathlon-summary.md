@@ -4,15 +4,15 @@ comments: true
 title: Hackathon project, tracking fake news in social networks
 categories: [Scientific projects]
 tags: [Social networks, fake news, data science, graphs, hackathon]
-thumbnail: /images/hackathlon/redditgraphwithclusters_thumb.png
+thumbnail: /images/hackathlon/redditgraphwithclusters_thumb.jpg
 published: true
 ---
 
 On April 3-6 2020 I took part in the Hackathon [LauzHack against COVID-19](https://covid19.lauzhack.com/) organized by the LauzHack association and EPFL. It was an interesting experience and I would like to summarize here the results we got during the 3 days on our project, as well as my impressions.
 
-I jumped on the occasion to propose a project related to the analysis of fake news and controversial topics about the COVID-19. The project was named 'Tracking fake news in social networks'. Indeed, I have been working on a research project since September 2019 whose goal is to detect and analyse controversies in social networks. I thought it would be a good opportunity to share our knowledge about this phenomenon and make some concrete contributions to fight misinformation.
+I jumped on the occasion to propose a project related to the analysis of fake news and controversial topics about the COVID-19. The project was named 'Tracking fake news in social networks'. Indeed, I have been working on a research project since September 2019 whose goal is to detect and analyse controversies in social networks. It is a joint research project between the Academy of Journalism at Neuchatel, the RTS (Swiss Radio and Television) and our lab, the LTS2 at EPFL. I thought it would be a good opportunity to share our knowledge about this phenomenon and make some concrete contributions to fight misinformation.
 
-I was glad to see people supporting this project and commenting on it. About 25 participants joined the project to see what it was about. Some of them were really concerned by the topic and willing to help, worried about the enormous amount of fake news and misinformation on the coronavirus. Some others were just curious about how we would process and tackle this challenge. Overall, 6-7 participants were really active, coding small scripts or analysing the data. Due to the circumstances, the hackathon was a purely online one, without physical interactions. Everyone was working from home. Interestingly, all the interactions took place using Slack and video-conference and it worked! However, I had the feeling that it was less efficient than an onsite Hackathon. From time to time, participants (including myself) would disappear for a short or long period of time. Of course, distractions are numerous at home and no-one is watching you :).
+I was glad to see people supporting this project and commenting on it. About 25 participants joined the project to see what it was about. Some of them were really concerned by the topic and willing to help, worried about the enormous amount of fake news and misinformation on the coronavirus. Some others were just curious about how we would process and tackle this challenge. Overall, 6-7 participants were really active, coding scripts or analysing the data. Due to the circumstances, the hackathon was a purely online one, without physical interactions. Everyone was working from home. Interestingly, all the interactions took place using Slack and video-conference and it worked! However, I had the feeling that it was less efficient than an onsite Hackathon. From time to time, participants (including myself) would disappear for a short or long period of time. Of course, distractions are numerous at home and no-one is watching you :).
 
 # Goal
 
@@ -25,8 +25,7 @@ The difficult task was to detect fake news (or controversies) among the huge amo
 After a short discussion, and based on participants preferences, Reddit and Twitter were selected as the social networks we would investigate.
 We organized the project into 2 focused subteams and an additional group of participants, making the connection between the teams and suggesting ideas in an 'agile' way. The first subteam was dedicated to the collection of Reddit data related to the COVID and the other to the collection of Tweets. For that, they used Python and the APIs provided by the 2 platforms.
 
-Experience from the research project was very helpful to get a quick start. We had already analyzed several subreddits for the project and the choice was easy. We quickly oriented our focus on subreddits related to the coronavirus. We knew 3 interesting ones, each of them with a different 'editorial line'. The subreddit r/China_flu has more posts sharing controversial topics, r/Coronavirus is rather neutral and r/COVID-19 contains more scientific discussions. In order to design an automatic detection, tagging posts and topics as controversial, neutral or scientific would be indeed valuable. We collected posts and links inside posts, especially links referring to tweets. The list of tweets in each subreddit was then given to the second team, dedicated to the extraction of tweets. During the 3 days, tweets and twitter users from the Reddit list were extracted to be analyzed.
-
+Experience from the research project was very helpful to get a quick start. We had already analyzed several subreddits for the project and the choice was easy. We quickly oriented our focus on subreddits related to the coronavirus. We knew 3 interesting ones, each of them with a different 'editorial line'. The subreddit r/China_flu has more posts sharing controversial topics, r/Coronavirus is rather neutral and r/COVID-19 contains more scientific discussions. In order to design an automatic detection, tagging posts and topics as controversial, neutral or scientific would be indeed valuable. We collected posts and links inside posts, especially links referring to tweets. The list of tweets in each subreddit was then given to the second team, dedicated to the extraction of tweets. Analysis of tweets was then performed by all participants interested.
 
 # The results
 
@@ -41,6 +40,8 @@ The first results came directly from the tools developed for the research projec
 The first fact to notice is that this network is not made of isolated clusters. There are different communities (at least the 3: diffusing controversies, neutral and scientific info) but there is no clear separation between them. Users do not really isolate from each other, and regular news are diffused by all, even by extremists or conspiracists. This is shown by the fact that established institutions such as WHO and CDC as well as regular news, the NY Times, Washington Post or CNN are situated at the centre of the graph (light green area). This is unusual as conspiracists are often isolated from the rest and form (mis)information bubbles.
 
 A closer look reveals regions in the network that have different topics. They are situated at the periphery. These regions are indicated on the figure by coloured circles. Some parts focus on the events of specific countries or areas (the UK on top, India on the right and New York at the bottom). Other regions are distinguished by their orientation. A region in light red concentrates several accounts sharing controversies. We can see the account of the US president in this region as they often refer to him.
+
+An [interactive version](http://miz.space/lauzhack/reddit-retweet/) is available where the graph can be explorer in more details.
 
 ## Word cloud
 
@@ -74,5 +75,5 @@ The top countries discussed in the subreddits are shown in the following figure.
 
 The page of our project can be found [here](https://devpost.com/software/tracking-fake-news-in-social-networks-proposal). In there, the information is minimal as we were short in time to prepare a good communication about our results. We must also say that designing an automatic detection of fake news was highly ambitious for a 3 days Hackathon. 
 
-What we obtained is more modest, but it gave interesting information on social networks, in particular Reddit and Twitter, and how the information about COVID-19 is treated and shared.
-It also gave us boost of motivation seeing the enthusiasm of people around and the first results that brought more questions than answers. This was definitely useful for our research project!
+What we obtained is more modest, but it gave interesting information on social networks, Reddit and Twitter, and how the information about COVID-19 is treated and shared.
+It also gave us a boost of motivation seeing the enthusiasm of people around and the first results that brought more questions than answers (in particular about fake news!). This was definitely useful for our research project!
